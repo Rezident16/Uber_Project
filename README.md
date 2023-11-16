@@ -1,5 +1,6 @@
 # Uber_Project
-![image](https://github.com/Rezident16/Uber_Project/assets/137537436/bcf1a4f0-932a-42fd-800d-1310fed1d9e6)
+![image](https://github.com/Rezident16/Uber_Project/assets/137537436/0e421b7c-413d-4821-98c4-02ad8dd0545a)
+
 
 ## MVP List
 # SavoryScoot, an UberEats clone, is a website for users to order food from a variety of restaurants straight to their door.
