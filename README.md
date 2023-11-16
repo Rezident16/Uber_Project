@@ -1,5 +1,6 @@
 # Uber_Project
-![image](https://github.com/Rezident16/Uber_Project/assets/137537436/0e421b7c-413d-4821-98c4-02ad8dd0545a)
+![image](https://github.com/Rezident16/Uber_Project/assets/137537436/c36f1483-d086-4400-875e-9cf92abda4e4)
+
 
 
 ## MVP List
