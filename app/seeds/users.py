@@ -1,19 +1,61 @@
 from app.models import db, User, environment, SCHEMA
 from sqlalchemy.sql import text
+from datetime import date
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
+  
+    mason = User(
+        username='masonaustin123', first_name='Mason', last_name='Austin', email='mason@aa.io', password='passwordMason', birthday=date(2000, 9, 7)
+    )
+    
+    zohaib = User(
+        username='zohaibrajan456', first_name='Zohaib', last_name='Rajan', email='zohaib@aa.io', password='passwordZohaib', birthday=date(2002, 5, 22)
+    )
+    
+    andrei = User(
+        username='andreivorobev789', first_name='Andrei', last_name='Vorobev', email='andrei@aa.io', password='passwordAndrei', birthday=date(1995, 8, 16)
+    )
+    
+    brian = User(
+        username='brianstokes111', first_name='Brian', last_name='Stokes', email='brian@aa.io', password='passwordBrian', birthday=date(1997, 1, 31)
+    )
+    
+    ronald = User(
+        username='mickiedeez', first_name='Ronald', last_name='McDonald', email='ronald@mcdonalds.com', password='BigMac123', birthday=date(1963, 12, 18)
+    )
+    
+    wendy = User(
+        username='fourforfour', first_name='Wendy', last_name='Thomas-Morse', email='wendy@wendys.com', password='Frosty321', birthday=date(1961, 9, 14)
+    )
+    
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        username='demouser', first_name='Demo', last_name='User', email='demo@aa.io', password='password', birthday=date(2000, 1, 1)
+    )
+    
+    shaggy = User(
+        username='shaggy', first_name='Shaggy', last_name='Rogers', email='shaggy@warnerbros.com', password='scoobysnack123', birthday=date(2000, 1, 1)
+    )
+    
+    scooby = User(
+        username='scoobydoobydooooo', first_name='Scooby', last_name='Doo', email='scoob@warnerbros.com', password='rutroh123', birthday=date(2000, 1, 1)
+    )
+    
+    fred = User(
+        username='fred', first_name='Fred', last_name='Jones', email='fred@warnerbros.com', password='fred123', birthday=date(2000, 1, 1)
+    )
 
+    db.session.add(mason)
+    db.session.add(zohaib)
+    db.session.add(andrei)
+    db.session.add(brian)
+    db.session.add(ronald)
+    db.session.add(wendy)
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(shaggy)
+    db.session.add(scooby)
+    db.session.add(fred)
     db.session.commit()
 
 
