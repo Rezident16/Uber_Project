@@ -11,7 +11,7 @@ def seed_orders():
         is_complete = False,
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 68.2,
-        restaurant_id = 2
+        restaurant_id = 2,
         )
     demo2 = Order(
         user_id = 1,
@@ -19,7 +19,7 @@ def seed_orders():
         is_complete = False,
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 17.39,
-        restaurant_id = 1
+        restaurant_id = 1,
         )
 
     db.session.add(demo)
