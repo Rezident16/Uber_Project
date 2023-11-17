@@ -1,7 +1,12 @@
 from . import db, add_prefix_for_prod
+from .db import environment, SCHEMA
 
 class Restaurant(db.Model):
     __tablename__ = "restaurants"
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+    
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     name = db.Column(db.String(50), nullable=False)

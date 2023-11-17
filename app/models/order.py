@@ -1,7 +1,12 @@
 from . import db, orders_items, add_prefix_for_prod
+from .db import environment, SCHEMA
 
 class Order(db.Model):
     __tablename__ = 'orders'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+    
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False) #confirm after users are created
     created_at = db.Column(db.DateTime) #Check migrations file
