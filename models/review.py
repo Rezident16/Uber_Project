@@ -1,4 +1,4 @@
-from ..models import db
+from . import db
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -7,4 +7,7 @@ class Review(db.Model):
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"), nullable=False)
     review = db.Column(db.String, nullable=False)
     stars = db.Column(db.Integer)
-    created_at = db.Column(db.Date) #Check migrations file
+    created_at = db.Column(db.DateTime) #Check migrations file
+    
+    restaurant = db.relationship("Restaurant", back_populates="reviews")
+    user = db.relationship("User", back_populates="reviews")

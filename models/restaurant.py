@@ -1,4 +1,4 @@
-from ..models import db
+from . import db
 
 class Restaurant(db.Model):
     __tablename__ = "restaurants"
@@ -9,9 +9,14 @@ class Restaurant(db.Model):
     address = db.Column(db.String(100), nullable=False)
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(50), nullable=False)
-    hours_open = db.Column(db.Float, nullable=False)
-    hours_close = db.Column(db.Float, nullable=False)
-    preview_img = db.Column(db.String(255), nullable=False)
+    hours_open = db.Column(db.Time, nullable=False)
+    hours_close = db.Column(db.Time, nullable=False)
+    preview_img = db.Column(db.String, nullable=False)
     min_order_time = db.Column(db.Integer)
     max_order_time = db.Column(db.Integer)
+    
+    owner = db.relationship("User", back_populates="restaurants")
+    reviews = db.relationship("Review", back_populates="restaurant")
+    items = db.relationship("Item", back_populates="restaurant")
+    orders = db.relationship("Order", back_populates="restaurant")
     
