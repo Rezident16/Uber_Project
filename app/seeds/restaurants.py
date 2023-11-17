@@ -4,7 +4,7 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_restaurants():
-    demo = Restaurant(
+    scooby_restaurant = Restaurant(
         owner_id = 1, 
         name = 'Scooby Ice Cream', 
         category = 'American', 
@@ -13,10 +13,10 @@ def seed_restaurants():
         state = 'CA', 
         hours_open = '09:00:00', 
         hours_close = '20:00:00', 
-        preview_img = 'https://pbs.twimg.com/media/DfFRrlVWkAAYbAz.jpg:large', 
+        preview_img = 'https://savoryscoot.s3.amazonaws.com/seeder-images/scooby-ice-cream.png', 
         min_order_time = 10, 
         max_order_time = 35)
-    marnieRestaurant = Restaurant(
+    shaggy_restaurant = Restaurant(
         owner_id = 2, 
         name = 'Shaggy Burgers', 
         category = 'American', 
@@ -25,10 +25,10 @@ def seed_restaurants():
         state = 'CA', 
         hours_open = '09:00:00', 
         hours_close = '20:00:00',  
-        preview_img = 'https://static.wikia.nocookie.net/scoobydoo/images/a/a4/Hamburger.png/revision/latest?cb=20180119232637', 
+        preview_img = 'https://savoryscoot.s3.amazonaws.com/seeder-images/shaggy-hamburger.jpg', 
         min_order_time = 15, 
         max_order_time = 24)
-    bobbieRestaurant = Restaurant(
+    fred_restaurant = Restaurant(
         owner_id = 3, 
         name = "Fred's Pizza", 
         category = 'Italian', 
@@ -37,10 +37,10 @@ def seed_restaurants():
         state = 'CA', 
         hours_open = '09:00:00', 
         hours_close = '20:00:00', 
-        preview_img = 'https://static.wikia.nocookie.net/flinstones/images/a/a9/The_Flintstone_Comedy_Hour_-_Pizza-Puss.jpg/revision/latest?cb=20200305205945', 
+        preview_img = 'https://savoryscoot.s3.amazonaws.com/seeder-images/fred-pizza.jpg', 
         min_order_time = 11, 
         max_order_time = 42)
-    bobbieRestaurant2 = Restaurant(
+    velma_restaurant = Restaurant(
         owner_id = 4, 
         name = 'Velma BBQ Grill', 
         category = 'American', 
@@ -49,14 +49,14 @@ def seed_restaurants():
         state = 'CA', 
         hours_open = '09:00:00', 
         hours_close = '20:00:00', 
-        preview_img ='https://64.media.tumblr.com/e74cd9b1e16b3a7f2971103e2a51548b/ff51ddbdee0567af-d9/s640x960/cfe8c90e5ea784c40647a436837fb51b85a73c7f.gif', 
+        preview_img ='https://savoryscoot.s3.amazonaws.com/seeder-images/daphne-velma-hot-dog.gif', 
         min_order_time = 20, 
         max_order_time = 70)
 
-    db.session.add(demo)
-    db.session.add(marnieRestaurant)
-    db.session.add(bobbieRestaurant)
-    db.session.add(bobbieRestaurant2)
+    db.session.add(scooby_restaurant)
+    db.session.add(shaggy_restaurant)
+    db.session.add(fred_restaurant)
+    db.session.add(velma_restaurant)
     db.session.commit()
 
 
