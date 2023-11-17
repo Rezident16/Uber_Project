@@ -1,4 +1,4 @@
-from . import db
+from . import db, orders_items
 
 class Order(db.Model):
     __tablename__ = 'orders'
@@ -9,6 +9,7 @@ class Order(db.Model):
     address = db.Column(db.String, nullable=False)
     price = db.Column(db.Float)
     restaurant_id = db.Column(db.Integer, db.ForeignKey("restaurants.id"), nullable=False)
-    
+
     user = db.relationship("User", back_populates="orders")
     restaurant = db.relationship("Restaurant", back_populates="orders")
+    items = db.relationship("Order", secondary=orders_items, back_populates='orders')
