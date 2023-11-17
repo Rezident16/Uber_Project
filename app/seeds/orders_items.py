@@ -1,29 +1,30 @@
-from app.models import db, Order, environment, SCHEMA
+from app.models import db, orders_items, environment, SCHEMA
 from sqlalchemy.sql import text
-from datetime import datetime
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_orders():
-    demo = Order(
-        user_id = 1,
-        created_at = datetime.today,
-        is_complete = False,
-        address = '6431 Chicago Ave, Seattle, WA 12345',
-        price = 68.2,
-        restaurant_id = 2
+def seed_orders_items():
+    order_items_1 = orders_items(
+        order_id = 1,
+        item_id = 3
         )
-    demo2 = Order(
-        user_id = 1,
-        created_at = datetime.today,
-        is_complete = False,
-        address = '6431 Chicago Ave, Seattle, WA 12345',
-        price = 17.39,
-        restaurant_id = 1
+    order_items_2 = orders_items(
+        order_id = 1,
+        item_id = 4
+        )
+    order_items_3 = orders_items(
+        order_id = 2,
+        item_id = 1
+        )
+    order_items_4 = orders_items(
+        order_id = 2,
+        item_id = 2
         )
 
-    db.session.add(demo)
-    db.session.add(demo2)
+    db.session.add(order_items_1)
+    db.session.add(order_items_2)
+    db.session.add(order_items_3)
+    db.session.add(order_items_4)
     db.session.commit()
 
 
@@ -33,7 +34,7 @@ def seed_orders():
 # incrementing primary key, CASCADE deletes any dependent entities.  With
 # sqlite3 in development you need to instead use DELETE to remove all data and
 # it will reset the primary keys for you as well.
-def undo_orders():
+def undo_orders_items():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.orders RESTART IDENTITY CASCADE;")
     else:
