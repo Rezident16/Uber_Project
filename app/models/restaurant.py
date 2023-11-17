@@ -1,9 +1,9 @@
-from . import db
+from . import db, add_prefix_for_prod
 
 class Restaurant(db.Model):
     __tablename__ = "restaurants"
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(100), nullable=False)
