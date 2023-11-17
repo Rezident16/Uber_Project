@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_items():
+def seed_items(users):
     burger = Item (
         restaurant_id = 1,
         name="Burger",
@@ -11,7 +11,8 @@ def seed_items():
         category = "Main",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/burger.png",
         price=10.99,
-        is_alcohol = False
+        is_alcohol = False,
+        items_likes = [users[1]]
     )
 
     salad = Item (
@@ -23,7 +24,8 @@ def seed_items():
         category = "Starter",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/salad.png",
         price=6.99,
-        is_alcohol = False
+        is_alcohol = False,
+        items_likes = [users[1]]
     )
 
     filet_mignon = Item (
@@ -35,7 +37,8 @@ def seed_items():
         category = "Main",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/filet-mignon.png",
         price=34.99,
-        is_alcohol = False
+        is_alcohol = False,
+        items_likes = [users[0]]
     )
 
     old_fashion = Item (
@@ -47,7 +50,8 @@ def seed_items():
         category = "Drink",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/old-fashioned.jpg",
         price=12.99,
-        is_alcohol = True
+        is_alcohol = True,
+        items_likes = [users[0]]
     )
 
     pizza = Item (

@@ -1,4 +1,5 @@
-from app.models import db, User, environment, SCHEMA
+from ..models.db import db, environment, SCHEMA
+from ..models.user import User
 from sqlalchemy.sql import text
 from datetime import date
 

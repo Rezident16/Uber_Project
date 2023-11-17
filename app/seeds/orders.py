@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_orders():
+def seed_orders(items):
     demo = Order(
         user_id = 1,
         created_at = datetime.today,
@@ -12,6 +12,7 @@ def seed_orders():
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 68.2,
         restaurant_id = 2,
+        orders_items = [items[2], items[3]]
         )
     demo2 = Order(
         user_id = 1,
@@ -20,6 +21,7 @@ def seed_orders():
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 17.39,
         restaurant_id = 1,
+        orders_items = [items[0], items[1]]
         )
 
     db.session.add(demo)
