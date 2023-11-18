@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, session, request, render_template, redirect
+from flask import Blueprint, jsonify, session, request, render_template, redirect, abort
 from app.models import User, Restaurant, db
 from flask_login import current_user, login_required
 from datetime import time
@@ -12,18 +12,22 @@ restaurant_routes = Blueprint('restaurants', __name__)
 def get_all_restaurants():
     """Get all restaurants"""
     restaurants = Restaurant.query.all()
-    return {"Restaurants": [restaurant.to_dict() for restaurant in restaurants]}
+    return {"Restaurants": [restaurant.to_dict_no_user() for restaurant in restaurants]}
 
 @restaurant_routes.route("/<int:restaurantId>", methods=["GET"])
 def get_restaurant(restaurantId):
     """Get restaurant details"""
     restaurant = Restaurant.query.get(restaurantId)
+    if not restaurant:
+        # return {"error": "not found"}, 404
+        abort(404, description='Restaurant not found')
+    
     return restaurant.to_dict()
 
-@restaurant_routes.route("/new")
-def get_form():
-    form = RestaurantForm()
-    return render_template("restaurant_form.html", form = form, errors = None)
+# @restaurant_routes.route("/new")
+# def get_form():
+#     form = RestaurantForm()
+#     return render_template("restaurant_form.html", form = form, errors = None)
 
 @restaurant_routes.route("", methods=["POST"])
 @login_required
@@ -41,7 +45,7 @@ def post_restaurant():
         print(upload)
 
         if "url" not in upload:
-            return render_template("restaurant_form.html", form=form, errors=upload)
+            return { 'errors': upload }, 500
         
         # Create minimum and maximum order times for fake delivery wait times
         min_time = randint(10, 50)
@@ -65,7 +69,7 @@ def post_restaurant():
         
         db.session.add(new_restaurant)
         db.session.commit()
-        return redirect("/api/restaurants")
+        return new_restaurant.to_dict(), 200
     
     if form.errors:
         return form.errors
@@ -76,6 +80,9 @@ def post_restaurant():
 def update_restaurant(restaurantId):
     """Update a restaurant by id"""
     restaurant = Restaurant.query.get(restaurantId)
+
+    if not restaurant:
+        abort(404, description='Restaurant not found')
     
     form = RestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -84,7 +91,8 @@ def update_restaurant(restaurantId):
         data = form.data
         
         if restaurant.owner_id != current_user.id:
-            return {"error": "Unauthorized"}
+            # return {"error": "Unauthorized"}
+            abort(403, description='Unauthorized')
         
         if data["preview_img"]:
             image = data['preview_img']
@@ -93,7 +101,8 @@ def update_restaurant(restaurantId):
             print(upload)
 
             if "url" not in upload:
-                return render_template("restaurant_form.html", form=form, errors=upload)
+                # return render_template("restaurant_form.html", form=form, errors=upload)
+                return { 'errors': upload }, 500
             else :
                 remove_file_from_s3(restaurant.preview_img)
                 restaurant.preview_img = upload["url"]
@@ -108,7 +117,7 @@ def update_restaurant(restaurantId):
         
         db.session.commit()
         
-        return restaurant.to_dict()
+        return restaurant.to_dict(), 200
     
     if form.errors:
         return form.errors
@@ -121,10 +130,11 @@ def delete_restaurant(restaurantId):
     restaurant = Restaurant.query.get(restaurantId)
     
     if not restaurant:
-        return {"error": "not found"}, 404
+        abort(404, description='Restaurant not found')
     
     if restaurant.owner_id != current_user.id:
-            return {"error": "Unauthorized"} , 403
+            # return {"error": "Unauthorized"} , 403
+        abort(403, description='Unauthorized')
         
     db.session.delete(restaurant)
     db.session.commit()
