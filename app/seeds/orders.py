@@ -4,24 +4,22 @@ from datetime import datetime
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_orders(items):
+def seed_orders():
     demo = Order(
         user_id = 1,
-        created_at = datetime.today,
+        created_at = datetime.today(),
         is_complete = False,
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 68.2,
-        restaurant_id = 2,
-        orders_items = [items[2], items[3]]
+        restaurant_id = 2
         )
     demo2 = Order(
         user_id = 1,
-        created_at = datetime.today,
+        created_at = datetime.today(),
         is_complete = False,
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 17.39,
-        restaurant_id = 1,
-        orders_items = [items[0], items[1]]
+        restaurant_id = 3
         )
 
     db.session.add(demo)
@@ -40,5 +38,6 @@ def undo_orders():
         db.session.execute(f"TRUNCATE table {SCHEMA}.orders RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM orders"))
+        # db.session.execute(text("DELETE FROM orders; DELETE FROM sqlite_sequence WHERE name='orders';"))
 
     db.session.commit()

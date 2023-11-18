@@ -19,10 +19,10 @@ class User(db.Model, UserMixin):
     birthday = db.Column(db.Date, nullable=False)
     address = db.Column(db.String)
 
-    reviews = db.relationship('Review', back_populates='user')
-    restaurants = db.relationship('Restaurant', back_populates='owner')
-    orders = db.relationship('Order', back_populates='user')
-    items = db.relationship('Item', back_populates='users', secondary=items_likes)
+    reviews = db.relationship('Review', back_populates='user', passive_deletes=True)
+    restaurants = db.relationship('Restaurant', back_populates='owner', passive_deletes=True)
+    orders = db.relationship('Order', back_populates='user', passive_deletes=True)
+    items = db.relationship('Item', back_populates='users', secondary=items_likes, passive_deletes=True)
 
     @property
     def password(self):
@@ -39,5 +39,23 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'birthday': self.birthday,
+            'address': self.address,
+        }
+    
+    def to_dict_full(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'birthday': self.birthday,
+            'address': self.address,
+            'reviews': [review.to_dict_no_user() for review in self.reviews],
+            'restaurants': [restaurant.to_dict() for restaurant in self.restaurants],
+            'orders': [order.to_dict() for order in self.orders]
         }

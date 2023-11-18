@@ -1,20 +1,16 @@
 """empty message
 
-Revision ID: a17f438d7d2b
+Revision ID: ae491966b4c8
 Revises: 
-Create Date: 2023-11-17 16:19:54.027063
+Create Date: 2023-11-18 11:06:53.763071
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
 
 # revision identifiers, used by Alembic.
-revision = 'a17f438d7d2b'
+revision = 'ae491966b4c8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -48,7 +44,7 @@ def upgrade():
     sa.Column('preview_img', sa.String(), nullable=False),
     sa.Column('min_order_time', sa.Integer(), nullable=True),
     sa.Column('max_order_time', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('items',
@@ -60,7 +56,7 @@ def upgrade():
     sa.Column('preview_img', sa.String(), nullable=False),
     sa.Column('price', sa.Float(), nullable=False),
     sa.Column('is_alcohol', sa.Boolean(), nullable=False),
-    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
+    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('orders',
@@ -71,8 +67,8 @@ def upgrade():
     sa.Column('address', sa.String(), nullable=False),
     sa.Column('price', sa.Float(), nullable=True),
     sa.Column('restaurant_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('reviews',
@@ -82,27 +78,24 @@ def upgrade():
     sa.Column('review', sa.String(), nullable=False),
     sa.Column('stars', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('items_likes',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('item_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['item_id'], ['items.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.ForeignKeyConstraint(['item_id'], ['items.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('user_id', 'item_id')
     )
     op.create_table('orders_items',
     sa.Column('order_id', sa.Integer(), nullable=True),
     sa.Column('item_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['item_id'], ['items.id'], ),
-    sa.ForeignKeyConstraint(['order_id'], ['orders.id'], )
+    sa.ForeignKeyConstraint(['item_id'], ['items.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ondelete='CASCADE')
     )
     # ### end Alembic commands ###
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
 
 
 def downgrade():

@@ -8,7 +8,7 @@ class Restaurant(db.Model):
         __table_args__ = {'schema': SCHEMA}
     
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(100), nullable=False)
@@ -21,7 +21,43 @@ class Restaurant(db.Model):
     max_order_time = db.Column(db.Integer)
     
     owner = db.relationship("User", back_populates="restaurants")
-    reviews = db.relationship("Review", back_populates="restaurant")
-    items = db.relationship("Item", back_populates="restaurant")
-    orders = db.relationship("Order", back_populates="restaurant")
+    reviews = db.relationship("Review", back_populates="restaurant", passive_deletes=True)
+    items = db.relationship("Item", back_populates="restaurant", passive_deletes=True)
+    orders = db.relationship("Order", back_populates="restaurant", passive_deletes=True)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'name': self.name,
+            'category': self.category,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'hours_open': self.hours_open,
+            'hours_close': self.hours_close,
+            'preview_img': self.preview_img,
+            'min_order_time': self.min_order_time,
+            'max_order_time': self.max_order_time,
+            'owner': self.owner.to_dict(),
+            'reviews': self.reviews.to_dict(),
+            'items': self.reviews.to_dict(),
+            'orders': self.orders.to_dict()
+        }
+    
+    def to_dict_no_user(self):
+        return {
+            'id': self.id,
+            'owner_id': self.owner_id,
+            'name': self.name,
+            'category': self.category,
+            'address': self.address,
+            'city': self.city,
+            'state': self.state,
+            'hours_open': self.hours_open,
+            'hours_close': self.hours_close,
+            'preview_img': self.preview_img,
+            'min_order_time': self.min_order_time,
+            'max_order_time': self.max_order_time,
+        }
     

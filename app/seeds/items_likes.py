@@ -1,32 +1,21 @@
-from app.models import db, items_likes, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-
-
-# Adds a demo user, you can add other users here if you want
+from ..models.items_likes import items_likes
+# Adds seed data for items_likes
 def seed_items_likes():
-    items_likes1 = items_likes(
-        user_id = 1,
-        item_id = 3
-        )
-    items_likes_2 = items_likes(
-        user_id = 1,
-        item_id = 4
-        )
-    items_likes_3 = items_likes(
-        user_id = 2,
-        item_id = 1
-        )
-    items_likes_4 = items_likes(
-        user_id = 2,
-        item_id = 2
-        )
+    items_likes_data = [
+        {"user_id": 1, "item_id": 3},
+        {"user_id": 1, "item_id": 4},
+        {"user_id": 2, "item_id": 1},
+        {"user_id": 2, "item_id": 2},
+    ]
 
-    db.session.add(items_likes1)
-    db.session.add(items_likes_2)
-    db.session.add(items_likes_3)
-    db.session.add(items_likes_4)
+    # Create an insert statement with values
+    insert_statement = db.insert(items_likes).values(items_likes_data)
+
+    # Execute the insert statement
+    db.session.execute(insert_statement)
     db.session.commit()
-
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
 # have a built in function to do this. With postgres in production TRUNCATE

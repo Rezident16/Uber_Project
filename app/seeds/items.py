@@ -1,9 +1,9 @@
-from app.models import db, Item, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-
+from ..models.item import Item
 
 # Adds a demo user, you can add other users here if you want
-def seed_items(users):
+def seed_items():
     burger = Item (
         restaurant_id = 1,
         name="Burger",
@@ -11,8 +11,7 @@ def seed_items(users):
         category = "Main",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/burger.png",
         price=10.99,
-        is_alcohol = False,
-        items_likes = [users[1]]
+        is_alcohol = False
     )
 
     salad = Item (
@@ -24,8 +23,7 @@ def seed_items(users):
         category = "Starter",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/salad.png",
         price=6.99,
-        is_alcohol = False,
-        items_likes = [users[1]]
+        is_alcohol = False
     )
 
     filet_mignon = Item (
@@ -37,8 +35,7 @@ def seed_items(users):
         category = "Main",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/filet-mignon.png",
         price=34.99,
-        is_alcohol = False,
-        items_likes = [users[0]]
+        is_alcohol = False
     )
 
     old_fashion = Item (
@@ -50,8 +47,7 @@ def seed_items(users):
         category = "Drink",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/old-fashioned.jpg",
         price=12.99,
-        is_alcohol = True,
-        items_likes = [users[0]]
+        is_alcohol = True
     )
 
     pizza = Item (
@@ -100,7 +96,6 @@ def seed_items(users):
         is_alcohol = False
     )
 
-
     db.session.add(burger)
     db.session.add(salad)
     db.session.add(filet_mignon)
@@ -123,5 +118,7 @@ def undo_items():
         db.session.execute(f"TRUNCATE table {SCHEMA}.items RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM items"))
+        # db.session.execute(text("DELETE FROM items; DELETE FROM sqlite_sequence WHERE name='items';"))
+
 
     db.session.commit()
