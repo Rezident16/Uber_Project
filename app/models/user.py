@@ -19,10 +19,10 @@ class User(db.Model, UserMixin):
     birthday = db.Column(db.Date, nullable=False)
     address = db.Column(db.String)
 
-    reviews = db.relationship('Review', back_populates='user')
-    restaurants = db.relationship('Restaurant', back_populates='owner')
-    orders = db.relationship('Order', back_populates='user')
-    items = db.relationship('Item', back_populates='users', secondary=items_likes)
+    reviews = db.relationship('Review', back_populates='user', cascade="all, delete-orphan")
+    restaurants = db.relationship('Restaurant', back_populates='owner', cascade="all, delete-orphan")
+    orders = db.relationship('Order', back_populates='user', cascade="all, delete-orphan")
+    items = db.relationship('Item', back_populates='users', secondary=items_likes, cascade="all, delete")
 
     @property
     def password(self):

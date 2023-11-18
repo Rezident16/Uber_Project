@@ -1,5 +1,7 @@
-from ..models.db import db, environment, SCHEMA
-from ..models.user import User
+# from ..models.db import db, environment, SCHEMA
+from app.models.db import db, environment, SCHEMA
+from app.models.user import User
+# from ..models.user import User
 from sqlalchemy.sql import text
 from datetime import date
 
@@ -8,45 +10,46 @@ from datetime import date
 def seed_users():
   
     mason = User(
-        username='masonaustin123', first_name='Mason', last_name='Austin', email='mason@aa.io', password='passwordMason', birthday=date(2000, 9, 7)
+        username='masonaustin123', first_name='Mason', last_name='Austin', email='mason@aa.io', hashed_password='passwordMason', birthday=date(2000, 9, 7)
     )
     
     zohaib = User(
-        username='zohaibrajan456', first_name='Zohaib', last_name='Rajan', email='zohaib@aa.io', password='passwordZohaib', birthday=date(2002, 5, 22)
+        username='zohaibrajan456', first_name='Zohaib', last_name='Rajan', email='zohaib@aa.io', hashed_password='passwordZohaib', birthday=date(2002, 5, 22)
     )
     
     andrei = User(
-        username='andreivorobev789', first_name='Andrei', last_name='Vorobev', email='andrei@aa.io', password='passwordAndrei', birthday=date(1995, 8, 16)
+        username='andreivorobev789', first_name='Andrei', last_name='Vorobev', email='andrei@aa.io', hashed_password='passwordAndrei', birthday=date(1995, 8, 16)
     )
     
     brian = User(
-        username='brianstokes111', first_name='Brian', last_name='Stokes', email='brian@aa.io', password='passwordBrian', birthday=date(1997, 1, 31)
+        username='brianstokes111', first_name='Brian', last_name='Stokes', email='brian@aa.io', hashed_password='passwordBrian', birthday=date(1997, 1, 31)
     )
     
     ronald = User(
-        username='mickiedeez', first_name='Ronald', last_name='McDonald', email='ronald@mcdonalds.com', password='BigMac123', birthday=date(1963, 12, 18)
+        username='mickiedeez', first_name='Ronald', last_name='McDonald', email='ronald@mcdonalds.com', hashed_password='BigMac123', birthday=date(1963, 12, 18)
     )
     
     wendy = User(
-        username='fourforfour', first_name='Wendy', last_name='Thomas-Morse', email='wendy@wendys.com', password='Frosty321', birthday=date(1961, 9, 14)
+        username='fourforfour', first_name='Wendy', last_name='Thomas-Morse', email='wendy@wendys.com', hashed_password='Frosty321', birthday=date(1961, 9, 14)
     )
     
     demo = User(
-        username='demouser', first_name='Demo', last_name='User', email='demo@aa.io', password='password', birthday=date(2000, 1, 1)
+        username='demouser', first_name='Demo', last_name='User', email='demo@aa.io', hashed_password='password', birthday=date(2000, 1, 1)
     )
     
     shaggy = User(
-        username='shaggy', first_name='Shaggy', last_name='Rogers', email='shaggy@warnerbros.com', password='scoobysnack123', birthday=date(2000, 1, 1)
+        username='shaggy', first_name='Shaggy', last_name='Rogers', email='shaggy@warnerbros.com', hashed_password='scoobysnack123', birthday=date(2000, 1, 1)
     )
     
     scooby = User(
-        username='scoobydoobydooooo', first_name='Scooby', last_name='Doo', email='scoob@warnerbros.com', password='rutroh123', birthday=date(2000, 1, 1)
+        username='scoobydoobydooooo', first_name='Scooby', last_name='Doo', email='scoob@warnerbros.com', hashed_password='rutroh123', birthday=date(2000, 1, 1)
     )
     
     fred = User(
-        username='fred', first_name='Fred', last_name='Jones', email='fred@warnerbros.com', password='fred123', birthday=date(2000, 1, 1)
+        username='fred', first_name='Fred', last_name='Jones', email='fred@warnerbros.com', hashed_password='fred123', birthday=date(2000, 1, 1)
     )
 
+    users = [mason, zohaib, andrei, brian, ronald, wendy, demo, shaggy, scooby, fred]
     db.session.add(mason)
     db.session.add(zohaib)
     db.session.add(andrei)
@@ -58,6 +61,7 @@ def seed_users():
     db.session.add(scooby)
     db.session.add(fred)
     db.session.commit()
+    return users
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

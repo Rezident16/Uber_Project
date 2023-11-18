@@ -21,7 +21,7 @@ class Restaurant(db.Model):
     max_order_time = db.Column(db.Integer)
     
     owner = db.relationship("User", back_populates="restaurants")
-    reviews = db.relationship("Review", back_populates="restaurant")
-    items = db.relationship("Item", back_populates="restaurant")
-    orders = db.relationship("Order", back_populates="restaurant")
+    reviews = db.relationship("Review", back_populates="restaurant", cascade="all, delete-orphan")
+    items = db.relationship("Item", back_populates="restaurant", cascade="all, delete-orphan")
+    orders = db.relationship("Order", back_populates="restaurant", cascade="all, delete-orphan")
     

@@ -1,5 +1,9 @@
-from . import db, orders_items, add_prefix_for_prod
+from . import db, add_prefix_for_prod
+
+# orders_items, 
+add_prefix_for_prod
 from .db import environment, SCHEMA
+from .orders_items import orders_items
 
 class Order(db.Model):
     __tablename__ = 'orders'
@@ -17,4 +21,4 @@ class Order(db.Model):
 
     user = db.relationship("User", back_populates="orders")
     restaurant = db.relationship("Restaurant", back_populates="orders")
-    items = db.relationship("Order", secondary=orders_items, back_populates='orders')
+    items = db.relationship("Item", secondary=orders_items, back_populates='orders')

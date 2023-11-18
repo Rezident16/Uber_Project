@@ -3,7 +3,7 @@ from sqlalchemy.sql import text
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_items(users):
+def seed_items(all_users):
     burger = Item (
         restaurant_id = 1,
         name="Burger",
@@ -12,7 +12,7 @@ def seed_items(users):
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/burger.png",
         price=10.99,
         is_alcohol = False,
-        items_likes = [users[1]]
+        users = [all_users[1]]
     )
 
     salad = Item (
@@ -25,7 +25,7 @@ def seed_items(users):
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/salad.png",
         price=6.99,
         is_alcohol = False,
-        items_likes = [users[1]]
+        users = [all_users[1]]
     )
 
     filet_mignon = Item (
@@ -38,7 +38,7 @@ def seed_items(users):
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/filet-mignon.png",
         price=34.99,
         is_alcohol = False,
-        items_likes = [users[0]]
+        users = [all_users[0]]
     )
 
     old_fashion = Item (
@@ -51,7 +51,7 @@ def seed_items(users):
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/old-fashioned.jpg",
         price=12.99,
         is_alcohol = True,
-        items_likes = [users[0]]
+        users = [all_users[0]]
     )
 
     pizza = Item (
@@ -100,7 +100,7 @@ def seed_items(users):
         is_alcohol = False
     )
 
-
+    items = [burger, salad, filet_mignon, old_fashion, pizza, coke, hot_wings, hotdog]
     db.session.add(burger)
     db.session.add(salad)
     db.session.add(filet_mignon)
@@ -110,6 +110,7 @@ def seed_items(users):
     db.session.add(hotdog)
     db.session.add(hot_wings)
     db.session.commit()
+    return items
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
@@ -123,5 +124,7 @@ def undo_items():
         db.session.execute(f"TRUNCATE table {SCHEMA}.items RESTART IDENTITY CASCADE;")
     else:
         db.session.execute(text("DELETE FROM items"))
+        # db.session.execute(text("DELETE FROM items; DELETE FROM sqlite_sequence WHERE name='items';"))
+
 
     db.session.commit()
