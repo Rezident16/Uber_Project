@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ecc4294e1480
+Revision ID: c42e0d692e20
 Revises:
-Create Date: 2023-11-18 01:11:31.215300
+Create Date: 2023-11-18 02:50:33.747163
 
 """
 from alembic import op
@@ -13,8 +13,9 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
+
 # revision identifiers, used by Alembic.
-revision = 'ecc4294e1480'
+revision = 'c42e0d692e20'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -102,7 +103,7 @@ def upgrade():
     )
     # ### end Alembic commands ###
 
-    # Next, for each table you are creating in your migration there will be an op.
+        # Next, for each table you are creating in your migration there will be an op.
     # create_table() method call. After each op.create_table() call
     # (and remember the closing ) will be after all the column and constraint details),
     # you will want to add the following conditional statement to handle prefixing the SCHEMA
@@ -112,6 +113,7 @@ def upgrade():
     #   | |
     #  \   /
     #   \ /
+    #    V
 
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
@@ -127,8 +129,6 @@ def upgrade():
         op.execute(f"ALTER TABLE items_likes SET SCHEMA {SCHEMA};")
     if environment == "production":
         op.execute(f"ALTER TABLE orders_likes SET SCHEMA {SCHEMA};")
-
-
 
 
 def downgrade():
