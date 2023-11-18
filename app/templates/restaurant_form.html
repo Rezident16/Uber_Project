@@ -1,0 +1,12 @@
+<form method="post" action="/api/restaurants">
+  {{ form.csrf_token }}
+  <p>{{ form.name.label }}: {{ form.name }}</p>
+  <p>{{ form.category.label }}: {{ form.category }}</p>
+  <p>{{ form.address.label }}: {{ form.address }}</p>
+  <p>{{ form.state.label }}: {{ form.state }}</p>
+  <p>{{ form.city.label }}: {{ form.city }}</p>
+  <p>{{ form.hours_open.label }}: {{ form.hours_open }}</p>
+  <p>{{ form.hours_close.label }}: {{ form.hours_close }}</p>
+  <p>{{form.preview_img.label}}{{form.preview_img}}</p>
+  <p>{{ form.submit }}</p>
+</form>
