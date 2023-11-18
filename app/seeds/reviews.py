@@ -5,13 +5,13 @@ from datetime import date
 # Adds a demo user, you can add other users here if you want
 def seed_reviews():
     mason_review = Review(
-        user_id=1, restaurant_id=1, review='Indulge in whimsical flavors reminiscent of childhood, a delightful treat for ice cream lovers seeking nostalgic joy.', stars=4, created_at=date(2021, 10, 2))
+        user_id=1, restaurant_id=2, review='Indulge in whimsical flavors reminiscent of childhood, a delightful treat for ice cream lovers seeking nostalgic joy.', stars=4, created_at=date(2021, 10, 2))
     zo_review = Review(
-        user_id=2, restaurant_id=2, review='Relish juicy, flavorful patties in a laid-back atmosphere, a go-to spot for satisfying burger cravings.', stars=3, created_at=date(2021, 1, 21))
+        user_id=2, restaurant_id=1, review='Relish juicy, flavorful patties in a laid-back atmosphere, a go-to spot for satisfying burger cravings.', stars=3, created_at=date(2021, 1, 21))
     andrei_review = Review(
-        user_id=3, restaurant_id=3, review='Savor crispy, cheesy goodness with a variety of toppings, offering a delicious experience for pizza enthusiasts.', stars=5, created_at=date(2023, 9, 21))
+        user_id=3, restaurant_id=4, review='Savor crispy, cheesy goodness with a variety of toppings, offering a delicious experience for pizza enthusiasts.', stars=5, created_at=date(2023, 9, 21))
     brian_review = Review(
-        user_id=4, restaurant_id=4, review='Delight in smoky, tender meats, a haven for barbecue aficionados seeking mouthwatering delights.', stars=3, created_at=date(2022, 11, 11))
+        user_id=4, restaurant_id=3, review='Delight in smoky, tender meats, a haven for barbecue aficionados seeking mouthwatering delights.', stars=3, created_at=date(2022, 11, 11))
     ronald_review = Review(
         user_id=5, restaurant_id=2, review='Dive into juicy, flavorful patties at Shaggy Burger, where every bite is a satisfying journey through a laid-back burger paradise.', stars=4, created_at=date(2022, 11, 21))
     wendy_review = Review(
