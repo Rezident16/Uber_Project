@@ -8,7 +8,7 @@ class Restaurant(db.Model):
         __table_args__ = {'schema': SCHEMA}
     
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
     category = db.Column(db.String(50), nullable=False)
     address = db.Column(db.String(100), nullable=False)
@@ -21,7 +21,7 @@ class Restaurant(db.Model):
     max_order_time = db.Column(db.Integer)
     
     owner = db.relationship("User", back_populates="restaurants")
-    reviews = db.relationship("Review", back_populates="restaurant", cascade="all, delete-orphan")
-    items = db.relationship("Item", back_populates="restaurant", cascade="all, delete-orphan")
-    orders = db.relationship("Order", back_populates="restaurant", cascade="all, delete-orphan")
+    reviews = db.relationship("Review", back_populates="restaurant", cascade="all, delete-orphan", passive_deletes=True)
+    items = db.relationship("Item", back_populates="restaurant", cascade="all, delete-orphan", passive_deletes=True)
+    orders = db.relationship("Order", back_populates="restaurant", cascade="all, delete-orphan", passive_deletes=True)
     

@@ -4,15 +4,14 @@ from datetime import datetime
 
 
 # Adds a demo user, you can add other users here if you want
-def seed_orders(all_items):
+def seed_orders():
     demo = Order(
         user_id = 1,
         created_at = datetime.today(),
         is_complete = False,
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 68.2,
-        restaurant_id = 2,
-        items = [all_items[2], all_items[3]]
+        restaurant_id = 2
         )
     demo2 = Order(
         user_id = 1,
@@ -20,8 +19,7 @@ def seed_orders(all_items):
         is_complete = False,
         address = '6431 Chicago Ave, Seattle, WA 12345',
         price = 17.39,
-        restaurant_id = 1,
-        items = [all_items[0], all_items[1]]
+        restaurant_id = 1
         )
 
     db.session.add(demo)

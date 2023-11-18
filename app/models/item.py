@@ -19,5 +19,5 @@ class Item(db.Model):
     is_alcohol = db.Column(db.Boolean, nullable=False)
 
     restaurant = db.relationship("Restaurant", back_populates="items")
-    orders = db.relationship("Order", secondary=orders_items, back_populates='items', cascade="all, delete")
-    users = db.relationship("User", secondary=items_likes, back_populates='items')
+    orders = db.relationship("Order", secondary=orders_items, back_populates='items')
+    users = db.relationship("User", secondary=items_likes, back_populates='items', )

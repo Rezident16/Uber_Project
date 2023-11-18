@@ -1,9 +1,9 @@
-from app.models import db, Item, environment, SCHEMA
+from app.models import db, environment, SCHEMA
 from sqlalchemy.sql import text
-
+from ..models.item import Item
 
 # Adds a demo user, you can add other users here if you want
-def seed_items(all_users):
+def seed_items():
     burger = Item (
         restaurant_id = 1,
         name="Burger",
@@ -11,8 +11,7 @@ def seed_items(all_users):
         category = "Main",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/burger.png",
         price=10.99,
-        is_alcohol = False,
-        users = [all_users[1]]
+        is_alcohol = False
     )
 
     salad = Item (
@@ -24,8 +23,7 @@ def seed_items(all_users):
         category = "Starter",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/salad.png",
         price=6.99,
-        is_alcohol = False,
-        users = [all_users[1]]
+        is_alcohol = False
     )
 
     filet_mignon = Item (
@@ -37,8 +35,7 @@ def seed_items(all_users):
         category = "Main",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/filet-mignon.png",
         price=34.99,
-        is_alcohol = False,
-        users = [all_users[0]]
+        is_alcohol = False
     )
 
     old_fashion = Item (
@@ -50,8 +47,7 @@ def seed_items(all_users):
         category = "Drink",
         preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/old-fashioned.jpg",
         price=12.99,
-        is_alcohol = True,
-        users = [all_users[0]]
+        is_alcohol = True
     )
 
     pizza = Item (
@@ -100,7 +96,6 @@ def seed_items(all_users):
         is_alcohol = False
     )
 
-    items = [burger, salad, filet_mignon, old_fashion, pizza, coke, hot_wings, hotdog]
     db.session.add(burger)
     db.session.add(salad)
     db.session.add(filet_mignon)
@@ -110,7 +105,6 @@ def seed_items(all_users):
     db.session.add(hotdog)
     db.session.add(hot_wings)
     db.session.commit()
-    return items
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't

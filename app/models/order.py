@@ -12,7 +12,7 @@ class Order(db.Model):
         __table_args__ = {'schema': SCHEMA}
     
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False) #confirm after users are created
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='CASCADE'), nullable=False) #confirm after users are created
     created_at = db.Column(db.DateTime) #Check migrations file
     is_complete = db.Column(db.Boolean, default=False)
     address = db.Column(db.String, nullable=False)
