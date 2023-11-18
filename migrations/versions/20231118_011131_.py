@@ -1,16 +1,20 @@
 """empty message
 
-Revision ID: 6fb4906ac414
-Revises: 
-Create Date: 2023-11-17 23:07:57.971418
+Revision ID: ecc4294e1480
+Revises:
+Create Date: 2023-11-18 01:11:31.215300
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
 
 # revision identifiers, used by Alembic.
-revision = '6fb4906ac414'
+revision = 'ecc4294e1480'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -97,6 +101,34 @@ def upgrade():
     sa.PrimaryKeyConstraint('order_id', 'item_id')
     )
     # ### end Alembic commands ###
+
+    # Next, for each table you are creating in your migration there will be an op.
+    # create_table() method call. After each op.create_table() call
+    # (and remember the closing ) will be after all the column and constraint details),
+    # you will want to add the following conditional statement to handle prefixing the SCHEMA
+    #   | |
+    #   | |
+    #   | |
+    #   | |
+    #  \   /
+    #   \ /
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE restaurants SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE items SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE items_likes SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE orders_likes SET SCHEMA {SCHEMA};")
+
+
 
 
 def downgrade():
