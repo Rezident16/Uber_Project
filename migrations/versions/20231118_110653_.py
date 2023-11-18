@@ -1,4 +1,4 @@
-"""empty message
+"""Migrate users, restaurants, items, orders, reviews, items_likes, and orders_items
 
 Revision ID: ae491966b4c8
 Revises: 
@@ -7,6 +7,10 @@ Create Date: 2023-11-18 11:06:53.763071
 """
 from alembic import op
 import sqlalchemy as sa
+
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
@@ -95,7 +99,21 @@ def upgrade():
     sa.ForeignKeyConstraint(['item_id'], ['items.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ondelete='CASCADE')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
+    if environment == "production":
+        op.execute(f"ALTER TABLE restaurants SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE items SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE items_likes SET SCHEMA {SCHEMA};")
+    if environment == "production":
+        op.execute(f"ALTER TABLE orders_items SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
