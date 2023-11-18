@@ -17,7 +17,7 @@ class Order(db.Model):
     is_complete = db.Column(db.Boolean, default=False)
     address = db.Column(db.String, nullable=False)
     price = db.Column(db.Float)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id"),  ondelete='CASCADE'), nullable=False)
 
     user = db.relationship("User", back_populates="orders")
     restaurant = db.relationship("Restaurant", back_populates="orders")

@@ -9,7 +9,7 @@ class Review(db.Model):
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='CASCADE'), nullable=False) #confirm after users are created
-    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id")), nullable=False)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("restaurants.id"),  ondelete='CASCADE'), nullable=False)
     review = db.Column(db.String, nullable=False)
     stars = db.Column(db.Integer)
     created_at = db.Column(db.DateTime) #Check migrations file
