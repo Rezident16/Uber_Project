@@ -99,3 +99,7 @@ def not_found(e):
 @app.errorhandler(403)
 def unauthorized(e):
     return jsonify(error = str(e)), 403
+
+@app.errorhandler(400)
+def bad_request(e):
+    return jsonify(error = str(e)), 400

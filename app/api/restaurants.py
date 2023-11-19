@@ -155,6 +155,11 @@ def create_review(restaurantId):
     
     restaurant = Restaurant.query.get(restaurantId)
     
+    existing_review = Review.query.filter_by(user_id=current_user.id, restaurant_id=restaurantId).first()
+    
+    if existing_review is not None:
+        return abort(400, description="User already has review for this restaurant")
+    
     if not restaurant:
         return abort(404, description='Restaurant not found')
     
