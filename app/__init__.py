@@ -8,6 +8,7 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.restaurants import restaurant_routes
+from .api.reviews import reviews_routes
 from .api.items import item_routes
 from .seeds import seed_commands
 from .config import Config
@@ -31,6 +32,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(restaurant_routes, url_prefix='/api/restaurants')
+app.register_blueprint(reviews_routes, url_prefix='/api/reviews')
 app.register_blueprint(item_routes, url_prefix='/api/items')
 
 db.init_app(app)
@@ -100,3 +102,7 @@ def not_found(e):
 @app.errorhandler(403)
 def unauthorized(e):
     return jsonify(error = str(e)), 403
+
+@app.errorhandler(400)
+def bad_request(e):
+    return jsonify(error = str(e)), 400

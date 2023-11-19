@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, session, request, render_template, redirect, abort
-from app.models import User, Restaurant, db, Item
+from app.models import User, Restaurant, Review, Item, db
 from flask_login import current_user, login_required
-from datetime import time
+from datetime import time, datetime
 from random import randint
-from app.forms import RestaurantForm, ItemForm
+from app.forms import RestaurantForm, ReviewForm, ItemForm
 from .aws_helpers import *
 
 restaurant_routes = Blueprint('restaurants', __name__)
@@ -20,7 +20,7 @@ def get_restaurant(restaurantId):
     restaurant = Restaurant.query.get(restaurantId)
     if not restaurant:
         # return {"error": "not found"}, 404
-        abort(404, description='Restaurant not found')
+        return abort(404, description='Restaurant not found')
     
     return restaurant.to_dict()
 
@@ -82,7 +82,7 @@ def update_restaurant(restaurantId):
     restaurant = Restaurant.query.get(restaurantId)
 
     if not restaurant:
-        abort(404, description='Restaurant not found')
+        return abort(404, description='Restaurant not found')
     
     form = RestaurantForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -92,7 +92,7 @@ def update_restaurant(restaurantId):
         
         if restaurant.owner_id != current_user.id:
             # return {"error": "Unauthorized"}
-            abort(403, description='Unauthorized')
+            return abort(403, description='Unauthorized')
         
         if data["preview_img"]:
             image = data['preview_img']
@@ -176,5 +176,48 @@ def post_item(restaurantId):
         db.session.commit()
         return new_item.to_dict(), 200
     
+    if form.errors:
+        return form.errors
+
+    
+    
+    # REVIEWS ENDPOINTS
+    
+
+@restaurant_routes.route("/<int:restaurantId>/reviews", methods=["POST"])
+@login_required
+def create_review(restaurantId):
+    """Post a review"""
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    restaurant = Restaurant.query.get(restaurantId)
+    
+    existing_review = Review.query.filter_by(user_id=current_user.id, restaurant_id=restaurantId).first()
+    
+    if existing_review is not None:
+        return abort(400, description="User already has review for this restaurant")
+    
+    if not restaurant:
+        return abort(404, description='Restaurant not found')
+    
+    if restaurant.owner_id == current_user.id:
+        return abort(403, description='Cannot leave reviews on restaurant that you own')
+    
+    if form.validate_on_submit():
+        data= form.data
+    
+        new_review = Review(
+            user_id = current_user.id,
+            restaurant_id = restaurantId,
+            review = data["review"],
+            stars = data["stars"],
+            created_at = datetime.now()
+        )
+
+        db.session.add(new_review)
+        db.session.commit()
+        return new_review.to_dict(), 200
+
     if form.errors:
         return form.errors
