@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, session, request, render_template, redirect, abort
-from app.models import User, Restaurant, db
+from app.models import User, Restaurant, db, Item
 from flask_login import current_user, login_required
 from datetime import time
 from random import randint
-from app.forms import RestaurantForm
+from app.forms import RestaurantForm, ItemForm
 from .aws_helpers import *
 
 restaurant_routes = Blueprint('restaurants', __name__)
@@ -130,14 +130,51 @@ def delete_restaurant(restaurantId):
     restaurant = Restaurant.query.get(restaurantId)
     
     if not restaurant:
-        abort(404, description='Restaurant not found')
+        return abort(404, description='Restaurant not found')
     
     if restaurant.owner_id != current_user.id:
             # return {"error": "Unauthorized"} , 403
-        abort(403, description='Unauthorized')
+        return abort(403, description='Unauthorized')
         
     db.session.delete(restaurant)
     db.session.commit()
     
     return {"status": "success"}, 200
     
+
+@restaurant_routes.route("/<int:restaurantId>/items/new", methods=["POST"])
+@login_required
+def post_item(restaurantId):
+    """Create an item"""
+    form = ItemForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    if form.validate_on_submit():
+        data = form.data
+        
+        image = data['preview_img']
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        print(upload)
+
+        if "url" not in upload:
+            return { 'errors': upload }, 500
+        
+        # Create minimum and maximum order times for fake delivery wait times
+        
+        new_item = Item(
+            name = data["name"],
+            description = data["description"],
+            category = data["category"],
+            preview_img = upload["url"],
+            price = data["price"],
+            is_alcohol=data["is_alcohol"],
+            restaurant_id = restaurantId,
+        )
+        
+        db.session.add(new_item)
+        db.session.commit()
+        return new_item.to_dict(), 200
+    
+    if form.errors:
+        return form.errors
