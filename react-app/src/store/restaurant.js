@@ -60,7 +60,7 @@ export const fetchCreateNewRestaurant = (payload) => async dispatch => {
 }
 // update restaurant
 export const fetchUpdateRestaurant = (payload) => async dispatch => {
-    const response = await fetch (`/api/restaurants/${id}`, {
+    const response = await fetch (`/api/restaurants/${payload.id}`, {
         method: "POST",
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
