@@ -1,6 +1,6 @@
 # from ..models.db import db, environment, SCHEMA
 from app.models.db import db, environment, SCHEMA
-from app.models.user import User
+from app.models.user import User, generate_password_hash
 # from ..models.user import User
 from sqlalchemy.sql import text
 from datetime import date
@@ -14,7 +14,7 @@ def seed_users():
         first_name='Mason',
         last_name='Austin',
         email='mason@aa.io',
-        hashed_password='passwordMason',
+        hashed_password= generate_password_hash('passwordMason'),
         birthday=date(2000, 9, 7)
     )
 
@@ -23,7 +23,7 @@ def seed_users():
         first_name='Zohaib',
         last_name='Rajan',
         email='zohaib@aa.io',
-        hashed_password='passwordZohaib',
+        hashed_password=generate_password_hash('passwordZohaib'),
         birthday=date(2002, 5, 22)
     )
 
@@ -32,7 +32,7 @@ def seed_users():
         first_name='Andrei',
         last_name='Vorobev',
         email='andrei@aa.io',
-        hashed_password='passwordAndrei',
+        hashed_password=generate_password_hash('passwordAndrei'),
         birthday=date(1995, 8, 16)
     )
 
@@ -41,16 +41,16 @@ def seed_users():
         first_name='Brian',
         last_name='Stokes',
         email='brian@aa.io',
-        hashed_password='passwordBrian',
+        hashed_password=generate_password_hash('passwordBrian'),
         birthday=date(1997, 1, 31)
     )
 
     ronald = User(
         username='mickiedeez',
         first_name='Ronald',
-        ast_name='McDonald',
+        last_name='McDonald',
         email='ronald@mcdonalds.com',
-        hashed_password='BigMac123',
+        hashed_password=generate_password_hash('BigMac123'),
         birthday=date(1963, 12, 18)
     )
 
@@ -59,7 +59,7 @@ def seed_users():
         first_name='Wendy',
         last_name='Thomas-Morse',
         email='wendy@wendys.com',
-        hashed_password='Frosty321',
+        hashed_password=generate_password_hash('Frosty321'),
         birthday=date(1961, 9, 14)
     )
 
@@ -68,7 +68,7 @@ def seed_users():
         first_name='Demo',
         last_name='User',
         email='demo@aa.io',
-        hashed_password='password',
+        hashed_password=generate_password_hash('password'),
         birthday=date(2000, 1, 1)
     )
 
@@ -77,7 +77,7 @@ def seed_users():
         first_name='Shaggy',
         last_name='Rogers',
         email='shaggy@warnerbros.com',
-        hashed_password='scoobysnack123',
+        hashed_password=generate_password_hash('scoobysnack123'),
         birthday=date(2000, 1, 1)
     )
 
@@ -86,7 +86,7 @@ def seed_users():
         first_name='Scooby',
         last_name='Doo',
         email='scoob@warnerbros.com',
-        hashed_password='rutroh123',
+        hashed_password=generate_password_hash('rutroh123'),
         birthday=date(2000, 1, 1)
     )
 
@@ -95,7 +95,7 @@ def seed_users():
         first_name='Fred',
         last_name='Jones',
         email='fred@warnerbros.com',
-        hashed_password='fred123',
+        hashed_password=generate_password_hash('fred123'),
         birthday=date(2000, 1, 1)
     )
 
