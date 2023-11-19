@@ -1,4 +1,7 @@
-
+/*
+Review:
+The review will be submitted on the front end via fetch request and after that we force the restaurant info to be re-rendered
+*/
 
 /** Action Type Constants: */
 export const LOAD_RESTAURANTS = 'restaurants/LOAD_RESTAURANTS'

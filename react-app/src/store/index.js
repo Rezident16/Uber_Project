@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import session from './session'
 import restaurantReducer from './restaurant';
 import itemReducer from './item';
+import cartReducer from './cart';
 
 const rootReducer = combineReducers({
   session,

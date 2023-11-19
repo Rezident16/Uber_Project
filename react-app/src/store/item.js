@@ -56,7 +56,8 @@ export const createAnItemThunk = (restrauntId, payload) => async (dispatch) => {
 
 export const deleteAnItemThunk = (itemId) => async (dispatch) => {
     const res = await fetch(`/api/items/${itemId}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {'Content-Type': 'application/json'},
     })
 
     if (res.ok) {

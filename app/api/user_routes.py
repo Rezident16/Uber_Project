@@ -53,6 +53,27 @@ def update_user(id):
     if form.errors:
         return form.errors
     
+@user_routes.route('/current', methods=["DELETE"])
+@login_required
+def delete_user():
+    """
+    delete current user
+    """
+    try:
+        user = User.query.get(current_user.id)
+
+        if not user:
+            return jsonify({"error": "User not found"}), 404
+
+        if current_user.id != user.id:
+            return abort(403, description="Unauthorized")
+
+        db.session.delete(user)
+        db.session.commit()
+
+        return jsonify({"success": "User deleted successfully"})
     
-    
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
     
