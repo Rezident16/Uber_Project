@@ -2,7 +2,7 @@
 
 /** Action Type Constants: */
 export const LOAD_RESTAURANTS = 'restaurants/LOAD_RESTAURANTS'
-export const RECIEVE_RESTAURANT = '/restaurants/RECIEVE_RESTAURANT'
+export const RECEIVE_RESTAURANT = '/restaurants/RECEIVE_RESTAURANT'
 export const UPDATE_RESTAURANT = '/restaurants/UPDATE_RESTAURANT'
 export const REMOVE_RESTAURANT = '/restaurants/REMOVE_RESTAURANT'
 
@@ -12,8 +12,8 @@ export const loadRestaurants = (restaurants) => ({
     restaurants
 })
 
-export const recieveRestaurant = (restaurant) => ({
-    type: RECIEVE_RESTAURANT,
+export const receiveRestaurant = (restaurant) => ({
+    type: RECEIVE_RESTAURANT,
     restaurant
 })
 
@@ -39,7 +39,7 @@ export const fetchRestaurants = () => async dispatch => {
 export const fetchRestaurant = (id) => async dispatch => {
     const response = await fetch (`/api/restaurants/${id}`)
     const data = await response.json()
-    dispatch(recieveRestaurant(data))
+    dispatch(receiveRestaurant(data));
 }
 
 // create restaurant
@@ -51,7 +51,7 @@ export const fetchCreateNewRestaurant = (payload) => async dispatch => {
     })
     if (response.ok) {
         const data = await response.json()
-        dispatch(recieveRestaurant(data))
+        dispatch(receiveRestaurant(data));
         return data
     } else {
         const errors = await response.json()
@@ -99,7 +99,7 @@ const restaurantReducer = (state = {}, action) => {
                 restaurantState[restaurant.id] = restaurant
             })
             return restaurantState;
-        case RECIEVE_RESTAURANT:
+        case RECEIVE_RESTAURANT:
             return {...state, [action.restaurant.id]: action.restaurant}
         case UPDATE_RESTAURANT:
             return {...state, [action.restaurant.id]: action.restaurant}
