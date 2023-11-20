@@ -1,6 +1,8 @@
 const RECEIVE_ITEM = "/items/RECEIVE_ITEM";
 const UPDATE_ITEM = "/items/UPDATE_ITEM";
 const REMOVE_ITEM = "/items/REMOVE_ITEM";
+const RECEIVE_RESTAURANT = '/restaurants/RECEIVE_RESTAURANT'
+const REMOVE_RESTAURANT = '/restaurants/REMOVE_RESTAURANT'
 
 
 // Action Creators
@@ -20,27 +22,54 @@ export const removeItem = (id) => ({
     id
 })
 
+export const receiveRestaurant = (restaurant) => ({
+    type: RECEIVE_RESTAURANT,
+    restaurant
+})
+
+export const removeRestaurant = (id) => ({
+    type: REMOVE_RESTAURANT,
+    id
+})
+
 
 // Thunks
 
+// export const fetchItemThunk = (id) => async (dispatch) => {
+//     const res = await fetch(`/api/items/${id}`)
 
-export const fetchItemThunk = (id) => async (dispatch) => {
-    const res = await fetch(`/api/items/${id}`)
+//     if (res.ok) {
+//         const item = await res.json()
+//         dispatch(receiveItem(item))
+//         return item
+//     } else {
+//         const errors = await res.json()
+//         return errors
+//     }
+// }
 
-    if (res.ok) {
-        const item = await res.json()
-        dispatch(receiveItem(item))
-        return item
+export const fetchRestaurant = (id) => async dispatch => {
+    const response = await fetch(`/api/restaurants/${id}`)
+    const data = await response.json()
+    dispatch(receiveRestaurant(data));
+}
+
+export const fetchDeleteRestaurant = (id) => async dispatch => {
+    const response = await fetch(`/api/restaurants/${id}`, {
+        method: "DELETE",
+        headers: { 'Content-Type': 'application/json' },
+    })
+    if (response.ok) {
+        dispatch(removeRestaurant(id))
     } else {
-        const errors = await res.json()
+        const errors = await response.json()
         return errors
     }
 }
-
-export const createAnItemThunk = (restrauntId, payload) => async (dispatch) => {
-    const res = await fetch(`/api/restraunts/${restrauntId}/items/new`, {
+export const createAnItemThunk = (restaurantId, payload) => async (dispatch) => {
+    const res = await fetch(`/api/restaurants/${restaurantId}/items/new`, {
         method: "POST",
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     })
 
@@ -57,45 +86,49 @@ export const createAnItemThunk = (restrauntId, payload) => async (dispatch) => {
 export const deleteAnItemThunk = (itemId) => async (dispatch) => {
     const res = await fetch(`/api/items/${itemId}`, {
         method: "DELETE",
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
     })
 
     if (res.ok) {
-      dispatch(removeItem(itemId));
-      return;
+        dispatch(removeItem(itemId));
+        return;
     } else {
-      const errors = await res.json();
-      return errors;
+        const errors = await res.json();
+        return errors;
     }
 }
 
 export const updateAnItemThunk = (item) => async (dispatch) => {
-        const res = await fetch(`/api/items/${item.id}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(item),
-        });
+    const res = await fetch(`/api/items/${item.id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(item),
+    });
 
-        if (res.ok) {
-          const updatedItem = await res.json();
-          dispatch(updateItem(updatedItem));
-          return updatedItem;
-        } else {
-          const errors = await res.json();
-          return errors;
-        }
+    if (res.ok) {
+        const updatedItem = await res.json();
+        dispatch(updateItem(updatedItem));
+        return updatedItem;
+    } else {
+        const errors = await res.json();
+        return errors;
+    }
 }
 
 const itemReducer = (state = {}, action) => {
     switch (action.type) {
-        case RECEIVE_ITEM:
-            return { ...state, [action.item.id]: action.item }
+        // case RECEIVE_ITEM:
+        //     return { ...state, [action.item.id]: action.item }
+        case RECEIVE_RESTAURANT:
+            return action.restaurant;
         case UPDATE_ITEM:
-            return { ...state, [action.item.id]: action.item };
+            return { ...state, items: { ...state.items, [action.item.id]: action.item } };
         case REMOVE_ITEM:
             const newState = { ...state }
-            delete newState[action.id]
+            delete newState.items[action.id]
             return newState
+        case REMOVE_RESTAURANT:
+            return state
         default:
             return state
     }
