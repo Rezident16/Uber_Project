@@ -14,7 +14,7 @@ def seed_restaurants():
         state = 'CA', 
         hours_open=datetime.strptime('09:00:00', '%H:%M:%S').time(),
         hours_close=datetime.strptime('20:00:00', '%H:%M:%S').time(),
-        preview_img = 'https://savoryscoot.s3.amazonaws.com/seeder-images/scooby-ice-cream.jpg', 
+        preview_img = 'https://savoryscoot.s3.amazonaws.com/seeder-images/scooby-ice-cream.png', 
         min_order_time = 10, 
         max_order_time = 35)
     shaggy_restaurant = Restaurant(

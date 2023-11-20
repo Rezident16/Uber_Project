@@ -20,18 +20,19 @@ function Restaurants(){
 
 
     return (
-
-        <>
         <div>
-            
-        </div>
-        <div>
-            {restaurants && restaurants.map((restaurant) => (
-               <RestaurantTile restaurant={restaurant} key={restaurant.id}/>
+            {restaurantsData && restaurantsData.Restaurants.map((restaurant) => (
+                <div key={restaurant.id}>
+                    <p>{restaurant.name}</p>
+                    <p>{restaurant.category}</p>
+                    <p>{restaurant.address}</p>
+                    <p>{restaurant.city}</p>
+                    <p>{restaurant.state}</p>
+                    <img src={restaurant.preview_img} alt={restaurant.name} />
+                </div>
             ))}
         </div>
-        </>
     );
-}
+};
 
-export default Restaurants;
+export default GetRestaurants;

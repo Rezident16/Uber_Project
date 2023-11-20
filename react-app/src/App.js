@@ -35,10 +35,7 @@ function App() {
               <CreateRestaurant/>
           </Route>
           <Route path="/restaurants">
-            <Restaurants/>
-          </Route>
-          <Route>
-            <h1>Page not found</h1>
+            <GetRestaurants/>
           </Route>
         </Switch>
       )}

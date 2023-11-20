@@ -1,5 +1,5 @@
 const LOAD_CART_COOKIE = 'cart/LOAD_CART_COOKIE'
-// const SET_CART_COOKIE = 'cart/SET_CART_COOKIE'
+const SET_CART_COOKIE = 'cart/SET_CART_COOKIE'
 const ADD_TO_CART = 'cart/ADD_TO_CART'
 const REMOVE_FROM_CART = 'cart/REMOVE_FROM_CART'
 const UPDATE_CART_ITEM_QTY = 'cart/UPDATE_CART_ITEM_QTY'
@@ -60,7 +60,7 @@ const cartReducer = (state = {}, action) => {
             let cart = localStorage.getItem('cart');
             return cart ? JSON.parse(cart) : {};
         case ADD_TO_CART:
-            localStorage.setItem('cart', JSON.stringify({...state, [action.item.id]: {...action.item, qty: action.qty}}))
+            locatlStorage.setItem('cart', JSON.stringify({...state, [action.item.id]: {...action.item, qty: action.qty}}))
             return {...state, [action.item.id]: {...action.item, qty: action.qty}}
         case REMOVE_FROM_CART:
             const newState = {...state}
@@ -73,8 +73,6 @@ const cartReducer = (state = {}, action) => {
         case CHECKOUT_CART:
             localStorage.removeItem('cart')
             return {}
-        default:
-            return state;
     }
 }
 export default cartReducer

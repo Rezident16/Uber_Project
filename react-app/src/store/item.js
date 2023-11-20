@@ -63,6 +63,7 @@ export const fetchDeleteRestaurant = (id) => async dispatch => {
         dispatch(removeRestaurant(id))
     } else {
         const errors = await response.json()
+        const errors = await response.json()
         return errors
     }
 }
@@ -78,7 +79,7 @@ export const createAnItemThunk = (restaurantId, payload) => async (dispatch) => 
         dispatch(receiveItem(newItem))
         return newItem
     } else {
-        const errors = await res.json()
+        const errors = await response.json()
         return errors
     }
 }
