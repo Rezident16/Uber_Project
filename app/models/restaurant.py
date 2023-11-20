@@ -59,5 +59,6 @@ class Restaurant(db.Model):
             'preview_img': self.preview_img,
             'min_order_time': self.min_order_time,
             'max_order_time': self.max_order_time,
+            # 'items': [item.to_dict() for item in self.items],
         }
     
