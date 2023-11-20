@@ -1,41 +1,37 @@
 import React, { useState, useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux'
+import { fetchRestaurants } from '../../store/restaurant';
+import RestaurantTile from './restaurant-tile';
 
-const GetRestaurants = () => {
-    const [restaurantsData, setRestaurantsData] = useState(null);
+// import 'Restaurants.css'
 
-    useEffect(() => {
-        const fetchRestaurants = async () => {
-            try {
-                const res = await fetch('/api/restaurants');
-                if (res.ok) {
-                    const data = await res.json();
-                    console.log(data);
-                    setRestaurantsData(data);
-                } else {
-                    console.error('Failed to fetch data');
-                }
-            } catch (error) {
-                console.error('Error during fetch:', error);
-            }
-        };
+function Restaurants(){
+    const dispatch = useDispatch()
 
-        fetchRestaurants();
-    }, []);
+    useEffect( () => {
+        dispatch(fetchRestaurants())
+    }, [dispatch])
 
+    // const restaurantsObj = useSelector( state => state.restaurants)
+    const restaurants = Object.values(useSelector( state => state.restaurants))
+    if (!restaurants) return null
+
+    // restaurants.forEach( restaurant => {
+    //     restaurant.averageReview = 
+    // })
     return (
+
+        <>
         <div>
-            {restaurantsData && restaurantsData.Restaurants.map((restaurant) => (
-                <div key={restaurant.id}>
-                    <p>{restaurant.name}</p>
-                    <p>{restaurant.category}</p>
-                    <p>{restaurant.address}</p>
-                    <p>{restaurant.city}</p>
-                    <p>{restaurant.state}</p>
-                    <img src={restaurant.preview_img} alt={restaurant.name} />
-                </div>
+            
+        </div>
+        <div>
+            {restaurants && restaurants.map((restaurant) => (
+               <RestaurantTile restaurant={restaurant} key={restaurant.id}/>
             ))}
         </div>
+        </>
     );
-};
+}
 
-export default GetRestaurants;
+export default Restaurants;

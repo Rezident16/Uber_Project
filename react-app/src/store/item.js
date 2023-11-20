@@ -32,7 +32,7 @@ export const fetchItemThunk = (id) => async (dispatch) => {
         dispatch(receiveItem(item))
         return item
     } else {
-        const errors = await response.json()
+        const errors = await res.json()
         return errors
     }
 }
@@ -49,7 +49,7 @@ export const createAnItemThunk = (restrauntId, payload) => async (dispatch) => {
         dispatch(receiveItem(newItem))
         return newItem
     } else {
-        const errors = await response.json()
+        const errors = await res.json()
         return errors
     }
 }
@@ -61,10 +61,10 @@ export const deleteAnItemThunk = (itemId) => async (dispatch) => {
     })
 
     if (res.ok) {
-      dispatch(removeItem(id));
+      dispatch(removeItem(itemId));
       return;
     } else {
-      const errors = await response.json();
+      const errors = await res.json();
       return errors;
     }
 }
@@ -81,7 +81,7 @@ export const updateAnItemThunk = (item) => async (dispatch) => {
           dispatch(updateItem(updatedItem));
           return updatedItem;
         } else {
-          const errors = await response.json();
+          const errors = await res.json();
           return errors;
         }
 }
@@ -89,9 +89,9 @@ export const updateAnItemThunk = (item) => async (dispatch) => {
 const itemReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_ITEM:
-            return { ...state, [action.item.id]: item }
+            return { ...state, [action.item.id]: action.item }
         case UPDATE_ITEM:
-            return { ...state, [action.item.id]: item };
+            return { ...state, [action.item.id]: action.item };
         case REMOVE_ITEM:
             const newState = { ...state }
             delete newState[action.id]

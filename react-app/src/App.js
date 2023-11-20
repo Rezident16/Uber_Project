@@ -5,7 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import GetRestaurants from "./components/Restaurants";
+import Restaurants from "./components/Restaurants";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,10 @@ function App() {
             <SignupFormPage />
           </Route>
           <Route path="/restaurants">
-            <GetRestaurants/>
+            <Restaurants/>
+          </Route>
+          <Route>
+            <h1>Page not found</h1>
           </Route>
         </Switch>
       )}
