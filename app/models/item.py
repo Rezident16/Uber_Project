@@ -33,7 +33,7 @@ class Item(db.Model):
             'price': self.price,
             'is_alcohol': self.is_alcohol,
             'likes': len(self.users),
-            'orders': len(self.orders)
+            'orders': len(self.orders),
         }
     
     def to_dict_no_user(self):

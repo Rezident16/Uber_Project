@@ -60,7 +60,7 @@ const cartReducer = (state = {}, action) => {
             let cart = localStorage.getItem('cart');
             return cart ? JSON.parse(cart) : {};
         case ADD_TO_CART:
-            locatlStorage.setItem('cart', JSON.stringify({...state, [action.item.id]: {...action.item, qty: action.qty}}))
+            localStorage.setItem('cart', JSON.stringify({...state, [action.item.id]: {...action.item, qty: action.qty}}))
             return {...state, [action.item.id]: {...action.item, qty: action.qty}}
         case REMOVE_FROM_CART:
             const newState = {...state}
@@ -73,6 +73,8 @@ const cartReducer = (state = {}, action) => {
         case CHECKOUT_CART:
             localStorage.removeItem('cart')
             return {}
+        default:
+            return state
     }
 }
 export default cartReducer
