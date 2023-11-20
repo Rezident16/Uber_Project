@@ -14,7 +14,7 @@ function RestaurantItemsFunc({ restaurant }) {
 
   const currUserObj = useSelector((state) => state.session);
   const userId = currUserObj.user.id;
-  console.log(items);
+  // console.log(items);
   return (
     <div className="create_item">
     {restaurant.ownerId == userId && (

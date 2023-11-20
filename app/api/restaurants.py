@@ -8,7 +8,7 @@ from .aws_helpers import *
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
-@restaurant_routes.route("/", methods=["GET"])
+@restaurant_routes.route("", methods=["GET"])
 def get_all_restaurants():
     """Get all restaurants"""
     restaurants = Restaurant.query.all()

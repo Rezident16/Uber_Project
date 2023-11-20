@@ -2,14 +2,14 @@ import { useEffect } from "react";
 import RestaurantForm from "./restaurant-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
-import { fetchRestaurant } from "../../store/item";
+import { fetchRestaurant } from "../../store/restaurant";
 function UpdateRestaurant(){
 
     const history = useHistory()
     const dispatch = useDispatch()
     const { restaurantId } = useParams()
     const sessionUser = useSelector((state) => state.session.user);
-    const restaurant = useSelector((state) => state.items)
+    const restaurant = useSelector((state) => state.restaurant)
     
     useEffect( () => {
         dispatch(fetchRestaurant(restaurantId))

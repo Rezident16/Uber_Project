@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
-import { fetchCreateNewRestaurant, fetchUpdateRestaurant } from '../../store/restaurant'
+import {fetchCreateNewRestaurant, fetchUpdateRestaurant} from '../../store/restaurants'
 import { useEffect, useState } from 'react';
 
 

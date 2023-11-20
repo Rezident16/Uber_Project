@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { createAnItemThunk, updateAnItemThunk } from "../../store/item";
+import { createAnItemThunk, updateAnItemThunk } from "../../store/restaurant";
 
 const ItemForm = ({ item, formType, id }) => {
   const [name, setName] = useState(formType === "Update" ? item.name : "");
