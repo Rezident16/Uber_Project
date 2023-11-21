@@ -79,7 +79,7 @@ export const fetchDeleteRestaurant = (id) => async (dispatch) => {
     return errors;
   }
 };
-export const createAnReviewThunk =
+export const createAReviewThunk =
   (restaurantId, review) => async (dispatch) => {
     const res = await fetch(`/api/${restaurantId}/reviews`, {
       method: "POST",

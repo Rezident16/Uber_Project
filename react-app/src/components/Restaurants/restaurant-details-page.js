@@ -5,13 +5,19 @@ import { useHistory, useParams } from "react-router-dom";
 import Items from "../Items/restaurantItems";
 import RestaurantReviews from "../Reviews/reviews-for-restaraunt";
 import CreateAReviewModal from "../Reviews/post-a-review";
+import OpenModalButton from "../OpenModalButton";
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { restaurantId } = useParams();
+  const user = useSelector(state => state.session.user)
   const restaurant = useSelector((state) => state.restaurant);
   const reviews = restaurant.reviews;
+  const orders = restaurant.orders;
+  let hasOrdered = false;
+  // console.log('---------', user)
+  console.log('----------', orders)
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -29,9 +35,15 @@ function RestaurantDetailPage() {
   if(minutes === 0 || minutes < 10) minutes = `0${minutes}`
   let currentTime = `${hours}:${minutes}`
 
-  // if (Number(restaurant.hours_close.slice(0,2)) > 12) {
-  //     restaurant.hours_close.slice(0,2) =
-  // }
+
+  if (user) {
+    hasOrdered = orders?.some(
+      (order) => order.user_id == user.id && order.restaurant_id == restaurantId
+    );
+  }
+
+  console.log(hasOrdered)
+
 
   return (
     <>
@@ -55,13 +67,20 @@ function RestaurantDetailPage() {
           ) : (
             <p>Be the first to leave a Review!!!</p>
           )}
-          { currentTime < restaurant.hours_close ? <p> Open until {restaurant.hours_close}</p> : <p>closed</p>}
+          {currentTime < restaurant.hours_close ? (
+            <p> Open until {restaurant.hours_close}</p>
+          ) : (
+            <p>closed</p>
+          )}
         </div>
       </header>
 
       <RestaurantReviews restaurant={restaurant} />
 
-      <CreateAReviewModal restaurant={restaurant} />
+      {user && hasOrdered && <OpenModalButton
+        buttonText={"Post Your Review"}
+        modalComponent={<CreateAReviewModal restaurant={restaurant} />}
+      />}
 
       <Items restaurant={restaurant} />
     </>
