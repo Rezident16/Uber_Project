@@ -10,21 +10,16 @@ function RestaurantDetailPage() {
   const { restaurantId } = useParams();
   const restaurant = useSelector((state) => state.restaurant);
   const reviews = restaurant.reviews;
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchRestaurant(restaurantId)).catch((e) => {
-      history.push("/restaurants");
-    });
+    const initialFetch = async () => {
+      const res = await dispatch(fetchRestaurant(restaurantId));
+      if (!res?.owner_id) history.push("/restaurants");
+    };
+    initialFetch();
   }, [dispatch]);
 
-  if (isLoaded && !restaurant?.owner_id) {
-    return <h1>404 Restaurant Does Not Exist</h1>;
-  }
-
   if (!restaurant?.owner_id) return null;
-
-  console.log(restaurant);
 
   return (
     <>

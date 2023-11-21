@@ -49,8 +49,7 @@ export const removeRestaurant = (id) => ({
 // }
 
 export const fetchRestaurant = (id) => async dispatch => {
-    const response = await fetch(`/api/restaurants/${id}`)
-    console.log(response)
+    const response = await fetch(`/api/restaurants/${id}`);
 
     if (response.ok) {
         const data = await response.json()
@@ -136,7 +135,7 @@ const restaurantReducer = (state = {}, action) => {
         case REMOVE_RESTAURANT:
             return state
         case RECEIVE_RESTAURANT:
-            return  action.restaurant
+            return action.restaurant
         default:
             return state
     }
