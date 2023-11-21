@@ -10,7 +10,7 @@ function UpdateRestaurant(){
     const { restaurantId } = useParams()
     const sessionUser = useSelector((state) => state.session.user);
     const restaurant = useSelector((state) => state.restaurant)
-    
+
     useEffect( () => {
         dispatch(fetchRestaurant(restaurantId))
         .catch(e => {
@@ -21,11 +21,11 @@ function UpdateRestaurant(){
     if(!restaurant?.owner_id){
         return null
     }
-    console.log(restaurant)
+    // console.log(restaurant)
     if (!sessionUser || sessionUser?.id !== restaurant?.owner_id) {
         history.push('/restaurants')
-      }
-    
+    }
+
     return (
         <div>
             <RestaurantForm formAction='edit' restaurant={restaurant}/>

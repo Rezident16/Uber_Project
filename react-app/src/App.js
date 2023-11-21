@@ -11,6 +11,7 @@ import updateRestaurant from "./store/restaurant";
 import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
+import RestaurantDetailPage from "./components/Restaurants/restraunt-details-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route path="/restaurants/:restaurantId">
+            <RestaurantDetailPage />
           </Route>
           <Route path='/restaurants/:restaurantId/edit'>
               <UpdateRestaurant/>
