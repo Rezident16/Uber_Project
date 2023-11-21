@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { createAnItemThunk, updateAnItemThunk } from "../../store/restaurant";
+import { useModal } from "../../context/Modal";
 
-const ItemForm = ({ item, formType, id }) => {
+const ItemForm = ({ item, formType, restaurantId }) => {
+  const { closeModal } = useModal();
   const [name, setName] = useState(formType === "Update" ? item.name : "");
   const [description, setDescription] = useState(
     formType === "Update" ? item.description : ""
@@ -13,9 +15,12 @@ const ItemForm = ({ item, formType, id }) => {
   const [preview_img, setPreview_img] = useState(
     formType === "Update" ? item.preview_img : null
   );
-  const [price, setPrice] = useState(
-    formType === "Update" ? item.price : 0
+
+  const [localImg, setLocalImg] = useState(
+    formType === "Update" ? item.preview_img : null
   );
+
+  const [price, setPrice] = useState(formType === "Update" ? item.price : 0);
   const [is_alcohol, setIsAlcohol] = useState(
     formType === "Update" ? item.is_alcohol : false
   );
@@ -36,13 +41,20 @@ const ItemForm = ({ item, formType, id }) => {
     is_alcohol,
   };
 
+  function onFileChange(e) {
+    setPreview_img(e.target.files[0]);
+    setLocalImg(URL.createObjectURL(e.target.files[0]));
+  }
+
   // Thunk Operations
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const errorsObj = {};
     if (!name) errorsObj.name = "Name is required";
-    if (!description) errorsObj.description = "Description is required";
+    if (description.length < 25 || description.length > 255)
+      errorsObj.description =
+        "Description must be at least 25 characters and less than 255 characters";
     if (!category) errorsObj.category = "Please select category";
     if (!preview_img) errorsObj.preview_img = "Image is required";
     if (!price) errorsObj.price = "Price is required";
@@ -55,16 +67,28 @@ const ItemForm = ({ item, formType, id }) => {
       formData.append("preview_img", preview_img);
       formData.append("price", price);
       formData.append("is_alcohol", is_alcohol);
-      if (formType == "Update")  formData.append('restaurant_id', item.restaurant_id)
+      if (formType == "Update")
+        formData.append("restaurant_id", item.restaurant_id);
       setImageLoading(true);
 
       if (formType === "Update") {
-        dispatch(updateAnItemThunk(formData, item.id));
+        try {
+          await dispatch(updateAnItemThunk(formData, item.id));
+          closeModal();
+        } catch (error) {
+          console.error(error);
+        }
       } else {
-        dispatch(createAnItemThunk(formData));
+        try {
+          await dispatch(createAnItemThunk(restaurantId, formData));
+          closeModal();
+        } catch (error) {
+          console.error(error);
+        }
       }
     } else {
-        setErrors(errorsObj)
+      setErrors(errorsObj);
+      console.log(errors);
     }
   };
 
@@ -79,6 +103,7 @@ const ItemForm = ({ item, formType, id }) => {
           onChange={(e) => setName(e.target.value)}
         />
       </label>
+      {errors.name && <p>{errors.name}</p>}
       <label>
         Item Description
         <textarea
@@ -87,6 +112,7 @@ const ItemForm = ({ item, formType, id }) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </label>
+      {errors.description && <p>{errors.description}</p>}
       <label>
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="" disabled hidden>
@@ -103,6 +129,7 @@ const ItemForm = ({ item, formType, id }) => {
           <option value="Specials">Specials</option>
         </select>
       </label>
+      {errors.category && <p>{errors.category}</p>}
       <label>
         Set The Price
         <input
@@ -116,6 +143,7 @@ const ItemForm = ({ item, formType, id }) => {
           }}
         />
       </label>
+      {errors.price && <p>{errors.price}</p>}
       {category == "Beverages" && (
         <label>
           <input
@@ -125,6 +153,7 @@ const ItemForm = ({ item, formType, id }) => {
           />
         </label>
       )}
+      {errors.is_alcohol && <p>{errors.is_alcohol}</p>}
 
       <label>
         Choose Your Food Image
@@ -132,13 +161,15 @@ const ItemForm = ({ item, formType, id }) => {
           type="file"
           name="Item Image"
           accept=".jpg, .jpeg, .png"
-          onChange={(e) => setPreview_img(e.target.files[0])}
+          onChange={onFileChange}
         />
+        {localImg && <img src={localImg} />}
       </label>
+      {errors.preview_img && <p>{errors.preview_img}</p>}
       <button>Submit</button>
       {imageLoading && <p>Image is Loading...</p>}
     </form>
   );
 };
 
-export default ItemForm
+export default ItemForm;

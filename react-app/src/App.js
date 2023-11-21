@@ -12,6 +12,7 @@ import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
 import RestaurantDetailPage from "./components/Restaurants/restraunt-details-page";
+import { loadCart } from "./store/cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,34 +21,44 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  useEffect(() => {
+    console.log("SET CART COOKIE");
+    const cookie = localStorage.getItem("cart");
+    if (cookie) {
+      dispatch(loadCart(JSON.parse(cookie)));
+    }
+  }, []);
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-        <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-          <Route path="/restaurants/:restaurantId">
-            <RestaurantDetailPage />
-          </Route>
-          <Route path='/restaurants/:restaurantId/edit'>
-              <UpdateRestaurant/>
-          </Route>
-          <Route path='/restaurants/new'>
-              <CreateRestaurant/>
-          </Route>
-          <Route path="/restaurants">
-            <GetRestaurants />
-          </Route>
-          {/* delete after test */}
-          <Route path="/restaurants/restaurantId/items">
-            <RestaurantItemsFunc/>
-          </Route>
-        </Switch>
+        <>
+          <Switch>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+            <Route path="/restaurants/:restaurantId">
+              <RestaurantDetailPage />
+            </Route>
+            <Route path="/restaurants/:restaurantId/edit">
+              <UpdateRestaurant />
+            </Route>
+            <Route path="/restaurants/new">
+              <CreateRestaurant />
+            </Route>
+            <Route path="/restaurants">
+              <GetRestaurants />
+            </Route>
+            {/* delete after test */}
+            <Route path="/restaurants/restaurantId/items">
+              <RestaurantItemsFunc />
+            </Route>
+          </Switch>
+        </>
       )}
     </>
   );

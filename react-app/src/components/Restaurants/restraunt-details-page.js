@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurant } from "../../store/restaurant";
 import { useHistory, useParams } from "react-router-dom";
-import RestaurantItemsFunc from "../Items/restaurantItems";
+import Items from "../Items/restaurantItems";
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
@@ -13,6 +13,8 @@ function RestaurantDetailPage() {
     dispatch(fetchRestaurant(restaurantId));
   }, [dispatch]);
 
+  console.log(restaurant);
+
   if (!restaurant?.owner_id) {
     return null;
   }
@@ -21,7 +23,7 @@ function RestaurantDetailPage() {
     <>
       <h1>Our Stuff</h1>
 
-      <RestaurantItemsFunc restaurant={restaurant} />
+      <Items restaurant={restaurant} />
     </>
   );
 }
