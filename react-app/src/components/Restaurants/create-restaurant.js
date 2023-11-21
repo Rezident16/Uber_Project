@@ -12,7 +12,6 @@ function CreateRestaurant(){
         return (
             <div className=''>
                 <h3>Get Started</h3>
-                <h2>fill out form bitch</h2>
                 <RestaurantForm formAction='create'/>
             </div>
         )

@@ -11,7 +11,7 @@ import updateRestaurant from "./store/restaurant";
 import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
-import RestaurantDetailPage from "./components/Restaurants/restraunt-details-page";
+import RestaurantDetailPage from "./components/Restaurants/restaurant-details-page";
 import { loadCart } from "./store/cart";
 
 function App() {
@@ -40,14 +40,14 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          <Route exact path="/restaurants/new">
+            <CreateRestaurant />
+          </Route>
           <Route exact path="/restaurants/:restaurantId">
             <RestaurantDetailPage />
           </Route>
           <Route path="/restaurants/:restaurantId/edit">
             <UpdateRestaurant />
-          </Route>
-          <Route path="/restaurants/new">
-            <CreateRestaurant />
           </Route>
           <Route path="/restaurants">
             <GetRestaurants />
