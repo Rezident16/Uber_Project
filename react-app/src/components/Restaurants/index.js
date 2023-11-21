@@ -7,15 +7,15 @@ import RestaurantTile from './restaurant-tile';
 
 function Restaurants(){
     const dispatch = useDispatch()
+    const restaurantsObj = useSelector(state => state.restaurants)
+    const restaurants = Object.values(restaurantsObj)
 
     useEffect( () => {
         dispatch(fetchRestaurants())
         // dispatch(fetchRestaurant())
     }, [dispatch])
 
-    const restaurantsObj = useSelector( state => state.restaurants)
-    const restaurants = Object.values(restaurantsObj)
-    // console.log('IN /RESTAURANTS', restaurants)
+    console.log('IN /RESTAURANTS', restaurants)
     if (!restaurants) return null
 
 

@@ -6,7 +6,7 @@ class Restaurant(db.Model):
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
-    
+
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
@@ -19,11 +19,11 @@ class Restaurant(db.Model):
     preview_img = db.Column(db.String, nullable=False)
     min_order_time = db.Column(db.Integer)
     max_order_time = db.Column(db.Integer)
-    
+
     owner = db.relationship("User", back_populates="restaurants")
-    reviews = db.relationship("Review", back_populates="restaurant", passive_deletes=True)
-    items = db.relationship("Item", back_populates="restaurant", passive_deletes=True)
-    orders = db.relationship("Order", back_populates="restaurant", passive_deletes=True)
+    reviews = db.relationship("Review", back_populates="restaurant", cascade="all, delete-orphan")
+    items = db.relationship("Item", back_populates="restaurant", cascade="all, delete-orphan")
+    orders = db.relationship("Order", back_populates="restaurant", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -44,7 +44,7 @@ class Restaurant(db.Model):
             'items': [item.to_dict_with_restaurant() for item in self.items],
             'orders': [order.to_dict() for order in self.orders]
         }
-    
+
     def to_dict_no_user(self):
         return {
             'id': self.id,
@@ -62,4 +62,3 @@ class Restaurant(db.Model):
             'reviews': [review.to_dict_no_user() for review in self.reviews]
             # 'items': [item.to_dict() for item in self.items],
         }
-    
