@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurant } from "../../store/restaurant";
 import { useHistory, useParams } from "react-router-dom";
 import Items from "../Items/restaurantItems";
+import RestaurantReviews from "../Reviews/reviews-for-restaraunt";
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
@@ -28,9 +29,9 @@ function RestaurantDetailPage() {
   let currentTime = `${hours}:${minutes}`
 
   // if (Number(restaurant.hours_close.slice(0,2)) > 12) {
-  //     restaurant.hours_close.slice(0,2) = 
+  //     restaurant.hours_close.slice(0,2) =
   // }
-                 
+
   return (
     <>
       <header>
@@ -56,6 +57,8 @@ function RestaurantDetailPage() {
           { currentTime < restaurant.hours_close ? <p> Open until {restaurant.hours_close}</p> : <p>closed</p>}
         </div>
       </header>
+
+      <RestaurantReviews restaurant={restaurant} />
 
       <Items restaurant={restaurant} />
     </>
