@@ -4,6 +4,7 @@ const REMOVE_ITEM = "/items/REMOVE_ITEM";
 const RECEIVE_RESTAURANT = "/restaurants/RECEIVE_RESTAURANT";
 const REMOVE_RESTAURANT = "/restaurants/REMOVE_RESTAURANT";
 const CREATE_REVIEW = "/reviews/CREATE_REVIEW";
+const DELETE_REVIEW = "/reviews/DELETE_REVIEW";
 
 // Action Creators
 
@@ -38,6 +39,13 @@ const createAReview = (review) => {
     review,
   };
 };
+
+const deleteAReview = (reviewId) => {
+    return  {
+        type: DELETE_REVIEW,
+        reviewId
+    }
+}
 
 // Thunks
 
@@ -81,9 +89,10 @@ export const fetchDeleteRestaurant = (id) => async (dispatch) => {
 };
 export const createAReviewThunk =
   (restaurantId, review) => async (dispatch) => {
-    const res = await fetch(`/api/${restaurantId}/reviews`, {
+    const res = await fetch(`/api/restaurants/${restaurantId}/reviews`, {
       method: "POST",
-      body: review,
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(review),
     });
 
     if (res.ok) {
@@ -95,6 +104,21 @@ export const createAReviewThunk =
       return errors;
     }
   };
+
+export const deleteAReviewThunk = (reviewId) => async (dispatch) => {
+  const res = await fetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (res.ok) {
+    dispatch(deleteAReview(reviewId));
+    return;
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
+};
 
 export const createAnItemThunk =
   (restaurantId, payload) => async (dispatch) => {
@@ -175,8 +199,12 @@ const restaurantReducer = (state = {}, action) => {
     case CREATE_REVIEW:
       return {
         ...state,
-        reviews: { ...state.reviews, [action.review.id]: action.review },
+        reviews: [...state.reviews, action.review],
       };
+    case DELETE_REVIEW:
+      const reviewRemoved = { ...state }
+      delete reviewRemoved.reviews[action.reviewId]
+      return reviewRemoved
     default:
       return state;
   }

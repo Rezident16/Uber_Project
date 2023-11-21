@@ -15,9 +15,10 @@ function RestaurantDetailPage() {
   const restaurant = useSelector((state) => state.restaurant);
   const reviews = restaurant.reviews;
   const orders = restaurant.orders;
+  let hasNoReview = false
   let hasOrdered = false;
   // console.log('---------', user)
-  console.log('----------', orders)
+  // console.log('----------', orders)
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -40,10 +41,10 @@ function RestaurantDetailPage() {
     hasOrdered = orders?.some(
       (order) => order.user_id == user.id && order.restaurant_id == restaurantId
     );
+    hasNoReview = !reviews?.some(
+      (review) => review.user_id == user.id && restaurant.id == review.restaurant_id
+    )
   }
-
-  console.log(hasOrdered)
-
 
   return (
     <>
@@ -77,7 +78,7 @@ function RestaurantDetailPage() {
 
       <RestaurantReviews restaurant={restaurant} />
 
-      {user && hasOrdered && <OpenModalButton
+      {hasOrdered && hasNoReview && <OpenModalButton
         buttonText={"Post Your Review"}
         modalComponent={<CreateAReviewModal restaurant={restaurant} />}
       />}
