@@ -11,7 +11,8 @@ import updateRestaurant from "./store/restaurant";
 import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
-import RestaurantDetailPage from "./components/Restaurants/restaurant-details-page";
+import RestaurantDetailPage from "./components/Restaurants/restraunt-details-page";
+import { loadCart } from "./store/cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,14 @@ function App() {
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log("SET CART COOKIE");
+    const cookie = localStorage.getItem("cart");
+    if (cookie) {
+      dispatch(loadCart(JSON.parse(cookie)));
+    }
+  }, []);
 
   return (
     <>

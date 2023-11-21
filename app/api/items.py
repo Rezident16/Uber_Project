@@ -11,7 +11,7 @@ item_routes = Blueprint('items', __name__)
     
 @item_routes.route("/<int:itemId>", methods=["POST"])
 @login_required
-def update_restaurant(itemId):
+def update_item(itemId):
     """Update an item by id"""
     item = Item.query.get(itemId)
     if not item:
@@ -36,15 +36,16 @@ def update_restaurant(itemId):
             if "url" not in upload:
                 return { 'errors': upload }, 500
             else :
-                remove_file_from_s3(restaurant.preview_img)
+                remove_file_from_s3(item.preview_img)
                 item.preview_img = upload["url"]
         
-        item.name = data["name"],
-        item.description = data["description"],
-        item.category = data["category"],
-        item.preview_img = upload["url"],
-        item.price = data["price"],
-        item.is_alcohol=data["is_alcohol"],    
+        item.name = data["name"]
+        item.description = data["description"]
+        item.category = data["category"]
+        if data["preview_img"]:
+            item.preview_img = upload["url"]
+        item.price = data["price"]
+        item.is_alcohol=data["is_alcohol"]
         
         db.session.commit()
         
@@ -68,6 +69,8 @@ def delete_item(itemId):
     if restaurant.owner_id != current_user.id:
             # return {"error": "Unauthorized"} , 403
         return abort(403, description='Unauthorized')
+    
+    remove_file_from_s3(item.preview_img)
         
     db.session.delete(item)
     db.session.commit()
