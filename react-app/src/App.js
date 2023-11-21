@@ -52,8 +52,7 @@ function App() {
           <Route path="/restaurants">
             <GetRestaurants />
           </Route>
-          {/* delete after test */}
-          <Route path="/restaurants/restaurantId/items">
+          <Route path="/restaurants/:restaurantId/items">
             <RestaurantItemsFunc />
           </Route>
           <Route>
