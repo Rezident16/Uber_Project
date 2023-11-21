@@ -11,7 +11,7 @@ import updateRestaurant from "./store/restaurant";
 import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
-import RestaurantDetailPage from "./components/Restaurants/restraunt-details-page";
+import RestaurantDetailPage from "./components/Restaurants/restaurant-details-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,21 +31,24 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/restaurants/:restaurantId">
+          <Route exact path="/restaurants/:restaurantId">
             <RestaurantDetailPage />
           </Route>
-          <Route path='/restaurants/:restaurantId/edit'>
-              <UpdateRestaurant/>
+          <Route path="/restaurants/:restaurantId/edit">
+            <UpdateRestaurant />
           </Route>
-          <Route path='/restaurants/new'>
-              <CreateRestaurant/>
+          <Route path="/restaurants/new">
+            <CreateRestaurant />
           </Route>
           <Route path="/restaurants">
             <GetRestaurants />
           </Route>
           {/* delete after test */}
           <Route path="/restaurants/restaurantId/items">
-            <RestaurantItemsFunc/>
+            <RestaurantItemsFunc />
+          </Route>
+          <Route>
+            <h1>404 Page Not Found</h1>
           </Route>
         </Switch>
       )}
