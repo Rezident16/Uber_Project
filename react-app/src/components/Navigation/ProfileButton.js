@@ -22,8 +22,6 @@ function ProfileButton({ user }) {
     const cartLength = Object.values(cart).reduce((acc, curr) => {
       acc = parseInt(acc) + parseInt(curr.qty);
       return acc;
-      console.log(acc, "accumulator");
-      console.log(curr, "current");
     }, 0);
 
     setCartQty(cartLength);

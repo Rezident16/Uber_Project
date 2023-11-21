@@ -1,11 +1,9 @@
 import React from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { deleteAReviewThunk } from "../../store/restaurant";
 
 function DeleteAReviewModal({ review }) {
-  const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 

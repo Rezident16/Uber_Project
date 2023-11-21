@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createAReviewThunk } from "../../store/restaurant";
 
 function CreateAReviewModal({ restaurant }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
   const [reviewText, setReviewText] = useState("");
   const [activeRating, setActiveRating] = useState(0);
@@ -13,7 +12,6 @@ function CreateAReviewModal({ restaurant }) {
   const disabled = reviewText.length < 10 || rating === 0;
   const className = disabled ? "not-confirmed-review" : "confirm-review";
   const [errors, setErrors] = useState({});
-
 
   // console.log(user)
 

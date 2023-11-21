@@ -1,5 +1,4 @@
 import OpenModalButton from "../OpenModalButton";
-import { useModal } from "../../context/Modal";
 import ItemModal from "./itemModal";
 import { useEffect, useState } from "react";
 import "./Items.css";
@@ -36,7 +35,6 @@ function Items({ restaurant }) {
     <>
       {isOwner && (
         <>
-          <h3>TEST</h3>
           <OpenModalButton
             buttonText={"Add Menu Item"}
             className={"update_component"}
@@ -52,7 +50,7 @@ function Items({ restaurant }) {
             <ItemModalButton
               buttonText={
                 <div>
-                  <img src={item.preview_img} />
+                  <img src={item.preview_img} alt="" />
                   <p>{item.name}</p>
                   <p>${item.price}</p>
                 </div>

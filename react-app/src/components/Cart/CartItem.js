@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateCartQty, removeFromCart } from "../../store/cart";
 import { useEffect } from "react";
 
@@ -21,7 +21,7 @@ function CartItem({ item }) {
 
   return (
     <div>
-      <img src={item.preview_img} />
+      <img src={item.preview_img} alt="" />
       <div>{item.name}</div>
       <div>
         <select

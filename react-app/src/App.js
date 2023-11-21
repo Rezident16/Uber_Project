@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import SignupFormPage from "./components/SignupFormPage";
-import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import Restaurants from "./components/Restaurants";
 import CreateRestaurant from "./components/Restaurants/create-restaurant";
-import updateRestaurant from "./store/restaurant";
 import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
 import RestaurantDetailPage from "./components/Restaurants/restaurant-details-page";
 import { loadCart } from "./store/cart";
 import CheckoutItem from "./components/Checkout/Checkout";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,18 +25,19 @@ function App() {
     if (cookie) {
       dispatch(loadCart(JSON.parse(cookie)));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
+          <Route exact path="/">
+            <>
+              <h1>Home Page</h1>
+              <Link to="/restaurants">Restaurants</Link>
+              <Link to=""></Link>
+            </>
           </Route>
           <Route exact path="/restaurants/new">
             <CreateRestaurant />

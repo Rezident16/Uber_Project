@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 import { createAnItemThunk, updateAnItemThunk } from "../../store/restaurant";
 import { useModal } from "../../context/Modal";
 
@@ -163,7 +163,7 @@ const ItemForm = ({ item, formType, restaurantId }) => {
           accept=".jpg, .jpeg, .png"
           onChange={onFileChange}
         />
-        {localImg && <img src={localImg} />}
+        {localImg && <img src={localImg} alt="" />}
       </label>
       {errors.preview_img && <p>{errors.preview_img}</p>}
       <button>Submit</button>
