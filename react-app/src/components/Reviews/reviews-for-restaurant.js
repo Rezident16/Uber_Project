@@ -3,9 +3,13 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteAReviewModal from "./delete-a-review";
 import { useSelector } from "react-redux";
 
-function RestaurantReviews({ restaurant }) {
-  const reviews = restaurant.reviews;
+function RestaurantReviews() {
   const user = useSelector(state => state.session.user)
+  const restaurant = useSelector(state => state.restaurant)
+  const reviews = restaurant.reviews;
+
+  console.log('RESTAURANT',restaurant)
+  if (!restaurant) return null
   return (
     <>
       <h3>What customers are saying</h3>

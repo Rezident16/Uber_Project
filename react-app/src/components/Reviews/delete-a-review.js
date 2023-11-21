@@ -17,9 +17,9 @@ function DeleteAReviewModal({ review }) {
   };
 
   return (
-    <div className="delete-spot-modal">
+    <div className="delete-review-modal">
       <h1>Confirm Delete</h1>
-      <span id="delete-spot-span">
+      <span id="delete-review-span">
         Are you sure you want to delete this review?
       </span>
       <button

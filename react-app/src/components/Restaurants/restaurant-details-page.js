@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurant } from "../../store/restaurant";
 import { useHistory, useParams } from "react-router-dom";
 import Items from "../Items/restaurantItems";
-import RestaurantReviews from "../Reviews/reviews-for-restaraunt";
+import RestaurantReviews from "../Reviews/reviews-for-restaurant";
 import CreateAReviewModal from "../Reviews/post-a-review";
 import OpenModalButton from "../OpenModalButton";
+import DeleteARestaurantModal from "./delete-a-restaurant";
+
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
@@ -80,9 +82,12 @@ function RestaurantDetailPage() {
 
       {hasOrdered && hasNoReview && <OpenModalButton
         buttonText={"Post Your Review"}
-        modalComponent={<CreateAReviewModal restaurant={restaurant} />}
+        modalComponent={<CreateAReviewModal/>}
       />}
-
+      {user.id === restaurant.owner_id && <OpenModalButton
+      buttonText={"Delete Your Restaurant"}
+      modalComponent={<DeleteARestaurantModal/> }
+      />}
       <Items restaurant={restaurant} />
     </>
   );

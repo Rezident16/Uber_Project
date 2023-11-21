@@ -202,8 +202,10 @@ const restaurantReducer = (state = {}, action) => {
         reviews: [...state.reviews, action.review],
       };
     case DELETE_REVIEW:
-      const reviewRemoved = { ...state }
-      delete reviewRemoved.reviews[action.reviewId]
+      const reviewRemoved = {
+        ...state,
+        reviews: state.reviews.filter(review => review.id !== action.reviewId)
+      };
       return reviewRemoved
     default:
       return state;
