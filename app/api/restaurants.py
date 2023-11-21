@@ -253,9 +253,8 @@ def create_order(restaurantId):
         for item in items:
             new_price += item.price
             
-        new_order.price = new_price
+        new_order.price = round(new_price, 2)
         
-        print("NEW ORDER",new_order)
         
         db.session.add(new_order)
         db.session.commit()
