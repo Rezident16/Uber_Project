@@ -255,6 +255,8 @@ def create_order(restaurantId):
             
         new_order.price = new_price
         
+        print("NEW ORDER",new_order)
+        
         db.session.add(new_order)
         db.session.commit()
         

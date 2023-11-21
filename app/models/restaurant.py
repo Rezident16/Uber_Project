@@ -41,7 +41,7 @@ class Restaurant(db.Model):
             'max_order_time': self.max_order_time,
             'owner': self.owner.to_dict(),
             'reviews': [review.to_dict() for review in self.reviews],
-            'items': [item.to_dict() for item in self.items],
+            'items': [item.to_dict_with_restaurant() for item in self.items],
             'orders': [order.to_dict() for order in self.orders]
         }
     
