@@ -21,6 +21,7 @@ function RestaurantDetailPage() {
 
   if (!restaurant?.owner_id) return null;
 
+                 
   return (
     <>
       <header>
