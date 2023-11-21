@@ -12,10 +12,11 @@ function UpdateRestaurant(){
     const restaurant = useSelector((state) => state.restaurant)
 
     useEffect( () => {
-        dispatch(fetchRestaurant(restaurantId))
-        .catch(e => {
-            history.push('/restaurants')
-        })
+    const initialFetch = async () => {
+      const res = await dispatch(fetchRestaurant(restaurantId));
+      if (!res?.owner_id) history.push("/restaurants");
+    };
+    initialFetch();
     }, [dispatch])
 
     if(!restaurant?.owner_id){
