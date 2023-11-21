@@ -13,6 +13,7 @@ import GetRestaurants from "./components/Restaurants";
 import RestaurantItemsFunc from "./components/Items/restaurantItems";
 import RestaurantDetailPage from "./components/Restaurants/restaurant-details-page";
 import { loadCart } from "./store/cart";
+import CheckoutItem from "./components/Checkout/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,9 @@ function App() {
           {/* delete after test */}
           <Route path="/restaurants/restaurantId/items">
             <RestaurantItemsFunc />
+          </Route>
+          <Route path="/checkout">
+            <CheckoutItem />
           </Route>
           <Route>
             <h1>404 Page Not Found</h1>
