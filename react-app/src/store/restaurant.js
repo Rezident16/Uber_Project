@@ -3,6 +3,7 @@ const UPDATE_ITEM = "/items/UPDATE_ITEM";
 const REMOVE_ITEM = "/items/REMOVE_ITEM";
 const RECEIVE_RESTAURANT = "/restaurants/RECEIVE_RESTAURANT";
 const REMOVE_RESTAURANT = "/restaurants/REMOVE_RESTAURANT";
+const CREATE_REVIEW = "/reviews/CREATE_REVIEW";
 
 // Action Creators
 
@@ -31,6 +32,13 @@ export const removeRestaurant = (id) => ({
   id,
 });
 
+const createAReview = (review) => {
+  return {
+    type: CREATE_REVIEW,
+    review,
+  };
+};
+
 // Thunks
 
 // export const fetchItemThunk = (id) => async (dispatch) => {
@@ -46,18 +54,18 @@ export const removeRestaurant = (id) => ({
 //     }
 // }
 
-export const fetchRestaurant = (id) => async dispatch => {
-    const response = await fetch(`/api/restaurants/${id}`);
+export const fetchRestaurant = (id) => async (dispatch) => {
+  const response = await fetch(`/api/restaurants/${id}`);
 
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(receiveRestaurant(data));
-        return data
-    } else {
-        const errors = await response.json()
-        return errors
-    }
-}
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(receiveRestaurant(data));
+    return data;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 
 export const fetchDeleteRestaurant = (id) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${id}`, {
@@ -71,6 +79,23 @@ export const fetchDeleteRestaurant = (id) => async (dispatch) => {
     return errors;
   }
 };
+export const createAnReviewThunk =
+  (restaurantId, review) => async (dispatch) => {
+    const res = await fetch(`/api/${restaurantId}/reviews`, {
+      method: "POST",
+      body: review,
+    });
+
+    if (res.ok) {
+      const rev = await res.json();
+      dispatch(createAReview(rev));
+      return rev;
+    } else {
+      const errors = await res.json();
+      return errors;
+    }
+  };
+
 export const createAnItemThunk =
   (restaurantId, payload) => async (dispatch) => {
     const res = await fetch(`/api/restaurants/${restaurantId}/items/new`, {
@@ -147,6 +172,11 @@ const restaurantReducer = (state = {}, action) => {
       return { ...action.restaurant, items: normalItems };
     case REMOVE_RESTAURANT:
       return state;
+    case CREATE_REVIEW:
+      return {
+        ...state,
+        reviews: { ...state.reviews, [action.review.id]: action.review },
+      };
     default:
       return state;
   }

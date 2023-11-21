@@ -4,6 +4,7 @@ import { fetchRestaurant } from "../../store/restaurant";
 import { useHistory, useParams } from "react-router-dom";
 import Items from "../Items/restaurantItems";
 import RestaurantReviews from "../Reviews/reviews-for-restaraunt";
+import CreateAReviewModal from "../Reviews/post-a-review";
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
@@ -59,6 +60,8 @@ function RestaurantDetailPage() {
       </header>
 
       <RestaurantReviews restaurant={restaurant} />
+
+      <CreateAReviewModal restaurant={restaurant} />
 
       <Items restaurant={restaurant} />
     </>
