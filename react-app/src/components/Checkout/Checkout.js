@@ -20,8 +20,8 @@ function CheckoutItem() {
   const restaurantOrders = {};
 
   cartItems.forEach((item) => {
-    restaurantOrders[item.restaurantId] = {
-      ...restaurantOrders[item.restaurantId],
+    restaurantOrders[item.restaurant_id] = {
+      ...restaurantOrders[item.restaurant_id],
       item,
     };
   });
@@ -33,27 +33,34 @@ function CheckoutItem() {
     const errorsObj = {};
     if (!address) {
       errorsObj.address = "Address is required";
-      setErrors(errorsObj)
+      setErrors(errorsObj);
     }
 
     if (!Object.values(errors).length) {
-        for (const [restaurantId, items] of Object.entries(restaurantOrders)) {
-          const itemsArr = [];
-          for (const item of Object.values(items)) {
-            for (let i = 0; i < item.qty; i++) {
-              itemsArr.push(item.id);
-            }
+      for (const [restaurantId, items] of Object.entries(restaurantOrders)) {
+        const itemsArr = [];
+        for (const item of Object.values(items)) {
+          for (let i = 0; i < item.qty; i++) {
+            itemsArr.push(item.id);
           }
-          const bodyOrder = {
-            address: address,
-            notes: notes,
-            items: itemsArr,
-            user_id: user.id,
-          };
-          await dispatch(submitOrder(bodyOrder, restaurantId));
         }
+        const bodyOrder = {
+          address: address,
+          notes: notes,
+          items: itemsArr,
+          user_id: user.id,
+        };
+        await dispatch(submitOrder(bodyOrder, restaurantId));
+      }
     }
   };
+
+  function displayItems() {
+    const restaurantArr = Object.entries(restaurantOrders);
+    console.log(restaurantArr);
+  }
+
+  displayItems();
 
   return (
     <>
@@ -62,16 +69,16 @@ function CheckoutItem() {
           Address
           <input onChange={(e) => setAddress(e.target.value)} value={address} />
         </label>
-        {errors.address && (
-            <p>{errors.address}</p>
-        )}
+        {errors.address && <p>{errors.address}</p>}
         <label>
           Leave you special instructions headers
           <textarea onChange={(e) => setNotes(e.target.value)} value={notes} />
         </label>
+
+        <button>Place Order</button>
       </form>
     </>
   );
 }
 
-export default CheckoutItem
+export default CheckoutItem;
