@@ -21,7 +21,7 @@ function RestaurantReviews() {
             {review.user.first_name} {review.user.last_name[0]}.
           </p>
           <p>{review.review}</p>
-          {user.id == review.user_id && (
+          {user && user.id == review.user_id && (
             <OpenModalButton
               buttonText={"Delete"}
               modalComponent={<DeleteAReviewModal review={review} />}

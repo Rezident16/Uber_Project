@@ -84,7 +84,7 @@ function RestaurantDetailPage() {
         buttonText={"Post Your Review"}
         modalComponent={<CreateAReviewModal/>}
       />}
-      {user.id === restaurant.owner_id && <OpenModalButton
+      {user && user.id === restaurant.owner_id && <OpenModalButton
       buttonText={"Delete Your Restaurant"}
       modalComponent={<DeleteARestaurantModal/> }
       />}
