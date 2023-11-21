@@ -15,6 +15,6 @@ class RestaurantForm(FlaskForm):
     state = StringField("state", validators=[DataRequired()])
     hours_open = TimeField("hours open", validators=[DataRequired()])
     hours_close = TimeField("hours close", validators=[DataRequired()])
-    preview_img = FileField("preview image", validators=[FileAllowed([IMAGE_EXTENSIONS])])
-    submit = SubmitField("submit")
+    preview_img = FileField("preview image", validators=[FileAllowed(list(IMAGE_EXTENSIONS))])
+    # submit = SubmitField("submit")
     

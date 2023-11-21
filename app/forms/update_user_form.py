@@ -28,11 +28,10 @@ def birthday_is_valid(form, field):
         raise ValidationError("Birthday cannot be in the future.")
     
 
-class SignUpForm(FlaskForm):
+class UpdateUserForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[DataRequired()])
     first_name = StringField("First Name", validators=[DataRequired()])
     last_name = StringField("Last Name", validators=[DataRequired()])
     birthday = DateField("Birthday", validators=[birthday_is_valid])

@@ -31,7 +31,9 @@ class Item(db.Model):
             'category': self.category,
             'preview_img': self.preview_img,
             'price': self.price,
-            'is_alcohol': self.is_alcohol
+            'is_alcohol': self.is_alcohol,
+            'likes': len(self.users),
+            'orders': len(self.orders),
         }
     
     def to_dict_no_user(self):
@@ -45,7 +47,7 @@ class Item(db.Model):
             'price': self.price,
             'is_alcohol': self.is_alcohol,
             'restaurant': self.restaurant.to_dict_no_user(),
-            'likes_ratio': len(self.users)/len(self.orders)
-            # 'users': len(self.users),
-            # 'orders': len(self.orders)
+            # 'likes_ratio': len(self.users)/len(self.orders)
+            'likes': len(self.users),
+            'orders': len(self.orders)
         }
