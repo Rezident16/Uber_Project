@@ -8,7 +8,7 @@ function RestaurantReviews() {
   const restaurant = useSelector(state => state.restaurant)
   const reviews = restaurant.reviews;
 
-  console.log('RESTAURANT',restaurant)
+  // console.log('RESTAURANT',restaurant)
   if (!restaurant) return null
   return (
     <>
