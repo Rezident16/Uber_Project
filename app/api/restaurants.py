@@ -135,6 +135,7 @@ def delete_restaurant(restaurantId):
     if restaurant.owner_id != current_user.id:
             # return {"error": "Unauthorized"} , 403
         return abort(403, description='Unauthorized')
+    
 
     db.session.delete(restaurant)
     db.session.commit()
