@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurants } from "../../store/restaurants";
 import RestaurantTile from "./restaurant-tile";
 
-// import 'Restaurants.css'
+import "./restaurant.css";
 
 function Restaurants() {
   const dispatch = useDispatch();
@@ -19,12 +19,10 @@ function Restaurants() {
   if (!restaurants) return null;
 
   return (
-    <div>
+    <div id="restaurant-tile-container">
       {restaurants &&
         restaurants.map((restaurant) => (
-          <div key={restaurant.id}>
-            <RestaurantTile restaurant={restaurant} />
-          </div>
+          <RestaurantTile key={restaurant.id} restaurant={restaurant} />
         ))}
     </div>
   );

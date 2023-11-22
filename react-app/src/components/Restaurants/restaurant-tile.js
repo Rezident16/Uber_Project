@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import React from 'react';
+import React from "react";
 
 function RestaurantTile({ restaurant }) {
   const history = useHistory();
@@ -8,7 +8,8 @@ function RestaurantTile({ restaurant }) {
   }
 
   return (
-    <div onClick={directToRestaurant}>
+    <div className="restaurant-tile" onClick={directToRestaurant}>
+      <img src={restaurant.preview_img} alt={restaurant.name} />
       <p>
         <span>{restaurant.name}</span> <span>({restaurant.address})</span>
       </p>
@@ -20,7 +21,6 @@ function RestaurantTile({ restaurant }) {
             ).toFixed(1)
           : "New Restaurant!!!"}
       </p>
-      <img src={restaurant.preview_img} alt={restaurant.name} />
     </div>
   );
 }

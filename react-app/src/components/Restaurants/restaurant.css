@@ -1,0 +1,29 @@
+#restaurant-tile-container {
+  display: grid;
+  /* align-items: center; */
+  max-width: 1400px;
+  min-width: 750px;
+  /* width: auto; */
+  grid-template-columns: repeat(3, minmax(218px, 442px));
+  gap: 40px 24px;
+}
+
+.restaurant-tile {
+  display: flex;
+  flex-direction: column;
+  /* min-width: 218px; */
+  /* max-width: 442px; */
+  width: 100%;
+  /* max-width: 100%; */
+  height: 188px;
+  /* margin: 12px 20px; */
+}
+
+.restaurant-tile > img {
+  width: 100%;
+  height: 70%;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+/* 24, 40 */
