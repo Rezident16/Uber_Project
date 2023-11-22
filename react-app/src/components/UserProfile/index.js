@@ -121,9 +121,24 @@ function UserProfile() {
                 </h3>
               </div>
               <h3>Order Details:</h3>
-              <p>Order Total: ${order.price.toFixed(2)}</p>
-              <p>Ordered at: {helperFunc(order.created_at.split("GMT")[0])}</p>
-              <p>Delivery Address: {order.address}</p>
+              <div className="order_details_container">
+                <h4>Order Total:</h4>
+                <p> ${order.price.toFixed(2)}</p>
+              </div>
+              <div className="order_details_container">
+                <h4>Ordered at:</h4>
+                <p> {helperFunc(order.created_at.split("GMT")[0])}</p>
+              </div>
+              <div className="order_details_container">
+                <h4>Delivery Address:</h4>
+                <p> {order.address}</p>
+              </div>
+                {order.notes && (
+                  <div className="order_details_container">
+                    <h4>Order Notes:</h4>
+                    <p> {order.notes}</p>
+                  </div>
+                )}
               <div className="item_container">
                 {order.items.map((item) => (
                   <div key={item.id}>
@@ -135,7 +150,6 @@ function UserProfile() {
                   </div>
                 ))}
               </div>
-              {order.notes && <p>Order Notes: {order.notes}</p>}
             </div>
           ))}
       </div>
