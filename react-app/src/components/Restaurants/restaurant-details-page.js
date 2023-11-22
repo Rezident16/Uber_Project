@@ -31,6 +31,8 @@ function RestaurantDetailPage() {
 
   if (!restaurant?.owner_id) return null;
 
+  if (restaurantId != restaurant.id) return null;
+
   let hours = new Date().getHours();
   // let AMorPM = hours >= 12 && hours < 24 ? "PM" : "AM";
   let minutes = new Date().getMinutes();
