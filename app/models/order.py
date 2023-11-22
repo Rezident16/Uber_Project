@@ -59,3 +59,24 @@ class Order(db.Model):
             'restaurant_id': self.restaurant_id,
             'notes': self.notes
         }
+    
+    def to_dict_no_user_with_items(self):
+
+        item_quantities = db.session.query(orders_items.c.item_id, db.func.count()).filter_by(order_id = self.id).group_by(orders_items.c.item_id).all()
+
+        # map those tuples to a dict
+        items = {}
+        for key, val in item_quantities:
+            items[key] = val
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'created_at': self.created_at,
+            'is_complete': self.is_complete,
+            'address': self.address,
+            'price': self.price,
+            'restaurant_id': self.restaurant_id,
+            'notes': self.notes,
+            'restaurant': self.restaurant.to_dict_no_user(),
+            'items': [item.to_dict_with_quantity(quantity = items[item.id]) for item in self.items]
+        }
