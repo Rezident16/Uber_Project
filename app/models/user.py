@@ -44,6 +44,7 @@ class User(db.Model, UserMixin):
             'last_name': self.last_name,
             'birthday': self.birthday,
             'address': self.address,
+            'orders': [order.to_dict_no_user_with_items() for order in self.orders]
         }
     
     def to_dict_full(self):

@@ -11,6 +11,7 @@ import RestaurantDetailPage from "./components/Restaurants/restaurant-details-pa
 import { loadCart } from "./store/cart";
 import CheckoutItem from "./components/Checkout/Checkout";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/checkout">
             <CheckoutItem />
+          </Route>
+          <Route path='/current'>
+            <UserProfile />
           </Route>
           <Route>
             <h1>404 Page Not Found</h1>

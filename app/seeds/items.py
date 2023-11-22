@@ -96,6 +96,119 @@ def seed_items():
         is_alcohol = False
     )
 
+    mc_chicken = Item (
+        restaurant_id = 5,
+        name="McChicken",
+        description="""The McChicken: a McDonald's sandwich with a breaded chicken patty,
+        lettuce, and mayo in a sesame seed bun.""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/mcchicken.jpeg",
+        price=1.99,
+        is_alcohol = False
+    )
+
+    fries = Item (
+        restaurant_id = 5,
+        name="Fries",
+        description="""McDonald's fries: golden and crispy potato sticks, seasoned to
+        perfection for a deliciously iconic snack.""",
+        category = "Side",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/mcfries.jpeg",
+        price=2.99,
+        is_alcohol = False
+    )
+
+    baconator = Item (
+        restaurant_id = 6,
+        name="Baconator",
+        description="""The Wendy's Baconator: a hearty burger piled high with fresh, never
+        frozen beef patties, crispy bacon, and melted cheese, creating a savory delight
+        for burger enthusiasts.""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/baconator.jpeg",
+        price=5.99,
+        is_alcohol = False
+    )
+
+    frosty = Item (
+        restaurant_id = 6,
+        name="Frosty",
+        description="""The Wendy's Frosty: a creamy and indulgent dessert, blending rich chocolate or vanilla
+        flavors into a smooth, frosty treat that strikes the perfect balance between shake and ice cream.""",
+        category = "Dessert",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/frosty.jpg",
+        price=.99,
+        is_alcohol = False
+    )
+
+    chicken_burrito = Item (
+        restaurant_id = 7,
+        name="Chicken Burrito",
+        description="""Chipotle's Chicken Burrito: Grilled chicken, rice, beans, salsa, cheese, and sour cream in a warm
+        tortilla—a delicious Mexican-inspired bite.""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/burrito.jpeg",
+        price=7.99,
+        is_alcohol = False
+    )
+
+    steak_bowl = Item (
+        restaurant_id = 7,
+        name="Steak Bowl",
+        description="""Chipotle's Steak Bowl: Succulent grilled steak served on a bed of cilantro-lime rice,
+        paired with black beans, salsa, cheese, and your choice of toppings for a hearty and customizable bowl.""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/steakbowl.jpeg",
+        price=7.99,
+        is_alcohol = False
+    )
+
+    cajun_fries = Item (
+        restaurant_id = 8,
+        name="Cajun Fries",
+        description="""Five Guys Cajun Fries: Irresistible hand-cut fries seasoned with a bold blend of spices,
+        offering a flavorful and satisfying twist to the classic potato fry experience.""",
+        category = "Side",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/cajunfries.jpeg",
+        price=3.99,
+        is_alcohol = False
+    )
+
+    fiveguys_burger = Item (
+        restaurant_id = 8,
+        name="Burger",
+        description="""Five Guys Burger: Double the juicy beef, endless toppings,
+        all in a soft bun—a classic indulgence.""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/fiveguysburger.jpeg",
+        price=7.99,
+        is_alcohol = False
+    )
+
+    quesarito = Item (
+        restaurant_id = 9,
+        name="Quesarito",
+        description="""Taco Bell Quesarito: Beef, rice, cheese, and chipotle sauce in a grilled tortilla—a
+        delicious blend of flavors""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/quesarito.jpeg",
+        price=4.99,
+        is_alcohol = False
+    )
+
+    crunchwrap = Item (
+        restaurant_id = 9,
+        name="Crunch Wrap Supreme",
+        description="""Crunchwrap Supreme: Beef, lettuce, tomatoes, cheese, and sour cream in a grilled
+        tortilla with a crispy tostada shell for a satisfying crunch..""",
+        category = "Main",
+        preview_img="https://savoryscoot.s3.amazonaws.com/seeder-images/crunchwrapsupreme.jpeg",
+        price=7.99,
+        is_alcohol = False
+    )
+
+
+
     db.session.add(burger)
     db.session.add(salad)
     db.session.add(filet_mignon)
@@ -104,6 +217,17 @@ def seed_items():
     db.session.add(coke)
     db.session.add(hotdog)
     db.session.add(hot_wings)
+    db.session.add(mc_chicken)
+    db.session.add(fries)
+    db.session.add(baconator)
+    db.session.add(frosty)
+    db.session.add(chicken_burrito)
+    db.session.add(steak_bowl)
+    db.session.add(cajun_fries)
+    db.session.add(fiveguys_burger)
+    db.session.add(crunchwrap)
+    db.session.add(quesarito)
+
     db.session.commit()
 
 

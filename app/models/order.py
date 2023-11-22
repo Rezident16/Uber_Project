@@ -22,7 +22,7 @@ class Order(db.Model):
 
     user = db.relationship("User", back_populates="orders")
     restaurant = db.relationship("Restaurant", back_populates="orders")
-    items = db.relationship("Item", secondary=orders_items, back_populates='orders', passive_deletes=True)
+    items = db.relationship("Item", secondary=orders_items, back_populates='orders', cascade="all, delete")
 
     def to_dict(self):
         # create a list of tuples formatted like (item_id, quantity)
@@ -58,4 +58,25 @@ class Order(db.Model):
             'price': self.price,
             'restaurant_id': self.restaurant_id,
             'notes': self.notes
+        }
+    
+    def to_dict_no_user_with_items(self):
+
+        item_quantities = db.session.query(orders_items.c.item_id, db.func.count()).filter_by(order_id = self.id).group_by(orders_items.c.item_id).all()
+
+        # map those tuples to a dict
+        items = {}
+        for key, val in item_quantities:
+            items[key] = val
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'created_at': self.created_at,
+            'is_complete': self.is_complete,
+            'address': self.address,
+            'price': self.price,
+            'restaurant_id': self.restaurant_id,
+            'notes': self.notes,
+            'restaurant': self.restaurant.to_dict_no_user(),
+            'items': [item.to_dict_with_quantity(quantity = items[item.id]) for item in self.items]
         }
