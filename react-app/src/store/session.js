@@ -2,7 +2,7 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
-const setUser = (user) => ({
+export const setUser = (user) => ({
 	type: SET_USER,
 	payload: user,
 });
@@ -28,6 +28,15 @@ export const authenticate = () => async (dispatch) => {
 		dispatch(setUser(data));
 	}
 };
+
+export const getCurr = () => async (dispatch) => {
+	const response = await fetch('/api/users/current')
+	if (response.ok) {
+		const data =  await response.json()
+		dispatch(setUser(data))
+		return null
+	}
+}
 
 export const login = (email, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/login", {
