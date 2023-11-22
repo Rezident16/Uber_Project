@@ -9,18 +9,15 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav id="navbar">
-      <ul>
-        <li>
-          <NavLink exact to="/restaurants">
-            Home
-          </NavLink>
-        </li>
-        {isLoaded && (
-          <li>
-            <ProfileButton user={sessionUser} />
-          </li>
-        )}
-      </ul>
+      <NavLink exact to="/restaurants" id="logo">
+        <img src="https://savoryscoot.s3.amazonaws.com/src-images/SavoryScooter.svg" />
+        <span>
+          <span style={{ fontWeight: 500 }}>Savory</span>
+          <span style={{ fontWeight: 600 }}>Scoot</span>
+        </span>
+      </NavLink>
+
+      {isLoaded && <ProfileButton user={sessionUser} />}
     </nav>
   );
 }

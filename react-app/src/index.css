@@ -26,7 +26,6 @@ nav {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
   font: inherit;
   font-family: Roboto, Helvetica, sans-serif;
 }
@@ -55,4 +54,5 @@ button {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100vw;
 }

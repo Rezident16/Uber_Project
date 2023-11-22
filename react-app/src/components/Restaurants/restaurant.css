@@ -6,6 +6,7 @@
   /* width: auto; */
   grid-template-columns: repeat(3, minmax(218px, 442px));
   gap: 40px 24px;
+  margin: 0 50px;
 }
 
 .restaurant-tile {
@@ -24,6 +25,35 @@
   height: 70%;
   border-radius: 15px;
   object-fit: cover;
+}
+
+.restaurant-tile > p {
+  margin-top: 8px;
+}
+
+.restaurant-title {
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.restaurant-rating {
+  background-color: lightgray;
+  border-radius: 50%;
+  background-size: auto;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+}
+
+.order-time {
+  font-size: 14px;
+  color: gray;
 }
 
 /* 24, 40 */

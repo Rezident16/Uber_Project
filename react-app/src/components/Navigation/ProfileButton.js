@@ -50,7 +50,7 @@ function ProfileButton({ user }) {
   const closeMenu = () => setShowMenu(false);
 
   return (
-    <>
+    <div>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
@@ -86,7 +86,7 @@ function ProfileButton({ user }) {
           modalComponent={<CartModal />}
         />
       </ul>
-    </>
+    </div>
   );
 }
 
