@@ -5,6 +5,7 @@ from datetime import time, datetime
 from random import randint
 from app.forms import RestaurantForm, ReviewForm, ItemForm, OrderForm
 from .aws_helpers import *
+from app.models import orders_items
 
 restaurant_routes = Blueprint('restaurants', __name__)
 
@@ -135,7 +136,18 @@ def delete_restaurant(restaurantId):
     if restaurant.owner_id != current_user.id:
             # return {"error": "Unauthorized"} , 403
         return abort(403, description='Unauthorized')
-    
+
+    for order in restaurant.orders:
+        print('i would to delete my orders here')
+        db.session.query(orders_items).filter(orders_items.c.order_id == order.id).delete()
+
+
+    for item in restaurant.items:
+        print('i would to delete my items here')
+        db.session.query(orders_items).filter(orders_items.c.item_id == item.id).delete()
+
+    db.session.commit()
+
 
     db.session.delete(restaurant)
     db.session.commit()
@@ -222,8 +234,8 @@ def create_review(restaurantId):
 
     if form.errors:
         return form.errors
-    
-    
+
+
 # ORDERS ROUTE
 
 @restaurant_routes.route("/<int:restaurantId>/orders", methods=["POST"])
@@ -232,10 +244,10 @@ def create_order(restaurantId):
     """Create a new order"""
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    
+
     if form.validate_on_submit():
         data = form.data
-        
+
         new_order = Order(
             user_id = current_user.id,
             restaurant_id = restaurantId,
@@ -244,22 +256,20 @@ def create_order(restaurantId):
             notes = data["notes"],
             price = 0
         )
-        req = request.get_json() 
-        
+        req = request.get_json()
+
         items = [Item.query.get(id) for id in req["item_ids"]]
-        
+
         new_order.items = items
-        
+
         new_price = 0
         for item in items:
             new_price += item.price
-            
+
         new_order.price = round(new_price, 2)
-        
-        
+
+
         db.session.add(new_order)
         db.session.commit()
-        
+
         return new_order.to_dict()
-        
-        
