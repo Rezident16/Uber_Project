@@ -6,6 +6,7 @@ import CartItem from "./CartItem";
 import { Link } from "react-router-dom/";
 import "./Cart.css";
 import { clearCart } from "../../store/cart";
+import React from 'react';
 
 function CartModal() {
   const cart = useSelector((state) => state.cart);

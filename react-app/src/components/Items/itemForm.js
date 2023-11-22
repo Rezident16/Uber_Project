@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { createAnItemThunk, updateAnItemThunk } from "../../store/restaurant";
 import { useModal } from "../../context/Modal";
+import React from 'react';
 
 const ItemForm = ({ item, formType, restaurantId }) => {
   const { closeModal } = useModal();

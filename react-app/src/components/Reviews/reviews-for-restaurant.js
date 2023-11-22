@@ -1,6 +1,7 @@
 import OpenModalButton from "../OpenModalButton";
 import DeleteAReviewModal from "./delete-a-review";
 import { useSelector } from "react-redux";
+import React from 'react';
 
 function RestaurantReviews() {
   const user = useSelector((state) => state.session.user);
