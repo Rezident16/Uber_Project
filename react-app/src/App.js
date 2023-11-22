@@ -51,10 +51,6 @@ function App() {
           <Route path="/restaurants">
             <GetRestaurants />
           </Route>
-          {/* delete after test */}
-          <Route path="/restaurants/restaurantId/items">
-            <RestaurantItemsFunc />
-          </Route>
           <Route path="/checkout">
             <CheckoutItem />
           </Route>

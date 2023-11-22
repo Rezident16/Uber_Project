@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createAReviewThunk } from "../../store/restaurant";
 
-function CreateAReviewModal({ restaurant }) {
+function CreateAReviewModal() {
+  const restaurant = useSelector((state) => state.restaurant);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [reviewText, setReviewText] = useState("");
@@ -38,6 +39,8 @@ function CreateAReviewModal({ restaurant }) {
 
     setErrors(errorsObj);
   };
+
+  if (!restaurant) return null;
 
   // console.log(rating);
   return (
