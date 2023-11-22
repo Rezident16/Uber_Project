@@ -5,6 +5,7 @@ import {
   fetchUpdateRestaurant,
 } from "../../store/restaurants";
 import { useState } from "react";
+import React from 'react';
 
 function RestaurantForm({ formAction, restaurant }) {
   const user = useSelector((state) => state.session.user);

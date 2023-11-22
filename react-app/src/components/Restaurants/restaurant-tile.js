@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import React from 'react';
 
 function RestaurantTile({ restaurant }) {
   const history = useHistory();

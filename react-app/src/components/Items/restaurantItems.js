@@ -6,6 +6,7 @@ import DeleteModal from "./deleteItemModal";
 import { useSelector } from "react-redux";
 import ItemForm from "./itemForm";
 import ItemModalButton from "./itemModalButton";
+import React from 'react';
 
 function Items({ restaurant }) {
   const currUserObj = useSelector((state) => state.session);

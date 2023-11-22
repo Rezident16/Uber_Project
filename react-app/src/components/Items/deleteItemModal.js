@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteAnItemThunk } from "../../store/restaurant";
+import React from 'react';
 
 const DeleteModal = ({ id }) => {
   const dispatch = useDispatch();

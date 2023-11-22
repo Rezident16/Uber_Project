@@ -1,6 +1,7 @@
 import RestaurantForm from "./restaurant-form";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import React from 'react';
 
 function CreateRestaurant(){
     const history = useHistory()
