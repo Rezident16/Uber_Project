@@ -98,8 +98,8 @@ def react_root(path):
 
 @app.errorhandler(404)
 def not_found(e):
-    # return app.send_static_file('index.html')
-    return jsonify(error = str(e)), 404
+    return app.send_static_file('index.html')
+    # return jsonify(error = str(e)), 404
 
 @app.errorhandler(403)
 def unauthorized(e):
