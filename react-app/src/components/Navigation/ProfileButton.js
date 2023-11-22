@@ -1,19 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import CartModal from "../Cart/CartModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const [cartQty, setCartQty] = useState(0);
+  const cart = useSelector((state) => state.cart);
 
   const openMenu = () => {
     if (showMenu) return;
     setShowMenu(true);
   };
+
+  useEffect(() => {
+    const cartLength = Object.values(cart).reduce((acc, curr) => {
+      acc = parseInt(acc) + parseInt(curr.qty);
+      return acc;
+    }, 0);
+
+    setCartQty(cartLength);
+  }, [cart]);
 
   useEffect(() => {
     if (!showMenu) return;
@@ -66,6 +78,13 @@ function ProfileButton({ user }) {
             />
           </>
         )}
+      </ul>
+      <ul>
+        <OpenModalButton
+          buttonText={`Cart (${cartQty})`}
+          onItemClick={closeMenu}
+          modalComponent={<CartModal />}
+        />
       </ul>
     </>
   );

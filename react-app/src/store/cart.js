@@ -64,7 +64,7 @@ const cartReducer = (state = {}, action) => {
         "cart",
         JSON.stringify({
           ...state,
-          [action.item.id]: { ...action.item, qty: action.qty },
+          [action.item.id]: { ...action.item, qty: parseInt(action.qty) },
         })
       );
       return {
@@ -81,7 +81,7 @@ const cartReducer = (state = {}, action) => {
         "cart",
         JSON.stringify({
           ...state,
-          [action.item.id]: { ...action.item, qty: action.qty },
+          [action.item.id]: { ...action.item, qty: parseInt(action.qty) },
         })
       );
       return {

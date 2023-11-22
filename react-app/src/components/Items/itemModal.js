@@ -36,7 +36,7 @@ function ItemModal({ item }) {
       <p>{item.price}</p>
       <p>{item.description}</p>
       {/* item likes */}
-      <img src={item.preview_img} className="img" />
+      <img src={item.preview_img} className="img" alt="" />
       <form onSubmit={AddToCart}>
         <select value={Qty} onChange={(e) => setQty(e.target.value)}>
           {options().map((option) => (

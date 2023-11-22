@@ -35,6 +35,20 @@ class Item(db.Model):
             'likes': len(self.users),
             'orders': len(self.orders),
         }
+        
+    def to_dict_with_restaurant(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'category': self.category,
+            'preview_img': self.preview_img,
+            'price': self.price,
+            'is_alcohol': self.is_alcohol,
+            'restaurant': self.restaurant.to_dict_no_user(),
+            'likes': len(self.users),
+            'orders': len(self.orders),
+        }
     
     def to_dict_no_user(self):
         return {
@@ -46,8 +60,19 @@ class Item(db.Model):
             'preview_img': self.preview_img,
             'price': self.price,
             'is_alcohol': self.is_alcohol,
-            'restaurant': self.restaurant.to_dict_no_user(),
             # 'likes_ratio': len(self.users)/len(self.orders)
-            'likes': len(self.users),
-            'orders': len(self.orders)
+        }
+        
+    def to_dict_with_quantity(self, **kwargs):
+        return {
+            'id': self.id,
+            'restaurant_id': self.restaurant_id,
+            'name': self.name,
+            'description': self.description,
+            'category': self.category,
+            'preview_img': self.preview_img,
+            'price': self.price,
+            'is_alcohol': self.is_alcohol,
+            'quantity': kwargs["quantity"]
+            # 'likes_ratio': len(self.users)/len(self.orders)
         }

@@ -1,9 +1,9 @@
-from flask import Blueprint, jsonify, session, request, render_template, redirect, abort
-from app.models import User, Restaurant, Review, Item, db
+from flask import Blueprint, jsonify, request, abort, request
+from app.models import User, Restaurant, Review, Item, Order, db
 from flask_login import current_user, login_required
 from datetime import time, datetime
 from random import randint
-from app.forms import RestaurantForm, ReviewForm, ItemForm
+from app.forms import RestaurantForm, ReviewForm, ItemForm, OrderForm
 from .aws_helpers import *
 
 restaurant_routes = Blueprint('restaurants', __name__)
@@ -221,3 +221,44 @@ def create_review(restaurantId):
 
     if form.errors:
         return form.errors
+    
+    
+# ORDERS ROUTE
+
+@restaurant_routes.route("/<int:restaurantId>/orders", methods=["POST"])
+@login_required
+def create_order(restaurantId):
+    """Create a new order"""
+    form = OrderForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    
+    if form.validate_on_submit():
+        data = form.data
+        
+        new_order = Order(
+            user_id = current_user.id,
+            restaurant_id = restaurantId,
+            address = data["address"],
+            created_at = datetime.now(),
+            notes = data["notes"],
+            price = 0
+        )
+        req = request.get_json() 
+        
+        items = [Item.query.get(id) for id in req["item_ids"]]
+        
+        new_order.items = items
+        
+        new_price = 0
+        for item in items:
+            new_price += item.price
+            
+        new_order.price = round(new_price, 2)
+        
+        
+        db.session.add(new_order)
+        db.session.commit()
+        
+        return new_order.to_dict()
+        
+        

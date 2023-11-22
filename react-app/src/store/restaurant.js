@@ -3,6 +3,8 @@ const UPDATE_ITEM = "/items/UPDATE_ITEM";
 const REMOVE_ITEM = "/items/REMOVE_ITEM";
 const RECEIVE_RESTAURANT = "/restaurants/RECEIVE_RESTAURANT";
 const REMOVE_RESTAURANT = "/restaurants/REMOVE_RESTAURANT";
+const CREATE_REVIEW = "/reviews/CREATE_REVIEW";
+const DELETE_REVIEW = "/reviews/DELETE_REVIEW";
 
 // Action Creators
 
@@ -31,6 +33,20 @@ export const removeRestaurant = (id) => ({
   id,
 });
 
+const createAReview = (review) => {
+  return {
+    type: CREATE_REVIEW,
+    review,
+  };
+};
+
+const deleteAReview = (reviewId) => {
+    return  {
+        type: DELETE_REVIEW,
+        reviewId
+    }
+}
+
 // Thunks
 
 // export const fetchItemThunk = (id) => async (dispatch) => {
@@ -46,18 +62,18 @@ export const removeRestaurant = (id) => ({
 //     }
 // }
 
-export const fetchRestaurant = (id) => async dispatch => {
-    const response = await fetch(`/api/restaurants/${id}`);
+export const fetchRestaurant = (id) => async (dispatch) => {
+  const response = await fetch(`/api/restaurants/${id}`);
 
-    if (response.ok) {
-        const data = await response.json()
-        dispatch(receiveRestaurant(data));
-        return data
-    } else {
-        const errors = await response.json()
-        return errors
-    }
-}
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(receiveRestaurant(data));
+    return data;
+  } else {
+    const errors = await response.json();
+    return errors;
+  }
+};
 
 export const fetchDeleteRestaurant = (id) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${id}`, {
@@ -71,6 +87,39 @@ export const fetchDeleteRestaurant = (id) => async (dispatch) => {
     return errors;
   }
 };
+export const createAReviewThunk =
+  (restaurantId, review) => async (dispatch) => {
+    const res = await fetch(`/api/restaurants/${restaurantId}/reviews`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(review),
+    });
+
+    if (res.ok) {
+      const rev = await res.json();
+      dispatch(createAReview(rev));
+      return rev;
+    } else {
+      const errors = await res.json();
+      return errors;
+    }
+  };
+
+export const deleteAReviewThunk = (reviewId) => async (dispatch) => {
+  const res = await fetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (res.ok) {
+    dispatch(deleteAReview(reviewId));
+    return;
+  } else {
+    const errors = await res.json();
+    return errors;
+  }
+};
+
 export const createAnItemThunk =
   (restaurantId, payload) => async (dispatch) => {
     const res = await fetch(`/api/restaurants/${restaurantId}/items/new`, {
@@ -147,6 +196,17 @@ const restaurantReducer = (state = {}, action) => {
       return { ...action.restaurant, items: normalItems };
     case REMOVE_RESTAURANT:
       return state;
+    case CREATE_REVIEW:
+      return {
+        ...state,
+        reviews: [...state.reviews, action.review],
+      };
+    case DELETE_REVIEW:
+      const reviewRemoved = {
+        ...state,
+        reviews: state.reviews.filter(review => review.id !== action.reviewId)
+      };
+      return reviewRemoved
     default:
       return state;
   }

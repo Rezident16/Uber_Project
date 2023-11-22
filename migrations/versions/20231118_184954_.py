@@ -1,8 +1,8 @@
-"""Migrate users, restaurants, items, orders, reviews, items_likes, and orders_items
+"""Migrate all Tables
 
-Revision ID: ae491966b4c8
+Revision ID: cf78e954b382
 Revises: 
-Create Date: 2023-11-18 11:06:53.763071
+Create Date: 2023-11-18 18:49:54.056581
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'ae491966b4c8'
+revision = 'cf78e954b382'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,7 +40,7 @@ def upgrade():
     sa.Column('owner_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
     sa.Column('category', sa.String(length=50), nullable=False),
-    sa.Column('address', sa.String(length=100), nullable=False),
+    sa.Column('address', sa.String(), nullable=False),
     sa.Column('city', sa.String(length=50), nullable=False),
     sa.Column('state', sa.String(length=50), nullable=False),
     sa.Column('hours_open', sa.Time(), nullable=False),
@@ -70,6 +70,7 @@ def upgrade():
     sa.Column('is_complete', sa.Boolean(), nullable=True),
     sa.Column('address', sa.String(), nullable=False),
     sa.Column('price', sa.Float(), nullable=True),
+    sa.Column('notes', sa.String(), nullable=True),
     sa.Column('restaurant_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['restaurant_id'], ['restaurants.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
@@ -101,7 +102,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-    # ### end Alembic commands ###
     if environment == "production":
         op.execute(f"ALTER TABLE restaurants SET SCHEMA {SCHEMA};")
     if environment == "production":
@@ -114,6 +114,7 @@ def upgrade():
         op.execute(f"ALTER TABLE items_likes SET SCHEMA {SCHEMA};")
     if environment == "production":
         op.execute(f"ALTER TABLE orders_items SET SCHEMA {SCHEMA};")
+    # ### end Alembic commands ###
 
 
 def downgrade():
