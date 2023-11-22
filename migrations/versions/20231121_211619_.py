@@ -1,8 +1,8 @@
-"""Migrate all tables
+"""empty message
 
-Revision ID: cab6107cd0ac
+Revision ID: a654c65b2651
 Revises: 
-Create Date: 2023-11-21 17:34:58.069036
+Create Date: 2023-11-21 21:16:19.540466
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'cab6107cd0ac'
+revision = 'a654c65b2651'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -100,7 +100,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['item_id'], ['items.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ondelete='CASCADE')
     )
-    
+    # ### end Alembic commands ###
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     if environment == "production":
@@ -115,8 +115,6 @@ def upgrade():
         op.execute(f"ALTER TABLE items_likes SET SCHEMA {SCHEMA};")
     if environment == "production":
         op.execute(f"ALTER TABLE orders_items SET SCHEMA {SCHEMA};")
-    
-    # ### end Alembic commands ###
 
 
 def downgrade():
