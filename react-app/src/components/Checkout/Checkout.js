@@ -77,7 +77,7 @@ function CheckoutItem() {
       }
       if (!res.errors) {
         await dispatch(clearCart());
-        history.push("/restaurants");
+        history.push("/current");
       } else {
         errorsObj.errors = res.errors;
         setErrors(errorsObj);
