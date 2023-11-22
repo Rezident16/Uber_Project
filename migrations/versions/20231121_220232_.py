@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: a654c65b2651
+Revision ID: e8fd9a5e8d00
 Revises: 
-Create Date: 2023-11-21 21:16:19.540466
+Create Date: 2023-11-21 22:02:32.614601
 
 """
 from alembic import op
@@ -127,4 +127,3 @@ def downgrade():
     op.drop_table('items')
     op.drop_table('restaurants')
     op.drop_table('users')
-    # ### end Alembic commands ###
