@@ -3,6 +3,7 @@ import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { fetchDeleteRestaurant } from "../../store/restaurant";
+import { fetchRestaurants } from "../../store/restaurants";
 
 function DeleteARestaurantModal() {
   const history = useHistory();
@@ -14,6 +15,7 @@ function DeleteARestaurantModal() {
     e.preventDefault();
 
     dispatch(fetchDeleteRestaurant(restaurant.id)).then(closeModal());
+    dispatch(fetchRestaurants());
     history.push("/restaurants");
   };
 
