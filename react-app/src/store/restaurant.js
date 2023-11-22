@@ -6,6 +6,7 @@ const REMOVE_RESTAURANT = "/restaurants/REMOVE_RESTAURANT";
 const CREATE_REVIEW = "/reviews/CREATE_REVIEW";
 const DELETE_REVIEW = "/reviews/DELETE_REVIEW";
 
+
 // Action Creators
 
 export const receiveItem = (item) => ({
@@ -75,18 +76,18 @@ export const fetchRestaurant = (id) => async (dispatch) => {
   }
 };
 
-export const fetchDeleteRestaurant = (id) => async (dispatch) => {
-  const response = await fetch(`/api/restaurants/${id}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  });
-  if (response.ok) {
-    dispatch(removeRestaurant(id));
-  } else {
-    const errors = await response.json();
-    return errors;
-  }
-};
+// export const fetchDeleteRestaurant = (id) => async (dispatch) => {
+//   const response = await fetch(`/api/restaurants/${id}`, {
+//     method: "DELETE",
+//     headers: { "Content-Type": "application/json" },
+//   });
+//   if (response.ok) {
+//     dispatch(removeRestaurant(id));
+//   } else {
+//     const errors = await response.json();
+//     return errors;
+//   }
+// };
 export const createAReviewThunk =
   (restaurantId, review) => async (dispatch) => {
     const res = await fetch(`/api/restaurants/${restaurantId}/reviews`, {
@@ -195,7 +196,7 @@ const restaurantReducer = (state = {}, action) => {
       action.restaurant.items.forEach((item) => (normalItems[item.id] = item));
       return { ...action.restaurant, items: normalItems };
     case REMOVE_RESTAURANT:
-      return state;
+      return {};
     case CREATE_REVIEW:
       return {
         ...state,

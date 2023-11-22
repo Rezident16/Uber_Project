@@ -7,4 +7,4 @@ from .order import Order
 from .restaurant import Restaurant
 from .review import Review
 # from .items_likes import items_likes
-# from .orders_items import orders_items
+from .orders_items import orders_items

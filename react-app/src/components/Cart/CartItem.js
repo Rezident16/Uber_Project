@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateCartQty, removeFromCart } from "../../store/cart";
 import { useEffect } from "react";
+import React from 'react';
 
 function CartItem({ item }) {
   const dispatch = useDispatch();

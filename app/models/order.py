@@ -22,7 +22,7 @@ class Order(db.Model):
 
     user = db.relationship("User", back_populates="orders")
     restaurant = db.relationship("Restaurant", back_populates="orders")
-    items = db.relationship("Item", secondary=orders_items, back_populates='orders', passive_deletes=True)
+    items = db.relationship("Item", secondary=orders_items, back_populates='orders', cascade="all, delete")
 
     def to_dict(self):
         # create a list of tuples formatted like (item_id, quantity)

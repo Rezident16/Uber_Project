@@ -2,18 +2,24 @@ import React from "react";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { fetchDeleteRestaurant } from "../../store/restaurant";
+import { deleteRestaurantThunk } from "../../store/restaurants";
+// import { fetchRestaurants } from "../../store/restaurants";
+import { removeRestaurant } from "../../store/restaurant";
+import { removeRestaurantItemsFromCart } from "../../store/cart";
 
 function DeleteARestaurantModal() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const restaurant = useSelector(state => state.restaurant)
-  
+  const restaurant = useSelector((state) => state.restaurant);
+
   const deleteRestaurant = (e) => {
     e.preventDefault();
 
-    dispatch(fetchDeleteRestaurant(restaurant.id)).then(closeModal());
+    dispatch(deleteRestaurantThunk(restaurant.id))
+      .then(dispatch(removeRestaurant()))
+      .then(dispatch(removeRestaurantItemsFromCart(restaurant.id)))
+      .then(closeModal());
     history.push("/restaurants");
   };
 
@@ -23,10 +29,18 @@ function DeleteARestaurantModal() {
       <span id="delete-restaurant-span">
         Are you sure you want to remove this restaurant?
       </span>
-      <button className="confirm-delete" style={{cursor: "pointer"}}onClick={deleteRestaurant}>
+      <button
+        className="confirm-delete"
+        style={{ cursor: "pointer" }}
+        onClick={deleteRestaurant}
+      >
         Yes (Delete Restaurant)
       </button>
-      <button className="do-not-delete" style={{cursor: "pointer"}}onClick={closeModal}>
+      <button
+        className="do-not-delete"
+        style={{ cursor: "pointer" }}
+        onClick={closeModal}
+      >
         No (Keep Restaurant)
       </button>
     </div>

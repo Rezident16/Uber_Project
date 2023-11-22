@@ -4,6 +4,7 @@ const ADD_TO_CART = "cart/ADD_TO_CART";
 const REMOVE_FROM_CART = "cart/REMOVE_FROM_CART";
 const UPDATE_CART_ITEM_QTY = "cart/UPDATE_CART_ITEM_QTY";
 const CHECKOUT_CART = "cart/CHECKOUT_CART";
+const REMOVE_RESTAURANT_ITEMS_FROM_CART = "cart/REMOVE_RESTAURANT_ITEMS_FROM_CART"
 
 // Action Creators
 export const loadCart = () => ({
@@ -36,6 +37,11 @@ export const clearCart = () => ({
   //Empty Cart
   type: CHECKOUT_CART,
 });
+
+export const removeRestaurantItemsFromCart = (restaurantId) => ({
+  type: REMOVE_RESTAURANT_ITEMS_FROM_CART,
+  restaurantId
+})
 
 // Thunk Action Creators
 export const submitOrder = (body, id) => async (dispatch) => {
@@ -91,6 +97,15 @@ const cartReducer = (state = {}, action) => {
     case CHECKOUT_CART:
       localStorage.removeItem("cart");
       return {};
+    case REMOVE_RESTAURANT_ITEMS_FROM_CART:
+      const newCartState = { ...state };
+      for (const key in newCartState) {
+        if (newCartState[key].restaurant.id === action.restaurantId) {
+          delete newCartState[key]
+        }
+      }
+      localStorage.setItem("cart", JSON.stringify(newCartState))
+      return newCartState
     default:
       return state;
   }
