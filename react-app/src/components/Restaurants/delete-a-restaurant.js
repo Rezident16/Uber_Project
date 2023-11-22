@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { deleteRestaurantThunk } from "../../store/restaurants";
 // import { fetchRestaurants } from "../../store/restaurants";
 import { removeRestaurant } from "../../store/restaurant";
+import { removeRestaurantItemsFromCart } from "../../store/cart";
 
 function DeleteARestaurantModal() {
   const history = useHistory();
@@ -16,7 +17,8 @@ function DeleteARestaurantModal() {
     e.preventDefault();
 
     dispatch(deleteRestaurantThunk(restaurant.id))
-      .then(dispatch(removeRestaurant))
+      .then(dispatch(removeRestaurant()))
+      .then(dispatch(removeRestaurantItemsFromCart(restaurant.id)))
       .then(closeModal());
     history.push("/restaurants");
   };
