@@ -18,8 +18,22 @@ img {
   align-items: center; */
 }
 
-
+#checkout-button{
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  height: 35px;
+  width: 200px;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none
+}
 .modal_buttons {
+  font-size: 14px;
   flex-direction: flex;
   align-items: center;
   justify-content: center;

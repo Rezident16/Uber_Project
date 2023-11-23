@@ -33,29 +33,31 @@ function CartModal() {
   return (
     <div className="cart_modal">
       <div className="all_cart_items">
-      {cartItems.length ? (
-        cartItems.map((item) => <CartItem item={item} key={item.id}></CartItem>)
-      ) : (
-        <p>Nothing in cart yet!</p>
-      )}
+        {cartItems.length ? (
+          cartItems.map((item) => (
+            <CartItem item={item} key={item.id}></CartItem>
+          ))
+        ) : (
+          <p>Nothing in cart yet!</p>
+        )}
       </div>
       <div className="cart_buttons">
-      <div>Subtotal ${total}</div>
-        <button className="modal_buttons">
-          <Link
-            to="/checkout"
-            onClick={(e) => {
-              if (!cartItems.length) {
-                e.preventDefault();
-              } else {
-                closeModal();
-              }
-            }}
-          >
-            {" "}
-            Checkout
-          </Link>
-        </button>
+        <div>Subtotal ${total}</div>
+        <Link
+          to="/checkout"
+          className="modal_buttons"
+          id='checkout-button'
+          onClick={(e) => {
+            if (!cartItems.length) {
+              e.preventDefault();
+            } else {
+              closeModal();
+            }
+          }}
+        >
+          Checkout
+        </Link>
+
         {cartItems.length ? (
           <button
             className="modal_buttons"

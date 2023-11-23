@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import LoginFormModal from "../LoginFormModal";
 import { clearCart, submitOrder } from "../../store/cart";
+import { getCurr } from "../../store/session";
+import OpenModalButton from "../OpenModalButton";
 
 function CheckoutItem() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.session);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { setModalContent } = useModal();
+  const { setModalContent, closeModal } = useModal();
 
-  // if (!user) return null
 
   const [address, setAddress] = useState(user?.address ? user.address : "");
   const [notes, setNotes] = useState("");
@@ -33,9 +34,11 @@ function CheckoutItem() {
 
     setErrors({});
 
-    if (!user) {
+    if (!user.user) {
       setModalContent(<LoginFormModal />);
+      return; // Exit the function or handle the modal opening flow
     }
+
     const errorsObj = {};
     if (!address) {
       errorsObj.address = "Address is required";
