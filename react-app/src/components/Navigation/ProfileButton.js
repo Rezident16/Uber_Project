@@ -75,7 +75,7 @@ function ProfileButton({ user }) {
         <button id="hamburger" onClick={openMenu}>
           <i
             className="fa-solid fa-bars profile-icons"
-            style={{ fontSize: "30px" }}
+            style={{ fontSize: "30px", color: "black" }}
           />
         </button>
         <ul className={ulClassName} ref={ulRef}>
