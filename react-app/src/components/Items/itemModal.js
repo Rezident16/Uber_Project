@@ -3,8 +3,8 @@ import { addToCart } from "../../store/cart";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import React from 'react';
-
+import React from "react";
+import "./Items.css";
 function ItemModal({ item }) {
   const cart = useSelector((state) => state.cart);
   const { closeModal } = useModal();
@@ -32,26 +32,31 @@ function ItemModal({ item }) {
   }, []);
 
   return (
-    <div>
-      <h1>{item.name}</h1>
-      <p>{item.price}</p>
-      <p>{item.description}</p>
-      {/* item likes */}
+    <div className="item-modal-container">
       <img src={item.preview_img} className="img" alt="" />
-      <form onSubmit={AddToCart}>
-        <select value={Qty} onChange={(e) => setQty(e.target.value)}>
-          {options().map((option) => (
-            <option value={option} key={option}>
-              {" "}
-              {option}{" "}
-            </option>
-          ))}
-        </select>
-        <button>
-          {" "}
-          Add {Qty} To Cart • ${(item.price * Qty).toFixed(2)}
-        </button>
-      </form>
+      <div className="item-content-container">
+        <h1>{item.name}</h1>
+        <p className="pricey">${item.price}</p>
+        <form onSubmit={AddToCart}>
+        {/* item likes */}
+          <select value={Qty} onChange={(e) => setQty(e.target.value)}
+          className="quantity"
+          >
+            {options().map((option) => (
+              <option value={option} key={option}>
+                {" "}
+                {option}{" "}
+              </option>
+            ))}
+          </select>
+              <p className="description">Description:</p>
+            <p>{item.description}</p>
+          <button className="modal_buttons">
+            {" "}
+            Add {Qty} To Cart • ${(item.price * Qty).toFixed(2)}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

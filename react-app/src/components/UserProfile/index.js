@@ -64,10 +64,10 @@ function UserProfile() {
   //   user.birthday = isoDate
 
   return (
-    <div className="main_user_container">
+    <div id="main_user_container">
       <h1>Account Info</h1>
       <div className="general_user_info_container">
-        <h2>Your General Information</h2>
+        {/* <h2>Your General Information</h2> */}
         <div>
           <h3>Username: </h3>
           <h4> {user.username}</h4>
@@ -120,35 +120,39 @@ function UserProfile() {
                   {order.restaurant.name}
                 </h3>
               </div>
-              <h3>Order Details:</h3>
-              <div className="order_details_container">
-                <h4>Order Total:</h4>
-                <p> ${order.price.toFixed(2)}</p>
-              </div>
-              <div className="order_details_container">
-                <h4>Ordered at:</h4>
-                <p> {helperFunc(order.created_at.split("GMT")[0])}</p>
-              </div>
-              <div className="order_details_container">
-                <h4>Delivery Address:</h4>
-                <p> {order.address}</p>
-              </div>
-                {order.notes && (
+              <div className="individual_order_information_container">
+                  <h3>Order Details:</h3>
+                <div className="info-flexbox">
                   <div className="order_details_container">
-                    <h4>Order Notes:</h4>
-                    <p> {order.notes}</p>
+                    <h4>Order Total:</h4>
+                    <p> ${order.price.toFixed(2)}</p>
                   </div>
-                )}
-              <div className="item_container">
-                {order.items.map((item) => (
-                  <div key={item.id}>
-                    {/* <div>{item.name}</div> */}
-                    <div className="item_img_qty_container">
-                      <img src={item.preview_img} />
-                      <p className="item_qty_container">{item.quantity}</p>
+                  <div className="order_details_container">
+                    <h4>Ordered at:</h4>
+                    <p> {helperFunc(order.created_at.split("GMT")[0])}</p>
+                  </div>
+                  <div className="order_details_container">
+                    <h4>Delivery Address:</h4>
+                    <p> {order.address}</p>
+                  </div>
+                  {order.notes && (
+                    <div className="order_details_container">
+                      <h4>Order Notes:</h4>
+                      <p> {order.notes}</p>
                     </div>
-                  </div>
-                ))}
+                  )}
+                </div>
+                <div className="item_container">
+                  {order.items.map((item) => (
+                    <div key={item.id}>
+                      {/* <div>{item.name}</div> */}
+                      <div className="item_img_qty_container">
+                        <img src={item.preview_img} />
+                        <p className="item_qty_container">{item.quantity}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ))}

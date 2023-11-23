@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { updateCartQty, removeFromCart } from "../../store/cart";
 import { useEffect } from "react";
 import React from 'react';
+import './Cart.css'
 
 function CartItem({ item }) {
   const dispatch = useDispatch();
@@ -21,9 +22,9 @@ function CartItem({ item }) {
   }, [item]);
 
   return (
-    <div>
+    <div className="individual_cart_item_container">
       <img src={item.preview_img} alt="" />
-      <div>{item.name}</div>
+      <div className="item_name">{item.name}</div>
       <div>
         <select
           onChange={(e) => {

@@ -1,0 +1,44 @@
+header {
+  width: 100%;
+}
+
+header > img {
+  height: 160px;
+  object-fit: cover;
+  width: 100%;
+}
+
+header > h2,
+header > div {
+  margin-left: 40px;
+}
+
+header > h2 {
+  margin-top: 20px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+header > div {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+header > div > p {
+  font-size: 14px;
+  width: auto;
+  margin: 0 4px;
+}
+
+.hours {
+  width: 100%;
+}
+
+.hours p {
+  font-size: 14px;
+  margin: 0 4px;
+  color: #545454;
+}
