@@ -1,66 +1,113 @@
-.main_user_container {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center;
-    justify-content: center; */
-    margin-left: 150px;
-    margin-right: 150px;
-    border: 1px solid red
+#main_user_container {
+    background-color: whitesmoke !important;
+    border-top: 1px solid gray;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-left: 150px !important;
+    padding-right: 150px !important;
+    padding-bottom: 200px;
+    padding-top: 25px;
+    /* border: 1px solid blue !important; */
+    width: 100%;
 }
-
+#main_user_container > h1{
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
 .general_user_info_container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     padding: 10px;
-    background-color: whitesmoke;
+    background-color: white;
     display: flex;
     flex-direction: column;
-    /* width: fit-content; */
+    align-items: center;
+    width: 1000px;
     border-radius: 10px;
-    gap: 10px
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
 .general_user_info_container > div {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .general_user_info_container > div > * {
     margin: 2px;
+    font-size: 20px;
 }
-
+.general_user_info_container > div > h3 {
+    font-weight: bolder;
+} 
 .general_user_info_container > div > h4 {
  font-weight: normal;
 }
 
 
 .all_orders_container{
-    border: 1px solid red
+    /* border: 1px solid red; */
+    width: 1012px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+.all_orders_container > h2{
+    font-size: 28px;
+    font-weight: 700;
+    padding-top: 15px;
+    padding-bottom: 25px;
 }
 
 .individual_order_container{
-    border: 1px solid red;
+    /* border: 1px solid rebeccapurple; */
     padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    width: 98%;
+}
+.individual_order_information_container{
+    /* padding-top: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid saddlebrown; */
+}
+.individual_order_information_container > h3{
+    font-size: 22px;
+    font-weight: 600;
+}
+.info-flexbox {
+    width: 300px;
+    justify-content: flex-start;
 }
 
 .item_img_qty_container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
 }
 .item_qty_container {
-    /* border: 1px solid black; */
-    border-radius: 50%;
-    height: 25px;
-    width: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(169, 194, 206);
     margin-left: -20px;
+    background-color: lightgray;
+    border-radius: 50%;
+    background-size: auto;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
 }
 
 .item_container{
     display: flex;
-    gap: 10px
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .item_img_qty_container > img {
@@ -70,13 +117,20 @@
 
 .restaurant_order_container {
     display: flex;
-    gap: 10px
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+    /* padding-top: 10px; */
 }
 
 .restaurant_order_container > img {
     border-radius: 50%;
-    width: 55px;
-    height: 55px;
+    width: 85px;
+    height: 85px;
+}
+.restaurant_order_container > h3 {
+    font-size: 23px;
+    font-weight: 600;
 }
 
 .restaurant_order_container > *:hover {
@@ -91,8 +145,11 @@
     align-items: center;
 
 }
+.order_details_container > h4{
+    font-weight: 700;
+}
 
-.order_details_container > *{
+.order_details_container > * {
     margin-top: 10px;
     margin-bottom: 10px;
 }

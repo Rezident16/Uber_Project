@@ -1,3 +1,51 @@
-.img {
+/* .img {
     width: 20px;
+} */
+.item-modal-container{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 30px;
+    width: 400px;
 }
+.item-modal-container > img{
+    width: 200px;
+    height: 200px;
+}
+
+.item-content-container >h1{
+    font-size: 20px;
+    font-weight: bold;
+    align-self: center;
+    /* margin-bottom: 10px; */
+}
+.item-content-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.pricey{
+    border-bottom: 1px solid gray;
+    padding-bottom: 8px;
+}
+.quantity{
+    margin-bottom: 8px;
+}
+.description{
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.modal_buttons {
+    flex-direction: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    height: 35px;
+    width: 200px;
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    border: none
+  }
