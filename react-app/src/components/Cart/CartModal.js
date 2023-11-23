@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 import { Link } from "react-router-dom/";
 import "./Cart.css";
 import { clearCart } from "../../store/cart";
-import React from 'react';
+import React from "react";
 
 function CartModal() {
   const cart = useSelector((state) => state.cart);
@@ -31,30 +31,34 @@ function CartModal() {
   }, [cart]);
 
   return (
-    <div>
+    <div className="cart_modal">
+      <div className="all_cart_items">
       {cartItems.length ? (
         cartItems.map((item) => <CartItem item={item} key={item.id}></CartItem>)
       ) : (
         <p>Nothing in cart yet!</p>
       )}
+      </div>
+      <div className="cart_buttons">
       <div>Subtotal ${total}</div>
-      <div>Add a note (delivery instructions)</div>
-      <div>
-        <Link
-          to="/checkout"
-          onClick={(e) => {
-            if (!cartItems.length) {
-              e.preventDefault();
-            } else {
-              closeModal();
-            }
-          }}
-        >
-          {" "}
-          Checkout
-        </Link>
+        <button className="modal_buttons">
+          <Link
+            to="/checkout"
+            onClick={(e) => {
+              if (!cartItems.length) {
+                e.preventDefault();
+              } else {
+                closeModal();
+              }
+            }}
+          >
+            {" "}
+            Checkout
+          </Link>
+        </button>
         {cartItems.length ? (
           <button
+            className="modal_buttons"
             onClick={(e) => {
               e.preventDefault();
               dispatch(clearCart());

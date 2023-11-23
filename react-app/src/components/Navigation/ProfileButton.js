@@ -88,7 +88,7 @@ function ProfileButton({ user }) {
             <Link to="/restaurants/new">Create a Restaurant</Link>
           </li>
           <li>
-            <button onClick={handleLogout}>Log Out</button>
+            <button onClick={handleLogout} className="loginButton">Log Out</button>
           </li>
         </ul>
       </div>
