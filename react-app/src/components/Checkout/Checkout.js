@@ -4,15 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import LoginFormModal from "../LoginFormModal";
 import { clearCart, submitOrder } from "../../store/cart";
-import { getCurr } from "../../store/session";
-import OpenModalButton from "../OpenModalButton";
 
 function CheckoutItem() {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.session);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { setModalContent, closeModal } = useModal();
+  const { setModalContent } = useModal();
 
 
   const [address, setAddress] = useState(user?.address ? user.address : "");
@@ -36,7 +34,7 @@ function CheckoutItem() {
 
     if (!user.user) {
       setModalContent(<LoginFormModal />);
-      return; // Exit the function or handle the modal opening flow
+      return; 
     }
 
     const errorsObj = {};
