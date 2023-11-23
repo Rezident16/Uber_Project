@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import CartModal from "../Cart/CartModal";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -58,20 +59,34 @@ function ProfileButton({ user }) {
   const userClassName = isUser ? "" : "hidden";
 
   return (
-    <div>
+    <div id="nav-buttons">
       <OpenModalButton
-        buttonText={`Cart (${cartQty})`}
+        buttonText={
+          <>
+            <i className="fa-solid fa-cart-shopping"></i>{" "}
+            {cartQty == 1 ? `${cartQty} Item` : `${cartQty} Items`}
+          </>
+        }
         onItemClick={closeMenu}
         modalComponent={<CartModal />}
       />
 
       <div className={userClassName}>
-        <button onClick={openMenu}>
-          <i className="fas fa-user-circle" />
+        <button id="hamburger" onClick={openMenu}>
+          <i
+            className="fa-solid fa-bars profile-icons"
+            style={{ fontSize: "30px" }}
+          />
         </button>
         <ul className={ulClassName} ref={ulRef}>
           <li>{user?.username}</li>
           <li>{user?.email}</li>
+          <li>
+            <Link to="/current">My Profile</Link>
+          </li>
+          <li>
+            <Link to="/restaurants/new">Create a Restaurant</Link>
+          </li>
           <li>
             <button onClick={handleLogout}>Log Out</button>
           </li>

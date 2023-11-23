@@ -3,6 +3,8 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import OpenModalButton from "../OpenModalButton";
+import SignupFormModal from "../SignupFormModal";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -17,8 +19,14 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal();
     }
+  };
+
+  const demoLogin = (e) => {
+    e.preventDefault();
+    // return
+    dispatch(login("demo@aa.io", "password")).then(closeModal());
   };
 
   return (
@@ -50,6 +58,14 @@ function LoginFormModal() {
         </label>
         <button type="submit">Log In</button>
       </form>
+
+      <button onClick={demoLogin}>Demo User</button>
+
+      <OpenModalButton
+        buttonText="Sign Up"
+        // onItemClick={closeMenu}
+        modalComponent={<SignupFormModal />}
+      />
     </>
   );
 }
