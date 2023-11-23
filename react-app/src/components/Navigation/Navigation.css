@@ -12,12 +12,15 @@
   transition: left 0.3s;
   list-style-type: none;
   left: auto;
-  right: 10px;
+  right: 0px;
+  /* top: 10px; */
+  /* width: 320px; */
   margin-top: 9px;
   /* top: 10px; */
   display: flex;
   flex-direction: column;
   gap: 2px;
+  align-items: center;
 }
 
 .hidden {
@@ -75,4 +78,18 @@
   background-color: black;
   color: white;
   margin: 0 20px;
+}
+
+.loginButton {
+  flex-direction: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  height: 35px;
+  width: 200px;    
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none
 }
