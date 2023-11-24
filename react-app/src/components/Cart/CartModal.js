@@ -42,7 +42,7 @@ function CartModal() {
         )}
       </div>
       <div className="cart_buttons">
-        {total => 0 (
+        {total > 0 && (
           <div>
         <div>Subtotal ${total}</div>
         <Link
