@@ -15,7 +15,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   const [cartQty, setCartQty] = useState(0);
   const cart = useSelector((state) => state.cart);
-  const history = useHistory()
+const history = useHistory()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -53,7 +53,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    history.push('/restaurants')
+history.push('/restaurants')
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -84,7 +84,7 @@ function ProfileButton({ user }) {
         <ul className={ulClassName} ref={ulRef}>
           <li>{user?.username}</li>
           <li>{user?.email}</li>
-          <li className="seperator"></li>
+<li className="seperator"></li>
           <li>
             <Link onClick={closeMenu} to="/current">My Profile</Link>
           </li>
