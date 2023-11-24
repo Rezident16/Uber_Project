@@ -42,6 +42,8 @@ function CartModal() {
         )}
       </div>
       <div className="cart_buttons">
+        {total => 0 (
+          <div>
         <div>Subtotal ${total}</div>
         <Link
           to="/checkout"
@@ -57,6 +59,8 @@ function CartModal() {
         >
           Checkout
         </Link>
+            </div>
+        )}
 
         {cartItems.length ? (
           <button
