@@ -25,8 +25,9 @@ function CartItem({ item }) {
     <div className="individual_cart_item_container">
       <img src={item.preview_img} alt="" />
       <div className="item_name">{item.name}</div>
-      <div>
+      <div className="price_qty">
         <select
+        className="qty"
           onChange={(e) => {
             if (e.target.value === "remove") {
               dispatch(removeFromCart(item));
