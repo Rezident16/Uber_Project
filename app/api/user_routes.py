@@ -25,7 +25,7 @@ def user():
     try:
         user = User.query.get(current_user.id)
     except AttributeError:
-        return {"user": None}
+        return None
     return user.to_dict()
 
 @user_routes.route('/<int:id>', methods=["POST"])
@@ -36,10 +36,10 @@ def update_user(id):
     """
     user = User.query.get(id)
     form = UpdateUserForm()
-    
+
     if current_user.id != user.id:
         return abort(403, description="Unauthorized")
-    
+
     if form.validate_on_submit():
         data = form.data
         user["username"] = data["username"]
@@ -49,10 +49,10 @@ def update_user(id):
         user["birthday"] = data["birthday"]
         user["address"] = data["address"]
         db.session.commit()
-        
+
     if form.errors:
         return form.errors
-    
+
 @user_routes.route('/current', methods=["DELETE"])
 @login_required
 def delete_user():
@@ -72,8 +72,7 @@ def delete_user():
         db.session.commit()
 
         return jsonify({"success": "User deleted successfully"})
-    
+
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
-    
