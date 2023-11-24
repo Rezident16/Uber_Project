@@ -89,7 +89,7 @@ export const deleteUser = () => async (dispatch) => {
 }
 
 export const signUp = (username, email, password, firstName, lastName, birthday, address) => async (dispatch) => {
-	
+
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		headers: {

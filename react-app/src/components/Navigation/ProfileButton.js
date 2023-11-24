@@ -46,6 +46,7 @@ function ProfileButton({ user }) {
   }, [showMenu]);
 
   useEffect(() => {
+    // console.log(user)
     if (user) setIsUser(true);
     else setIsUser(false);
   }, [user]);
@@ -54,10 +55,13 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(logout());
     history.push('/restaurants')
+
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
+
+  // console.log('---------', isUser)
 
   const userClassName = isUser ? "" : "hidden";
 
