@@ -42,25 +42,27 @@ function CartModal() {
         )}
       </div>
       <div className="cart_buttons">
-        {total => 0 (
-          <div>
-        <div>Subtotal ${total}</div>
-        <Link
-          to="/checkout"
-          className="modal_buttons"
-          id='checkout-button'
-          onClick={(e) => {
-            if (!cartItems.length) {
-              e.preventDefault();
-            } else {
-              closeModal();
-            }
-          }}
-        >
-          Checkout
-        </Link>
+        {/* {(total) =>
+          ( */}
+            <div>
+              <div>Subtotal ${total}</div>
+              <Link
+                to="/checkout"
+                className="modal_buttons"
+                id="checkout-button"
+                onClick={(e) => {
+                  if (!cartItems.length) {
+                    e.preventDefault();
+                  } else {
+                    closeModal();
+                  }
+                }}
+              >
+                Checkout
+              </Link>
             </div>
-        )}
+          {/* )
+        } */}
 
         {cartItems.length ? (
           <button
