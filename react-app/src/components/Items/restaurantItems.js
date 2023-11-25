@@ -13,7 +13,7 @@ function Items({ restaurant }) {
   const userId = currUserObj.user ? currUserObj.user.id : false;
   const [isOwner, setIsOwner] = useState(false);
 
-  console.log(restaurant);
+  // console.log(restaurant);
 
   const items = Object.values(restaurant.items);
   const categoryItems = {};
@@ -43,6 +43,7 @@ function Items({ restaurant }) {
   const categoryNav = Object.values(categoryItems).length ? 'category-nav' : 'category-nav-empty'
 
   console.log("USER ID:", userId, typeof userId);
+  // console.log("USER ID:", userId, typeof userId);
   return (
     <div id="restaurant-items-container">
       <div id={categoryNav}>
