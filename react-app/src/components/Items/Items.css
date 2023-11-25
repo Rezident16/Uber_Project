@@ -269,3 +269,8 @@
   display: flex;
   background-color: yellow;
 }
+
+#item-img-container {
+  display: flex;
+  justify-content: center;
+}

@@ -185,7 +185,11 @@ const ItemForm = ({ item, formType, restaurantId }) => {
             accept=".jpg, .jpeg, .png"
             onChange={onFileChange}
           />
-          {localImg && <img src={localImg} alt="" />}
+          {localImg && (
+            <div id='item-img-container'>
+              <img src={localImg} alt="" />
+            </div>
+          )}
         </label>
         {errors.preview_img && (
           <p className="item-errors">{errors.preview_img}</p>
