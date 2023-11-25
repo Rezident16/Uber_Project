@@ -17,7 +17,7 @@ function CreateRestaurant(){
     
         return (
             <div className=''>
-                <h3>Get Started</h3>
+                <h3 className="form_type">Get Started</h3>
                 <RestaurantForm formAction='create'/>
             </div>
         )
