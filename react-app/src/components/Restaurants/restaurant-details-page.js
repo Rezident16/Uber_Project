@@ -19,8 +19,7 @@ function RestaurantDetailPage() {
   const orders = restaurant.orders;
   let hasNoReview = false;
   let hasOrdered = false;
-  // console.log('---------', user)
-  // console.log('----------', orders)
+  
 
   useEffect(() => {
     const initialFetch = async () => {
