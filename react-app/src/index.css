@@ -59,5 +59,8 @@ button {
   align-items: center;
   flex-direction: column;
   width: 100%;
+}
+
+html {
   background-color: #f8f8f8;
 }
