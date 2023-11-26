@@ -1,8 +1,8 @@
-"""Migrate All Tables
+"""empty message
 
-Revision ID: 6bce75e16167
+Revision ID: 4b0134a77344
 Revises: 
-Create Date: 2023-11-22 15:03:55.757242
+Create Date: 2023-11-25 19:16:35.603631
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 # revision identifiers, used by Alembic.
-revision = '6bce75e16167'
+revision = '4b0134a77344'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,6 +36,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+    
     op.create_table('restaurants',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('owner_id', sa.Integer(), nullable=False),
@@ -54,6 +55,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE restaurants SET SCHEMA {SCHEMA};")
+   
     op.create_table('items',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('restaurant_id', sa.Integer(), nullable=False),
@@ -68,6 +70,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE items SET SCHEMA {SCHEMA};")
+    
     op.create_table('orders',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -83,6 +86,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE orders SET SCHEMA {SCHEMA};")
+    
     op.create_table('reviews',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -96,15 +100,17 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE reviews SET SCHEMA {SCHEMA};")
+    
     op.create_table('items_likes',
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('item_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['item_id'], ['items.id'], ondelete='CASCADE'),
-    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['item_id'], ['items.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('user_id', 'item_id')
     )
     if environment == "production":
         op.execute(f"ALTER TABLE items_likes SET SCHEMA {SCHEMA};")
+    
     op.create_table('orders_items',
     sa.Column('order_id', sa.Integer(), nullable=True),
     sa.Column('item_id', sa.Integer(), nullable=True),
@@ -113,6 +119,7 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE orders_items SET SCHEMA {SCHEMA};")
+    
     # ### end Alembic commands ###
 
 
