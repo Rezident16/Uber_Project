@@ -42,3 +42,21 @@ header > div > p {
   margin: 0 4px;
   color: #545454;
 }
+.restaurant_details_button_div {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 13px;
+  height: 35px;
+  width: 200px;
+  background-color: black;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  border: none;
+}
+
+.restaurant_details_buttons {
+  margin-bottom: 10px;
+}

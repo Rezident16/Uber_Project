@@ -13,7 +13,7 @@ function Items({ restaurant }) {
   const userId = currUserObj.user ? currUserObj.user.id : false;
   const [isOwner, setIsOwner] = useState(false);
 
-  console.log(restaurant);
+  // console.log(restaurant);
 
   const items = Object.values(restaurant.items);
   const categoryItems = {};
@@ -39,10 +39,14 @@ function Items({ restaurant }) {
     restaurant.owner_id,
     typeof restaurant.owner_id
   );
+
+  const categoryNav = Object.values(categoryItems).length ? 'category-nav' : 'category-nav-empty'
+
   console.log("USER ID:", userId, typeof userId);
+  // console.log("USER ID:", userId, typeof userId);
   return (
     <div id="restaurant-items-container">
-      <div id="category-nav">
+      <div id={categoryNav}>
         {items &&
           Object.values(categoryItems).map((category) => (
             <a href={`#${category[0].category}`}>{category[0].category}</a>

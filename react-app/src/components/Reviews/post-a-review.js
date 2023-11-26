@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createAReviewThunk } from "../../store/restaurant";
+import "./reviews.css"
 
 function CreateAReviewModal() {
   const restaurant = useSelector((state) => state.restaurant);
@@ -45,7 +46,14 @@ function CreateAReviewModal() {
   // console.log(rating);
   return (
     <div className="create-a-review-modal">
-      <h1 style={{ marginBottom: "5px" }}>How was order?</h1>
+      <h1
+      id="review-header"
+        style={{
+          marginBottom: "5px"
+        }}
+      >
+        How was order?
+      </h1>
       {errors.review && (
         <p
           style={{

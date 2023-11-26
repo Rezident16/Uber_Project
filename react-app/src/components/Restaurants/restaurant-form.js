@@ -5,7 +5,8 @@ import {
   fetchUpdateRestaurant,
 } from "../../store/restaurants";
 import { useState } from "react";
-import React from 'react';
+import React from "react";
+import "./restaurantForm.css";
 
 function RestaurantForm({ formAction, restaurant }) {
   const user = useSelector((state) => state.session.user);
@@ -118,7 +119,6 @@ function RestaurantForm({ formAction, restaurant }) {
     } else {
       setErrorsOnSubmit({});
     }
-    console.log(errorsObj);
     if (!Object.values(errorsObj).length) {
       setImageLoading(true);
       if (formAction === "edit") {
@@ -141,84 +141,98 @@ function RestaurantForm({ formAction, restaurant }) {
     }
   };
 
+  const selectedState = state
+    ? "restaurant_input select"
+    : "restaurant_input_not_selected";
+
+  const selectedCuisine = category
+    ? "restaurant_input select"
+    : "restaurant_input_not_selected";
   return (
     <form
-      className="create-restaurant-form"
+      className="restaurant_form_container"
       onSubmit={onSubmit}
       encType="multipart/form-data"
     >
-      <div className="restaurant-form-location-div">
-        <label>
-          {errorsOnSubmit?.name && (
-            <p className="restaurant-form-errors">{errorsOnSubmit.name}</p>
-          )}
-          <input
-            type="text"
-            className=""
-            placeholder="Restaurant name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-
-          <select
-            type="text"
-            value={category}
-            className="restaurant-form-category"
-            onChange={(e) => {
-              setCategory(e.target.value);
-              // if (!e.target.value) errors.category = "Category is required";
-              // else {
-              //     errors.category = null;
-              // }
-            }}
-            placeholder="Category"
-          >
-            <option value="" disabled hidden>
-              Category
-            </option>
-            <option value="Indian">Indian</option>
-            <option value="Chinese">Chinese</option>
-            <option value="Italian">Italian</option>
-            <option value="American">American</option>
-            <option value="Japanese">Japanese</option>
-            <option value="Mexican">Mexican</option>
-            <option value="Thai">Thai</option>
-          </select>
-        </label>
-      </div>
-
-      <label>
-        {errorsOnSubmit?.address && (
-          <p className="restaurant-form-errors">{errorsOnSubmit.address}</p>
-        )}
+      <label className="form_element">
+        <h3 className="form_text_restaurant">Restaurant Name</h3>
         <input
           type="text"
-          className=""
+          className="restaurant_input"
+          placeholder="Restaurant name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </label>
+      {errorsOnSubmit?.name && (
+        <p className="restaurant-form-errors">{errorsOnSubmit.name}</p>
+      )}
+      {/* <div className="restaurant_separator"></div> */}
+      <label className="form_element">
+        <h3 className="form_text_restaurant">Cuisine</h3>
+        <select
+          type="text"
+          value={category}
+          className={selectedCuisine}
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+          placeholder="Category"
+          required
+        >
+          <option value="" disabled hidden>
+            Cuisine
+          </option>
+          <option value="Indian">Indian</option>
+          <option value="Chinese">Chinese</option>
+          <option value="Italian">Italian</option>
+          <option value="American">American</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Mexican">Mexican</option>
+          <option value="Thai">Thai</option>
+        </select>
+      </label>
+      {errorsOnSubmit?.category && (
+        <p className="restaurant-form-errors">{errorsOnSubmit.category}</p>
+      )}
+<div className="restaurant_separator"></div>
+      <label className="form_element">
+        <h3 className="form_text_restaurant">Address</h3>
+        <input
+          type="text"
+          className="restaurant_input"
           placeholder="What is your restaurant address?"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          required
         />
       </label>
+      {errorsOnSubmit?.address && (
+        <p className="restaurant-form-errors">{errorsOnSubmit.address}</p>
+      )}
 
-      <label>
-        {errorsOnSubmit?.location && (
-          <p className="group-form-errors">{errorsOnSubmit.location}</p>
-        )}
+      <label className="form_element">
+        <h3 className="form_text_restaurant">City</h3>
         <input
           type="text"
-          className=""
+          className="restaurant_input"
           placeholder="What is your restaurant's city?"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          required
         />
       </label>
+      {errorsOnSubmit?.location && (
+        <p className="group-form-errors">{errorsOnSubmit.location}</p>
+      )}
 
-      <label>
-        {/* {errorsOnSubmit?.state && <p className='group-form-errors'>{errorsOnSubmit.state}</p>} */}
+      <label className="form_element">
+        <h3 className="form_text_restaurant">State</h3>
         <select
           type="text"
           value={state}
-          className="group-form-select"
+          className={selectedState}
           onChange={(e) => {
             setState(e.target.value);
             if (!e.target.value) errors.state = "State is required";
@@ -226,6 +240,7 @@ function RestaurantForm({ formAction, restaurant }) {
               errors.state = null;
             }
           }}
+          required
           placeholder="State"
         >
           <option value="" disabled hidden>
@@ -283,45 +298,61 @@ function RestaurantForm({ formAction, restaurant }) {
           <option value="WI">Wisconsin</option>
           <option value="WY">Wyoming</option>
         </select>
-        {errorsOnSubmit?.hoursOpen && (
-          <p className="group-form-errors">{errorsOnSubmit.hoursOpen}</p>
-        )}
-        <input
-          type="time"
-          className=""
-          placeholder="What is your restaurant's opening time?"
-          value={hoursOpen}
-          onChange={(e) => setHoursOpen(e.target.value)}
-        />
-        {errorsOnSubmit?.hoursClose && (
-          <p className="group-form-errors">{errorsOnSubmit.hoursClose}</p>
-        )}
-        <input
-          type="time"
-          className=""
-          placeholder="What is your restaurant's closing time?"
-          value={hoursClose}
-          onChange={(e) => setHoursClose(e.target.value)}
-        />
-        {formAction !== "edit" && (
-          <div>
-            <p>Please add an image url for your restaurant below:</p>
-            {errorsOnSubmit?.previewImg && (
-              <p className="group-form-errors">{errorsOnSubmit.previewImg}</p>
-            )}
-            <input
-              type="file"
-              placeholder="Restaurant Image File"
-              accept=".jpg, .jpeg, .png"
-              className="restaurant-form-input"
-              onChange={(e) => setPreviewImg(e.target.files[0])}
-            />
-          </div>
-        )}
       </label>
+      <div className="restaurant_separator"></div>
+      <div className="form_element">
+        <h3 className="form_text_restaurant">Operating Hours</h3>
+        <label>
+          Hours Open
+          <input
+            type="time"
+            className="restaurant_input"
+            placeholder="What is your restaurant's opening time?"
+            value={hoursOpen}
+            onChange={(e) => setHoursOpen(e.target.value)}
+            required
+          />
+        </label>
+        <label>
+          Hours Close
+          <input
+            type="time"
+            className="restaurant_input"
+            placeholder="What is your restaurant's closing time?"
+            value={hoursClose}
+            onChange={(e) => setHoursClose(e.target.value)}
+            required
+          />
+        </label>
+      </div>
+      {errorsOnSubmit?.hoursOpen && (
+        <p className="group-form-errors">{errorsOnSubmit.hoursOpen}</p>
+      )}
+      {errorsOnSubmit?.hoursClose && (
+        <p className="group-form-errors">{errorsOnSubmit.hoursClose}</p>
+      )}
+      {formAction !== "edit" && (
+        
+        <label className="form_element">
+          <div className="restaurant_separator"></div>
+          <p>Please add an image url for your restaurant below:</p>
+          {errorsOnSubmit?.previewImg && (
+            <p className="group-form-errors">{errorsOnSubmit.previewImg}</p>
+          )}
+          <input
+            type="file"
+            placeholder="Restaurant Image File"
+            accept=".jpg, .jpeg, .png"
+            className="form_element button"
+            onChange={(e) => setPreviewImg(e.target.files[0])}
+            required
+          />
+        </label>
+      )}
 
       {imageLoading && <p>Image is Loading...</p>}
-      <div className="restaurant-form-button-div">
+      {/* <div className="restaurant_separator"></div> */}
+      <div className="restaurant_button_div">
         <button type="submit">
           {formAction !== "edit" ? "Create Restaurant" : "Update Restaurant"}
         </button>

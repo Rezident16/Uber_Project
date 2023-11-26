@@ -29,6 +29,7 @@ function UpdateRestaurant() {
 
   return (
     <div>
+      <h3 className="form_type">Update</h3>
       <RestaurantForm formAction="edit" restaurant={restaurant} />
     </div>
   );

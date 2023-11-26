@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -12,7 +12,6 @@ function CheckoutItem() {
   const history = useHistory();
   const { setModalContent } = useModal();
 
-  // if (!user) return null
 
   const [address, setAddress] = useState(user?.address ? user.address : "");
   const [notes, setNotes] = useState("");
@@ -33,9 +32,11 @@ function CheckoutItem() {
 
     setErrors({});
 
-    if (!user) {
+    if (!user.user) {
       setModalContent(<LoginFormModal />);
+      return; 
     }
+
     const errorsObj = {};
     if (!address) {
       errorsObj.address = "Address is required";

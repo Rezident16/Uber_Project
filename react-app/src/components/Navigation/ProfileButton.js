@@ -6,6 +6,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import CartModal from "../Cart/CartModal";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   const [cartQty, setCartQty] = useState(0);
   const cart = useSelector((state) => state.cart);
+const history = useHistory()
 
   const openMenu = () => {
     if (showMenu) return;
@@ -44,6 +46,7 @@ function ProfileButton({ user }) {
   }, [showMenu]);
 
   useEffect(() => {
+    // console.log(user)
     if (user) setIsUser(true);
     else setIsUser(false);
   }, [user]);
@@ -51,10 +54,14 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.push('/restaurants')
+
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
+
+  // console.log('---------', isUser)
 
   const userClassName = isUser ? "" : "hidden";
 
@@ -75,17 +82,18 @@ function ProfileButton({ user }) {
         <button id="hamburger" onClick={openMenu}>
           <i
             className="fa-solid fa-bars profile-icons"
-            style={{ fontSize: "30px" }}
+            style={{ fontSize: "30px", color: "black" }}
           />
         </button>
         <ul className={ulClassName} ref={ulRef}>
           <li>{user?.username}</li>
           <li>{user?.email}</li>
+<li className="seperator"></li>
           <li>
-            <Link to="/current">My Profile</Link>
+            <Link onClick={closeMenu} to="/current">My Profile</Link>
           </li>
           <li>
-            <Link to="/restaurants/new">Create a Restaurant</Link>
+            <Link onClick={closeMenu} to="/restaurants/new">Create a Restaurant</Link>
           </li>
           <li>
             <button onClick={handleLogout} className="loginButton">Log Out</button>

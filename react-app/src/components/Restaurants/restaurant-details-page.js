@@ -8,6 +8,7 @@ import CreateAReviewModal from "../Reviews/post-a-review";
 import OpenModalButton from "../OpenModalButton";
 import DeleteARestaurantModal from "./delete-a-restaurant";
 import "./restaurant-details.css";
+import UpdateRestaurant from "./update-restaurant";
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
@@ -101,6 +102,20 @@ function RestaurantDetailPage() {
             )}
           </div>
         </div>
+        {/* {user && user.id === restaurant.owner_id && (
+        <div className="restaurant_details_buttons">
+          <OpenModalButton
+           className="restaurant_details_button_div"
+            buttonText={"Update Your Restaurant"}
+            modalComponent={<UpdateRestaurant />}
+          />
+          <OpenModalButton
+           className="restaurant_details_button_div"
+            buttonText={"Delete Your Restaurant"}
+            modalComponent={<DeleteARestaurantModal />}
+          />
+        </div>
+      )} */}
       </header>
 
       <Items restaurant={restaurant} />
@@ -116,10 +131,18 @@ function RestaurantDetailPage() {
         />
       )}
       {user && user.id === restaurant.owner_id && (
-        <OpenModalButton
-          buttonText={"Delete Your Restaurant"}
-          modalComponent={<DeleteARestaurantModal />}
-        />
+        <div className="restaurant_details_buttons">
+          <OpenModalButton
+           className="restaurant_details_button_div"
+            buttonText={"Update Your Restaurant"}
+            modalComponent={<UpdateRestaurant />}
+          />
+          <OpenModalButton
+           className="restaurant_details_button_div"
+            buttonText={"Delete Your Restaurant"}
+            modalComponent={<DeleteARestaurantModal />}
+          />
+        </div>
       )}
     </>
   );
