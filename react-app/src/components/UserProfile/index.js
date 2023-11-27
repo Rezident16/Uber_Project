@@ -142,7 +142,7 @@ function UserProfile() {
                     </div>
                   )}
                 </div>
-                <div className="item_container">
+                <div className="user_item_container">
                   {order.items.map((item) => (
                     <div key={item.id}>
                       {/* <div>{item.name}</div> */}
