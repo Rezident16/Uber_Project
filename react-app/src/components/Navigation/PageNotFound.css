@@ -1,0 +1,56 @@
+#not-found-scoot-logo {
+  width: 400px;
+  position: relative;
+  animation: scootAway 1.3s ease;
+  animation-iteration-count: 1;
+  bottom: -50px;
+}
+
+#stop-sign {
+  height: 400px;
+  width: auto;
+}
+
+#not-found-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+#not-found-heading {
+  font-weight: 500;
+  font-size: 70px;
+  margin-bottom: 20px;
+}
+
+#not-found-subheading {
+  font-weight: 400;
+  font-size: 40px;
+}
+
+#not-found-container {
+  margin: 40px 0;
+}
+
+#not-found-link {
+  font-size: 30px;
+}
+
+@keyframes scootAway {
+  0% {
+    left: -150vw;
+    bottom: -5px;
+    transform: rotate(25deg);
+  }
+
+  90% {
+    left: 30px;
+    bottom: -5px;
+    transform: rotate(25deg);
+  }
+
+  100% {
+    left: 0;
+    bottom: -50px;
+    transform: rotate(0);
+  }
+}
