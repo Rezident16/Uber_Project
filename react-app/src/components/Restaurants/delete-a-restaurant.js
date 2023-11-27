@@ -3,7 +3,6 @@ import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteRestaurantThunk } from "../../store/restaurants";
-// import { fetchRestaurants } from "../../store/restaurants";
 import { removeRestaurant } from "../../store/restaurant";
 import { removeRestaurantItemsFromCart } from "../../store/cart";
 

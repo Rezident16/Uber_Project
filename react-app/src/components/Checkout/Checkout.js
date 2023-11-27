@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -52,7 +52,6 @@ function CheckoutItem() {
           today.getDate()
         );
         if (bday < youngestAllowedAge) {
-          // console.log(bday, youngestAllowedAge, bday < youngestAllowedAge);
           errorsObj.age =
             "Must be 21 years or older to purchase alcohol. Please remove item from cart to continue.";
         }
@@ -72,7 +71,6 @@ function CheckoutItem() {
           address: address,
           notes: notes,
           item_ids: itemsArr,
-          // user_id: user.id,
         };
         res = await dispatch(submitOrder(bodyOrder, restaurantId));
       }
@@ -92,7 +90,6 @@ function CheckoutItem() {
       return (
         <div key={restaurant[0]} className="restaurant_container">
           <h2>{Object.values(restaurant[1])[0].restaurant.name}</h2>
-          {/* <h3>Items:</h3> */}
           <div className="order_items">
             {Object.values(restaurant[1]).map((item) => {
               return (
@@ -101,11 +98,11 @@ function CheckoutItem() {
                   <p className="item_qty_container">{item.qty}</p>
                   <p>${(item.price * item.qty).toFixed(2)}</p>
                   {item.is_alcohol && (
-                  <div>
-                    Item contains alcohol, must be 21 years or older to
-                    purchase.
-                  </div>
-                )}
+                    <div>
+                      Item contains alcohol, must be 21 years or older to
+                      purchase.
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -120,10 +117,12 @@ function CheckoutItem() {
       <form className="checkout_form" onSubmit={handleSubmit}>
         <label className="form_element address_form_element">
           Address
-          <input 
-          className="form_element_borders"
-          placeholder="Delivery Address"
-          onChange={(e) => setAddress(e.target.value)} value={address} />
+          <input
+            className="form_element_borders"
+            placeholder="Delivery Address"
+            onChange={(e) => setAddress(e.target.value)}
+            value={address}
+          />
         </label>
         {errors.address && <p className="errors">{errors.address}</p>}
         <label className="form_element" style={{ flexDirection: "column" }}>

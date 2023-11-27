@@ -49,13 +49,6 @@ function RestaurantForm({ formAction, restaurant }) {
   const [errors, setErrors] = useState({});
   const [errorsOnSubmit, setErrorsOnSubmit] = useState();
 
-  // function isImgUrl(url) {
-  //     const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif'];
-  //     const lowerCaseUrl = url.toLowerCase();
-
-  //     return imageExtensions.some(extension => lowerCaseUrl.includes(extension));
-  // }
-
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -82,24 +75,8 @@ function RestaurantForm({ formAction, restaurant }) {
       errorsObj.location = "Closing hours are required";
     }
 
-    // if (formAction !== 'edit' && !isImgUrl(previewImg)) {
-    //     errorsObj.previewImg = 'Url must be jpg, jpeg or png'
-    // }
-
     setErrors(errorsObj);
-    // -------------------------------------------------------------
-    // const requestBodyRestaurant = {
-    //   owner_id: user.id,
-    //   name,
-    //   category,
-    //   address,
-    //   city,
-    //   state,
-    //   hours_open: hoursOpen,
-    //   hours_close: hoursClose,
-    //   min_order_time: minOrderTime,
-    //   max_order_time: maxOrderTime,
-    // };
+
     const formdata = new FormData();
     formdata.append("owner_id", user.id);
     formdata.append("name", name);
@@ -196,7 +173,7 @@ function RestaurantForm({ formAction, restaurant }) {
       {errorsOnSubmit?.category && (
         <p className="restaurant-form-errors">{errorsOnSubmit.category}</p>
       )}
-<div className="restaurant_separator"></div>
+      <div className="restaurant_separator"></div>
       <label className="form_element">
         <h3 className="form_text_restaurant">Address</h3>
         <input
@@ -332,7 +309,6 @@ function RestaurantForm({ formAction, restaurant }) {
         <p className="group-form-errors">{errorsOnSubmit.hoursClose}</p>
       )}
       {formAction !== "edit" && (
-        
         <label className="form_element">
           <div className="restaurant_separator"></div>
           <p>Please add an image url for your restaurant below:</p>

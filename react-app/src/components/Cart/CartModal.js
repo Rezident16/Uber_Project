@@ -18,14 +18,9 @@ function CartModal() {
   const cartItems = Object.values(cart);
 
   useEffect(() => {
-    // setTotal(0);
     let newTotal = 0;
     cartItems.forEach((item) => {
-      // setTotal(total + (item.price * item.qty).toFixed(2));
-      // console.log("ITEM", item);
       newTotal += parseFloat((item.price * parseInt(item.qty)).toFixed(2));
-      // console.log(item.price, parseInt(item.qty));
-      // console.log("NEW TOTAL", newTotal);
     });
     setTotal(parseFloat(newTotal.toFixed(2)));
   }, [cart]);
@@ -44,22 +39,22 @@ function CartModal() {
       <div className="cart_buttons">
         {total > 0 && (
           <div>
-        <div>Subtotal ${total}</div>
-        <Link
-          to="/checkout"
-          className="modal_buttons"
-          id='checkout-button'
-          onClick={(e) => {
-            if (!cartItems.length) {
-              e.preventDefault();
-            } else {
-              closeModal();
-            }
-          }}
-        >
-          Checkout
-        </Link>
-            </div>
+            <div>Subtotal ${total}</div>
+            <Link
+              to="/checkout"
+              className="modal_buttons"
+              id="checkout-button"
+              onClick={(e) => {
+                if (!cartItems.length) {
+                  e.preventDefault();
+                } else {
+                  closeModal();
+                }
+              }}
+            >
+              Checkout
+            </Link>
+          </div>
         )}
 
         {cartItems.length ? (

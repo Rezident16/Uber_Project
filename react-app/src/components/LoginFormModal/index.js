@@ -25,7 +25,6 @@ function LoginFormModal() {
 
   const demoLogin = (e) => {
     e.preventDefault();
-    // return
     dispatch(login("demo@aa.io", "password")).then(closeModal());
   };
 
@@ -33,7 +32,6 @@ function LoginFormModal() {
     <div className="login_modal_container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-
         <label>
           Email
           <input
@@ -54,13 +52,13 @@ function LoginFormModal() {
             required
           />
         </label>
-        
+
         <button type="submit" className="loginButton">
           Log In
         </button>
         <div className="errors">
           {errors.map((error, idx) => (
-            <p key={idx} >{error.split(" :")[1]}</p>
+            <p key={idx}>{error.split(" :")[1]}</p>
           ))}
         </div>
       </form>
@@ -73,7 +71,6 @@ function LoginFormModal() {
           <OpenModalButton
             className="loginButton"
             buttonText="Sign Up"
-            // onItemClick={closeMenu}
             modalComponent={<SignupFormModal />}
           />
         </div>

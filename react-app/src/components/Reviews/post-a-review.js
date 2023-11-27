@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { createAReviewThunk } from "../../store/restaurant";
-import "./reviews.css"
+import "./reviews.css";
 
 function CreateAReviewModal() {
   const restaurant = useSelector((state) => state.restaurant);
@@ -14,8 +14,6 @@ function CreateAReviewModal() {
   const disabled = reviewText.length < 10 || rating === 0;
   const className = disabled ? "not-confirmed-review" : "confirm-review";
   const [errors, setErrors] = useState({});
-
-  // console.log(user)
 
   const onChange = (number) => {
     setRating(parseInt(number));
@@ -43,13 +41,12 @@ function CreateAReviewModal() {
 
   if (!restaurant) return null;
 
-  // console.log(rating);
   return (
     <div className="create-a-review-modal">
       <h1
-      id="review-header"
+        id="review-header"
         style={{
-          marginBottom: "5px"
+          marginBottom: "5px",
         }}
       >
         How was order?

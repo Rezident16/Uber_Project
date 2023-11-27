@@ -15,7 +15,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   const [cartQty, setCartQty] = useState(0);
   const cart = useSelector((state) => state.cart);
-const history = useHistory()
+  const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -46,7 +46,6 @@ const history = useHistory()
   }, [showMenu]);
 
   useEffect(() => {
-    // console.log(user)
     if (user) setIsUser(true);
     else setIsUser(false);
   }, [user]);
@@ -54,14 +53,11 @@ const history = useHistory()
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    history.push('/restaurants')
-
+    history.push("/restaurants");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
-
-  // console.log('---------', isUser)
 
   const userClassName = isUser ? "" : "hidden";
 
@@ -88,15 +84,21 @@ const history = useHistory()
         <ul className={ulClassName} ref={ulRef}>
           <li>{user?.username}</li>
           <li>{user?.email}</li>
-<li className="seperator"></li>
+          <li className="seperator"></li>
           <li>
-            <Link onClick={closeMenu} to="/current">My Profile</Link>
+            <Link onClick={closeMenu} to="/current">
+              My Profile
+            </Link>
           </li>
           <li>
-            <Link onClick={closeMenu} to="/restaurants/new">Create a Restaurant</Link>
+            <Link onClick={closeMenu} to="/restaurants/new">
+              Create a Restaurant
+            </Link>
           </li>
           <li>
-            <button onClick={handleLogout} className="loginButton">Log Out</button>
+            <button onClick={handleLogout} className="loginButton">
+              Log Out
+            </button>
           </li>
         </ul>
       </div>

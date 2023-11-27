@@ -6,11 +6,8 @@ import Navigation from "./components/Navigation";
 import CreateRestaurant from "./components/Restaurants/create-restaurant";
 import UpdateRestaurant from "./components/Restaurants/update-restaurant";
 import GetRestaurants from "./components/Restaurants";
-import RestaurantItemsFunc from "./components/Items/restaurantItems";
 import RestaurantDetailPage from "./components/Restaurants/restaurant-details-page";
-import { loadCart } from "./store/cart";
 import CheckoutItem from "./components/Checkout/Checkout";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import UserProfile from "./components/UserProfile";
 import LandingPage from "./components/LandingPage";
 import { loadCartThunk } from "./store/cart";
@@ -25,10 +22,8 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log("SET CART COOKIE");
     const cookie = localStorage.getItem("cart");
     if (cookie) {
-      // dispatch(loadCart(JSON.parse(cookie)));
       dispatch(loadCartThunk(JSON.parse(cookie)));
     }
   }, [dispatch]);

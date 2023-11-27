@@ -1,20 +1,15 @@
 const LOAD_CART_COOKIE = "cart/LOAD_CART_COOKIE";
-// const SET_CART_COOKIE = "cart/SET_CART_COOKIE";
 const ADD_TO_CART = "cart/ADD_TO_CART";
 const REMOVE_FROM_CART = "cart/REMOVE_FROM_CART";
 const UPDATE_CART_ITEM_QTY = "cart/UPDATE_CART_ITEM_QTY";
 const CHECKOUT_CART = "cart/CHECKOUT_CART";
-const REMOVE_RESTAURANT_ITEMS_FROM_CART = "cart/REMOVE_RESTAURANT_ITEMS_FROM_CART"
+const REMOVE_RESTAURANT_ITEMS_FROM_CART =
+  "cart/REMOVE_RESTAURANT_ITEMS_FROM_CART";
 
 // Action Creators
 export const loadCart = () => ({
   type: LOAD_CART_COOKIE,
 });
-
-// export const setCartCookie = (cart) => ({
-//     type: SET_CART_COOKIE,
-//     cart
-// })
 
 export const addToCart = (item, qty = 1) => ({
   type: ADD_TO_CART,
@@ -40,8 +35,8 @@ export const clearCart = () => ({
 
 export const removeRestaurantItemsFromCart = (restaurantId) => ({
   type: REMOVE_RESTAURANT_ITEMS_FROM_CART,
-  restaurantId
-})
+  restaurantId,
+});
 
 // Thunk Action Creators
 export const submitOrder = (body, id) => async (dispatch) => {
@@ -62,27 +57,18 @@ export const submitOrder = (body, id) => async (dispatch) => {
 
 export const loadCartThunk = () => async (dispatch) => {
   let cart = localStorage.getItem("cart");
-  let items = {}
-  const objectItems = Object.values(JSON.parse(cart))
+  let items = {};
+  const objectItems = Object.values(JSON.parse(cart));
   for (const key in objectItems) {
-    const item = objectItems[key]
-    const res = await fetch(`/api/items/${item.id}`)
+    const item = objectItems[key];
+    const res = await fetch(`/api/items/${item.id}`);
     if (res.ok) {
-      items[item.id] = item
+      items[item.id] = item;
     }
   }
-  // await objectItems.forEach(async (item) => {
-  //   const res = await fetch(`/api/items/${item.id}`)
-  //   console.log(res, 'res ')
-  //   console.log(items, 'inside for each')
-  //   if (res.ok) {
-  //     items[item.id] = item
-  //     console.log(items)
-  //   }
-  // })
-  localStorage.setItem("cart", JSON.stringify(items))
-  dispatch(loadCart())
-}
+  localStorage.setItem("cart", JSON.stringify(items));
+  dispatch(loadCart());
+};
 
 const cartReducer = (state = {}, action) => {
   switch (action.type) {
@@ -125,11 +111,11 @@ const cartReducer = (state = {}, action) => {
       const newCartState = { ...state };
       for (const key in newCartState) {
         if (newCartState[key].restaurant.id === action.restaurantId) {
-          delete newCartState[key]
+          delete newCartState[key];
         }
       }
-      localStorage.setItem("cart", JSON.stringify(newCartState))
-      return newCartState
+      localStorage.setItem("cart", JSON.stringify(newCartState));
+      return newCartState;
     default:
       return state;
   }
