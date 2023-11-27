@@ -3,7 +3,7 @@ import RestaurantForm from "./restaurant-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { fetchRestaurant } from "../../store/restaurant";
-import React from 'react';
+import React from "react";
 function UpdateRestaurant() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -22,7 +22,6 @@ function UpdateRestaurant() {
   if (!restaurant?.owner_id) {
     return null;
   }
-  // console.log(restaurant)
   if (!sessionUser || sessionUser?.id !== restaurant?.owner_id) {
     history.push("/restaurants");
   }

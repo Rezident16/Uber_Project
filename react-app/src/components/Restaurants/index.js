@@ -12,10 +12,8 @@ function Restaurants() {
 
   useEffect(() => {
     dispatch(fetchRestaurants());
-    // dispatch(fetchRestaurant())
   }, [dispatch]);
 
-  console.log("IN /RESTAURANTS", restaurants);
   if (!restaurants) return null;
 
   return (

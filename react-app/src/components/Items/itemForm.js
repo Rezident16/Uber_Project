@@ -2,8 +2,8 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { createAnItemThunk, updateAnItemThunk } from "../../store/restaurant";
 import { useModal } from "../../context/Modal";
-import React from 'react';
-import './Items.css'
+import React from "react";
+import "./Items.css";
 
 const ItemForm = ({ item, formType, restaurantId }) => {
   const { closeModal } = useModal();
@@ -90,7 +90,6 @@ const ItemForm = ({ item, formType, restaurantId }) => {
       }
     } else {
       setErrors(errorsObj);
-      console.log(errors);
     }
   };
 
@@ -186,7 +185,7 @@ const ItemForm = ({ item, formType, restaurantId }) => {
             onChange={onFileChange}
           />
           {localImg && (
-            <div id='item-img-container'>
+            <div id="item-img-container">
               <img src={localImg} alt="" />
             </div>
           )}

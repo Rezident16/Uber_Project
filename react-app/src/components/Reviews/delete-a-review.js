@@ -10,7 +10,6 @@ function DeleteAReviewModal({ review }) {
   const deleteReview = (e) => {
     e.preventDefault();
 
-    // console.log(review)
     dispatch(deleteAReviewThunk(review.id)).then(closeModal());
   };
 

@@ -1,49 +1,26 @@
-import { useState } from "react";
-import "./landingpage.css";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-function LandingPage() {
-  const [scootClassName, setScootClassName] = useState("");
-  const history = useHistory();
+import { Link } from "react-router-dom";
 
-  function scootButton() {
-    setScootClassName("scoot-away");
-    setTimeout(() => {
-      history.push("/restaurants");
-    }, 1000);
-  }
-
+function Footer() {
   return (
-    <>
-      <h1 id="welcome">Welcome to SavoryScoot</h1>
-      <h2 id="sub-welcome">A full stack project inspired by UberEats</h2>
+    <div className="footer-container">
+      <div className="footer-left-container">
+        <span>
+          <span style={{ fontWeight: 500 }}>Savory</span>
+          <span style={{ fontWeight: 600 }}>Scoot</span>
+        </span>
+        <Link to="/">Go to Homepage </Link>
+      </div>
 
-      <img
-        id="scoot-logo"
-        className={scootClassName}
-        src="https://savoryscoot.s3.amazonaws.com/src-images/SavoryScooterNoLeaves.svg"
-        alt=""
-      />
-
-      <button id="scoot-button" onClick={scootButton}>
-        Start Scooting
-      </button>
-
-      <p className="p-text">
-        Users can take a look at different restaurants offering delivery
-        services local to them, place orders, and even list their own
-        restaurants to offer delivery services as well.
-      </p>
-
-      <ul>
+      <ul className="footer-right-container">
         <li>
-          <ol>
-            <li className="name-li">Andrei Vorobev</li>
-            <li>
+          <ol className="individual-links-container">
+            <li className="name-li-footer">Andrei Vorobev</li>
+            <li className="footer-links">
               <a target="_blank" href="https://github.com/Rezident16">
                 <i className="fa-brands fa-github"></i>
               </a>
             </li>
-            <li>
+            <li className="footer-links">
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/andreivorobev/"
@@ -54,14 +31,14 @@ function LandingPage() {
           </ol>
         </li>
         <li>
-          <ol>
-            <li className="name-li">Brian Stokes</li>
-            <li>
+          <ol className="individual-links-container">
+            <li className="name-li-footer">Brian Stokes</li>
+            <li className="footer-links">
               <a target="_blank" href="https://github.com/bcstokes4">
                 <i className="fa-brands fa-github"></i>
               </a>
             </li>
-            <li>
+            <li className="footer-links">
               <a target="_blank" href="linkedin.com/in/brian-stokes-86a842124">
                 <i className="fa-brands fa-linkedin"></i>
               </a>
@@ -69,14 +46,14 @@ function LandingPage() {
           </ol>
         </li>
         <li>
-          <ol>
-            <li className="name-li">Mason Austin</li>
-            <li>
+          <ol className="individual-links-container">
+            <li className="name-li-footer">Mason Austin</li>
+            <li className="footer-links">
               <a target="_blank" href="https://github.com/masonaustin42">
                 <i className="fa-brands fa-github"></i>
               </a>
             </li>
-            <li>
+            <li className="footer-links">
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/mason-austin-a1b568240/"
@@ -87,14 +64,14 @@ function LandingPage() {
           </ol>
         </li>
         <li>
-          <ol>
-            <li className="name-li">Zohaib Rajan</li>
-            <li>
+          <ol className="individual-links-container">
+            <li className="name-li-footer">Zohaib Rajan</li>
+            <li className="footer-links">
               <a target="_blank" href="https://github.com/zohaibrajan">
                 <i className="fa-brands fa-github"></i>
               </a>
             </li>
-            <li>
+            <li className="footer-links">
               <a
                 target="_blank"
                 href="https://www.linkedin.com/in/zohaib-rajan-718198216/"
@@ -105,8 +82,8 @@ function LandingPage() {
           </ol>
         </li>
       </ul>
-    </>
+    </div>
   );
 }
 
-export default LandingPage;
+export default Footer;

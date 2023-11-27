@@ -6,7 +6,6 @@ const REMOVE_RESTAURANT = "/restaurants/REMOVE_RESTAURANT";
 const CREATE_REVIEW = "/reviews/CREATE_REVIEW";
 const DELETE_REVIEW = "/reviews/DELETE_REVIEW";
 
-
 // Action Creators
 
 export const receiveItem = (item) => ({
@@ -42,26 +41,13 @@ const createAReview = (review) => {
 };
 
 const deleteAReview = (reviewId) => {
-    return  {
-        type: DELETE_REVIEW,
-        reviewId
-    }
-}
+  return {
+    type: DELETE_REVIEW,
+    reviewId,
+  };
+};
 
 // Thunks
-
-// export const fetchItemThunk = (id) => async (dispatch) => {
-//     const res = await fetch(`/api/items/${id}`)
-
-//     if (res.ok) {
-//         const item = await res.json()
-//         dispatch(receiveItem(item))
-//         return item
-//     } else {
-//         const errors = await res.json()
-//         return errors
-//     }
-// }
 
 export const fetchRestaurant = (id) => async (dispatch) => {
   const response = await fetch(`/api/restaurants/${id}`);
@@ -71,23 +57,12 @@ export const fetchRestaurant = (id) => async (dispatch) => {
     dispatch(receiveRestaurant(data));
     return data;
   } else {
-    const errors = await response.json();
-    return errors;
+    // const errors = await response.json();
+    // return errors;
+    return response;
   }
 };
 
-// export const fetchDeleteRestaurant = (id) => async (dispatch) => {
-//   const response = await fetch(`/api/restaurants/${id}`, {
-//     method: "DELETE",
-//     headers: { "Content-Type": "application/json" },
-//   });
-//   if (response.ok) {
-//     dispatch(removeRestaurant(id));
-//   } else {
-//     const errors = await response.json();
-//     return errors;
-//   }
-// };
 export const createAReviewThunk =
   (restaurantId, review) => async (dispatch) => {
     const res = await fetch(`/api/restaurants/${restaurantId}/reviews`, {
@@ -205,9 +180,11 @@ const restaurantReducer = (state = {}, action) => {
     case DELETE_REVIEW:
       const reviewRemoved = {
         ...state,
-        reviews: state.reviews.filter(review => review.id !== action.reviewId)
+        reviews: state.reviews.filter(
+          (review) => review.id !== action.reviewId
+        ),
       };
-      return reviewRemoved
+      return reviewRemoved;
     default:
       return state;
   }

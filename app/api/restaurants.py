@@ -138,12 +138,10 @@ def delete_restaurant(restaurantId):
         return abort(403, description='Unauthorized')
 
     for order in restaurant.orders:
-        print('i would to delete my orders here')
         db.session.query(orders_items).filter(orders_items.c.order_id == order.id).delete()
 
 
     for item in restaurant.items:
-        print('i would to delete my items here')
         db.session.query(orders_items).filter(orders_items.c.item_id == item.id).delete()
 
     db.session.commit()

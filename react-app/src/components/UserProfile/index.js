@@ -61,13 +61,10 @@ function UserProfile() {
   user.birthday =
     `${userFormat[0]}` + ` ${monthAbbreviation}` + ` ${userFormat[2]}`;
 
-  //   user.birthday = isoDate
-
   return (
     <div id="main_user_container">
       <h1>Account Info</h1>
       <div className="general_user_info_container">
-        {/* <h2>Your General Information</h2> */}
         <div>
           <h3>Username: </h3>
           <h4> {user.username}</h4>
@@ -121,7 +118,7 @@ function UserProfile() {
                 </h3>
               </div>
               <div className="individual_order_information_container">
-                  <h3>Order Details:</h3>
+                <h3>Order Details:</h3>
                 <div className="info-flexbox">
                   <div className="order_details_container">
                     <h4>Order Total:</h4>
