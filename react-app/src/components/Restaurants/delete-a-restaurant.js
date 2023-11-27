@@ -24,9 +24,9 @@ function DeleteARestaurantModal() {
   };
 
   return (
-    <div className="delete-restaurant-modal">
+    <div className="delete-item-modal">
       <h1>Confirm Delete</h1>
-      <span id="delete-restaurant-span">
+      <span id="delete-item-span">
         Are you sure you want to remove this restaurant?
       </span>
       <button
@@ -37,7 +37,7 @@ function DeleteARestaurantModal() {
         Yes (Delete Restaurant)
       </button>
       <button
-        className="do-not-delete"
+        className="do-not-delete-item"
         style={{ cursor: "pointer" }}
         onClick={closeModal}
       >

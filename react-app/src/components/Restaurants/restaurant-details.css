@@ -59,4 +59,17 @@ header > div > p {
 
 .restaurant_details_buttons {
   margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.delete_item, .update_component {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-top: 5px;
+}
+
+.restaurant_detail_container_full {
+  padding-bottom: 35px;
 }

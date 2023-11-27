@@ -12,6 +12,7 @@ import { loadCart } from "./store/cart";
 import CheckoutItem from "./components/Checkout/Checkout";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import UserProfile from "./components/UserProfile";
+import LandingPage from "./components/LandingPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,11 +35,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <>
-              <h1>Home Page</h1>
-              <Link to="/restaurants">Restaurants</Link>
-              <Link to=""></Link>
-            </>
+            <LandingPage />
           </Route>
           <Route exact path="/restaurants/new">
             <CreateRestaurant />
@@ -55,7 +52,7 @@ function App() {
           <Route path="/checkout">
             <CheckoutItem />
           </Route>
-          <Route path='/current'>
+          <Route path="/current">
             <UserProfile />
           </Route>
           <Route>

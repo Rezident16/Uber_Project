@@ -9,6 +9,10 @@
   margin: 0 50px;
 }
 
+.restaurant-tile:hover {
+  cursor: pointer;
+}
+
 .restaurant-tile {
   display: flex;
   flex-direction: column;
