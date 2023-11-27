@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import LoginFormModal from "../LoginFormModal";
 import { clearCart, submitOrder } from "../../store/cart";
+import "./checkout.css";
 
 function CheckoutItem() {
   const cart = useSelector((state) => state.cart);
@@ -11,7 +12,6 @@ function CheckoutItem() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { setModalContent } = useModal();
-
 
   const [address, setAddress] = useState(user?.address ? user.address : "");
   const [notes, setNotes] = useState("");
@@ -34,7 +34,7 @@ function CheckoutItem() {
 
     if (!user.user) {
       setModalContent(<LoginFormModal />);
-      return; 
+      return;
     }
 
     const errorsObj = {};
@@ -90,21 +90,21 @@ function CheckoutItem() {
     const restaurantArr = Object.entries(restaurantOrders);
     return restaurantArr.map((restaurant) => {
       return (
-        <div key={restaurant[0]}>
+        <div key={restaurant[0]} className="restaurant_container">
           <h2>Restaurant: {Object.values(restaurant[1])[0].restaurant.name}</h2>
           <h3>Items:</h3>
           {Object.values(restaurant[1]).map((item) => {
             return (
-              <div key={item.id}>
-                <p>{item.qty}</p>
+              <div key={item.id} className="item_container">
                 <img src={item.preview_img} alt="" />
+                <p className="item_qty_container">{item.qty}</p>
                 <p>${(item.price * item.qty).toFixed(2)}</p>
-                {item.is_alcohol && (
-                  <p>
+                {/* {item.is_alcohol && (
+                  <span>
                     Item contains alcohol, must be 21 years or older to
                     purchase.
-                  </p>
-                )}
+                  </span>
+                )} */}
               </div>
             );
           })}
@@ -115,15 +115,20 @@ function CheckoutItem() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="checkout_form" onSubmit={handleSubmit}>
+        <label className="form_element">
           Address
           <input onChange={(e) => setAddress(e.target.value)} value={address} />
         </label>
         {errors.address && <p>{errors.address}</p>}
-        <label>
+        <label className="form_element" style={{ flexDirection: "column" }}>
           Leave you special instructions headers
-          <textarea onChange={(e) => setNotes(e.target.value)} value={notes} />
+          <textarea
+            onChange={(e) => setNotes(e.target.value)}
+            value={notes}
+            rows="10"
+            cols="45"
+          />
         </label>
         {displayItems()}
         {errors.age && <p>{errors.age}</p>}
