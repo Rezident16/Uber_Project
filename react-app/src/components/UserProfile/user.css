@@ -104,15 +104,17 @@
     height: 28px;
 }
 
-.item_container{
+.user_item_container{
     display: flex;
-    gap: 10px;
+    gap: 20px;
     flex-wrap: wrap;
+    padding-top: 20px;
 }
 
 .item_img_qty_container > img {
     width: 125px;
     height: 125px;
+    object-fit: cover;
 }
 
 .restaurant_order_container {
@@ -127,6 +129,7 @@
     border-radius: 50%;
     width: 85px;
     height: 85px;
+    object-fit: cover;
 }
 .restaurant_order_container > h3 {
     font-size: 23px;

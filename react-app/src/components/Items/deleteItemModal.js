@@ -1,17 +1,20 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteAnItemThunk } from "../../store/restaurant";
 import React from 'react';
+import { removeFromCart } from "../../store/cart";
 
 const DeleteModal = ({ id }) => {
-  console.log('--------------', id)
+  // console.log('--------------', id)
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-
-
+  const restaurant = useSelector(state => state.restaurant)
+  const item = Object.values(restaurant.items).find(item => item.id == id)
   const onDelete = async (e) => {
     e.preventDefault(e);
     dispatch(deleteAnItemThunk(id));
+    dispatch(removeFromCart(item))
+    // console.log(restaurant)
     closeModal();
   };
 

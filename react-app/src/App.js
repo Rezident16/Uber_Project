@@ -13,6 +13,7 @@ import CheckoutItem from "./components/Checkout/Checkout";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import UserProfile from "./components/UserProfile";
 import LandingPage from "./components/LandingPage";
+import { loadCartThunk } from "./store/cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ function App() {
     console.log("SET CART COOKIE");
     const cookie = localStorage.getItem("cart");
     if (cookie) {
-      dispatch(loadCart(JSON.parse(cookie)));
+      // dispatch(loadCart(JSON.parse(cookie)));
+      dispatch(loadCartThunk(JSON.parse(cookie)))
     }
   }, [dispatch]);
 
