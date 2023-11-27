@@ -2,13 +2,16 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 25px;
   padding: 10px 20px;
   margin-bottom: 60px;
   margin-top: 10px;
+  /* margin-left: 25px; */
+  padding-left: 80px;
   align-items: center;
   justify-content: center;
+  /* height: 100%; */
 }
 
 .form_element,
@@ -24,6 +27,14 @@
 .restaurant_container {
   width: 100%;
   flex-wrap: wrap;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant_container > h2 {
+font-size: 18px;
+font-weight: bold;
 }
 
 .item_container img {
@@ -58,4 +69,41 @@
   flex-direction: row;
   width: 220px;
   /* height: 200px; */
+  align-content: flex-start;
+}
+
+.order_items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* align-items: center; */
+  /* justify-content: center; */
+}
+
+.checkout_button {
+  width: 150px;
+    height: 50px;
+    font-size: 15px;
+    background-color: black;
+    color: white;
+    margin: 0 20px;
+}
+
+.form_element {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  text-align: start;
+}
+
+.address_form_element {
+  display: flex;
+  /* flex-direction: row; */
+  /* align-items: flex-start; */
+}
+
+.form_element_borders {
+  width: 385px;
+  border: 1px solid rgb(137, 137, 137);
+  border-radius: 5px;
 }
