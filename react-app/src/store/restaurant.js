@@ -6,7 +6,6 @@ const REMOVE_RESTAURANT = "/restaurants/REMOVE_RESTAURANT";
 const CREATE_REVIEW = "/reviews/CREATE_REVIEW";
 const DELETE_REVIEW = "/reviews/DELETE_REVIEW";
 
-
 // Action Creators
 
 export const receiveItem = (item) => ({
@@ -42,11 +41,11 @@ const createAReview = (review) => {
 };
 
 const deleteAReview = (reviewId) => {
-    return  {
-        type: DELETE_REVIEW,
-        reviewId
-    }
-}
+  return {
+    type: DELETE_REVIEW,
+    reviewId,
+  };
+};
 
 // Thunks
 
@@ -71,8 +70,9 @@ export const fetchRestaurant = (id) => async (dispatch) => {
     dispatch(receiveRestaurant(data));
     return data;
   } else {
-    const errors = await response.json();
-    return errors;
+    // const errors = await response.json();
+    // return errors;
+    return response;
   }
 };
 
@@ -205,9 +205,11 @@ const restaurantReducer = (state = {}, action) => {
     case DELETE_REVIEW:
       const reviewRemoved = {
         ...state,
-        reviews: state.reviews.filter(review => review.id !== action.reviewId)
+        reviews: state.reviews.filter(
+          (review) => review.id !== action.reviewId
+        ),
       };
-      return reviewRemoved
+      return reviewRemoved;
     default:
       return state;
   }

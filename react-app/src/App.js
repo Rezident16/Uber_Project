@@ -14,6 +14,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import UserProfile from "./components/UserProfile";
 import LandingPage from "./components/LandingPage";
 import { loadCartThunk } from "./store/cart";
+import PageNotFound from "./components/Navigation/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function App() {
     const cookie = localStorage.getItem("cart");
     if (cookie) {
       // dispatch(loadCart(JSON.parse(cookie)));
-      dispatch(loadCartThunk(JSON.parse(cookie)))
+      dispatch(loadCartThunk(JSON.parse(cookie)));
     }
   }, [dispatch]);
 
@@ -48,7 +49,7 @@ function App() {
           <Route path="/restaurants/:restaurantId/edit">
             <UpdateRestaurant />
           </Route>
-          <Route path="/restaurants">
+          <Route exact path="/restaurants">
             <GetRestaurants />
           </Route>
           <Route path="/checkout">
@@ -58,7 +59,7 @@ function App() {
             <UserProfile />
           </Route>
           <Route>
-            <h1>404 Page Not Found</h1>
+            <PageNotFound />
           </Route>
         </Switch>
       )}
