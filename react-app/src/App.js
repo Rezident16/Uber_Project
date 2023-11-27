@@ -14,6 +14,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import UserProfile from "./components/UserProfile";
 import LandingPage from "./components/LandingPage";
 import { loadCartThunk } from "./store/cart";
+import Footer from "./components/Navigation/footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function App() {
     const cookie = localStorage.getItem("cart");
     if (cookie) {
       // dispatch(loadCart(JSON.parse(cookie)));
-      dispatch(loadCartThunk(JSON.parse(cookie)))
+      dispatch(loadCartThunk(JSON.parse(cookie)));
     }
   }, [dispatch]);
 
@@ -62,6 +63,9 @@ function App() {
           </Route>
         </Switch>
       )}
+      <Route path='/:notHome'>
+        <Footer />
+      </Route>
     </>
   );
 }

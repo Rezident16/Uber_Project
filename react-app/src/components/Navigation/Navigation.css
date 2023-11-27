@@ -51,6 +51,7 @@
 
 #logo:hover {
   color: #dc2444;
+  text-decoration: none;
 }
 
 #logo > img {
@@ -96,4 +97,71 @@
   border-radius: 30px;
   cursor: pointer;
   border: none
+}
+
+/* FOOTER STYLING */
+
+/* Updated CSS styles */
+.footer-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 500px;
+  padding: 75px;
+  margin: 75px;
+  border-top: 1px solid lightgray;
+  width: 100%;
+  background-color: #f8f8f8;
+}
+
+.footer-left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  height: 100%;
+  padding-top: 9px;
+}
+
+.footer-left-container > span {
+  font-size: 25px;
+  color: #dc2444;
+}
+
+.footer-right-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* gap: 15px; */
+  padding: 0;
+}
+
+.individual-links-container {
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+  padding: 10px;
+  gap: 15px;
+  width: auto;
+}
+
+.individual-links-container > li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+}
+.name-li-footer{
+  width: 150px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 10px;
+  width: auto;
+}
+
+.footer-links i{
+  font-size: 24px;
 }

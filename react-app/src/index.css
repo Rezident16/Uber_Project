@@ -38,6 +38,10 @@ a:visited {
 
 a:hover {
   color: black;
+  text-decoration: underline;
+}
+a .fa-linkedin:hover{
+  color: #0077B5;
 }
 
 button:hover {

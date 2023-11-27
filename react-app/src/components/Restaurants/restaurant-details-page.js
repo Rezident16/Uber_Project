@@ -10,6 +10,7 @@ import DeleteARestaurantModal from "./delete-a-restaurant";
 import "./restaurant-details.css";
 import UpdateRestaurant from "./update-restaurant";
 
+
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
   const history = useHistory();

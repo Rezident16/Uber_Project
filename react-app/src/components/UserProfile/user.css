@@ -1,5 +1,5 @@
 #main_user_container {
-    background-color: whitesmoke !important;
+    background-color: #f8f8f8 !important;
     border-top: 1px solid gray;
     display: flex !important;
     flex-direction: column !important;
