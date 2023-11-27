@@ -76,4 +76,12 @@ def delete_item(itemId):
     db.session.commit()
     
     return {"status": "success"}, 200
+
+@item_routes.route('/<int:itemId>')
+def get_item(itemId):
+    item = Item.query.get(itemId)
     
+    if not item:
+        return abort(404, description='Item not found')
+    
+    return item.to_dict(), 200

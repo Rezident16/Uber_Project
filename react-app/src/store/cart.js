@@ -60,6 +60,30 @@ export const submitOrder = (body, id) => async (dispatch) => {
   }
 };
 
+export const loadCartThunk = () => async (dispatch) => {
+  let cart = localStorage.getItem("cart");
+  let items = {}
+  const objectItems = Object.values(JSON.parse(cart))
+  for (const key in objectItems) {
+    const item = objectItems[key]
+    const res = await fetch(`/api/items/${item.id}`)
+    if (res.ok) {
+      items[item.id] = item
+    }
+  }
+  // await objectItems.forEach(async (item) => {
+  //   const res = await fetch(`/api/items/${item.id}`)
+  //   console.log(res, 'res ')
+  //   console.log(items, 'inside for each')
+  //   if (res.ok) {
+  //     items[item.id] = item
+  //     console.log(items)
+  //   }
+  // })
+  localStorage.setItem("cart", JSON.stringify(items))
+  dispatch(loadCart())
+}
+
 const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD_CART_COOKIE:
