@@ -1,0 +1,82 @@
+a > i {
+  color: #bec5d0;
+  font-size: 40px;
+}
+
+a > i:hover {
+  color: black;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: center;
+}
+
+ol {
+  display: flex;
+  width: 200px;
+  list-style: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+ol > li {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.name-li {
+  width: 100%;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+#welcome {
+  font-weight: 500;
+  font-size: 60px;
+}
+
+#sub-welcome {
+  font-weight: 400;
+  font-size: 30px;
+}
+
+#scoot-button {
+  margin: 40px;
+  font-size: 20px;
+  padding: 15px 25px;
+}
+
+.p-text {
+  font-size: 20px;
+  margin: 20px;
+}
+
+#scoot-logo {
+  width: 400px;
+  position: relative;
+}
+
+.scoot-away {
+  animation: scootAway 2s ease;
+  animation-iteration-count: 1;
+}
+
+@keyframes scootAway {
+  0% {
+    left: 0;
+    bottom: 30px;
+  }
+
+  15% {
+    transform: rotate(-45deg);
+  }
+
+  100% {
+    left: 150vw;
+  }
+}

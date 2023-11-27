@@ -64,7 +64,7 @@ function RestaurantDetailPage() {
   }
 
   return (
-    <>
+    <div className="restaurant_detail_container_full">
       <header>
         <img src={restaurant.preview_img} alt=""></img>
         <h2>{restaurant.name}</h2>
@@ -102,7 +102,7 @@ function RestaurantDetailPage() {
             )}
           </div>
         </div>
-        {/* {user && user.id === restaurant.owner_id && (
+        {user && user.id === restaurant.owner_id && (
         <div className="restaurant_details_buttons">
           <OpenModalButton
            className="restaurant_details_button_div"
@@ -115,7 +115,7 @@ function RestaurantDetailPage() {
             modalComponent={<DeleteARestaurantModal />}
           />
         </div>
-      )} */}
+      )}
       </header>
 
       <Items restaurant={restaurant} />
@@ -130,7 +130,7 @@ function RestaurantDetailPage() {
           modalComponent={<CreateAReviewModal />}
         />
       )}
-      {user && user.id === restaurant.owner_id && (
+      {/* {user && user.id === restaurant.owner_id && (
         <div className="restaurant_details_buttons">
           <OpenModalButton
            className="restaurant_details_button_div"
@@ -143,8 +143,8 @@ function RestaurantDetailPage() {
             modalComponent={<DeleteARestaurantModal />}
           />
         </div>
-      )}
-    </>
+      )} */}
+    </div>
   );
 }
 
