@@ -19,19 +19,24 @@
 ## 3. Shopping Carts
 - Users should be able to view all products added to their cart.
 - Users should be able to add products to their shopping cart.
+- Shopping cart is saved to User's Local Storage.
 - Users should be able to remove products from their shopping cart.
 - Users should be able to preform a "transaction" to complete their purchase.
 ## 4. Reviews
 - Users should be able to view all reviews on a restaurant.
 - Users should be able to create a review for a restaurant.
-- Users should be able to update their review for a restaurant.
+- Users should be able to update their review for a restaurant. (Work in progress)
 - Users should be able to delete their review from a restaurant.
-## 5. Menu Items
+## 5. Orders
+- Users should be able to view their order summary before checking out.
+- Users should be able to complete the checkout
+- Users should be able to view their orders in User Profile
+## 6. Menu Items
 - Users should be able to view all menu items for a restaurant.
 - Users should be able to add menu items to their restaurants.
 - Users should be able to update menu items on their restaurants.
 - Users should be able to delete menu items from their restaurants.
-## Bonus Features
+## Bonus Features/Work In Progress
 ## Google Maps Integration
 - Users should be able to filter restaurants by distance.
 - Users should be able to see estimated delivery times based on their proximity to the restaurant.
@@ -233,4 +238,3 @@
 
 - As a logged out user with items in the cart, when clicking on the “Go to Checkout” Button, I should be redirected to the login page. The login page should also have a link to the sign-up page for users without an account.
 - After successfully creating/logging in into an account, I should be redirected to `/checkout`. This page consists of my “Order Details”, the place I am ordering from, an image, the address and name, and the total, with taxes included. I should also be able to edit my shopping cart here. Finally, a button “Place my Order” that will “place” my order and be redirected to the `/users/:userId/orders` page. This page will contain similar details to the `/checkout` but without the “Place my Order” button and taking away the ability to edit the order.
-
