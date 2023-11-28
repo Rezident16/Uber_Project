@@ -11,13 +11,15 @@ function UpdateRestaurant() {
   const sessionUser = useSelector((state) => state.session.user);
   const restaurant = useSelector((state) => state.restaurant);
 
-  useEffect(() => {
-    const initialFetch = async () => {
-      const res = await dispatch(fetchRestaurant(restaurantId));
-      if (!res?.owner_id) history.push("/restaurants");
-    };
-    initialFetch();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const initialFetch = async () => {
+  //     console.log(restaurantId, 'use effect')
+  //     // const res = await dispatch(fetchRestaurant(restaurantId));
+  //     // if (!res?.owner_id) history.push("/restaurants");
+  //     // if (restaurant.owner_id)
+  //   };
+  //   initialFetch();
+  // }, [dispatch]);
 
   if (!restaurant?.owner_id) {
     return null;

@@ -7,12 +7,14 @@ import {
 import { useState } from "react";
 import React from "react";
 import "./restaurantForm.css";
+import { useModal } from "../../context/Modal";
+import { fetchRestaurant } from "../../store/restaurant";
 
 function RestaurantForm({ formAction, restaurant }) {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
-
+  const { closeModal } = useModal();
   const randIntMin = Math.floor(Math.random() * 4) * 5 + 10;
   const randIntMax = Math.floor(Math.random() * 3) * 5 + 10 + randIntMin;
 
@@ -77,19 +79,18 @@ function RestaurantForm({ formAction, restaurant }) {
 
     setErrors(errorsObj);
 
-    const formdata = new FormData();
-    formdata.append("owner_id", user.id);
-    formdata.append("name", name);
-    formdata.append("category", category);
-    formdata.append("address", address);
-    formdata.append("city", city);
-    formdata.append("state", state);
-    formdata.append("hours_open", hoursOpen);
-    formdata.append("hours_close", hoursClose);
-    formdata.append("preview_img", previewImg);
-    formdata.append("min_order_time", minOrderTime);
-    formdata.append("max_order_time", maxOrderTime);
-
+    // const formdata = new FormData();
+    // formdata.append("owner_id", user.id);
+    // formdata.append("name", name);
+    // formdata.append("category", category);
+    // formdata.append("address", address);
+    // formdata.append("city", city);
+    // formdata.append("state", state);
+    // formdata.append("hours_open", hoursOpen);
+    // formdata.append("hours_close", hoursClose);
+    // formdata.append("preview_img", previewImg);
+    // formdata.append("min_order_time", minOrderTime);
+    // formdata.append("max_order_time", maxOrderTime);
     // Check for errors
     if (Object.keys(errorsObj).length > 0) {
       setErrorsOnSubmit({ ...errorsObj });
@@ -97,19 +98,35 @@ function RestaurantForm({ formAction, restaurant }) {
       setErrorsOnSubmit({});
     }
     if (!Object.values(errorsObj).length) {
-      setImageLoading(true);
+      const formdata = new FormData();
+      formdata.append("owner_id", user.id);
+      formdata.append("name", name);
+      formdata.append("category", category);
+      formdata.append("address", address);
+      formdata.append("city", city);
+      formdata.append("state", state);
+      formdata.append("hours_open", hoursOpen);
+      formdata.append("hours_close", hoursClose);
+      formdata.append("preview_img", previewImg);
+      formdata.append("min_order_time", minOrderTime);
+      formdata.append("max_order_time", maxOrderTime);
       if (formAction === "edit") {
         try {
           await dispatch(fetchUpdateRestaurant(restaurant.id, formdata));
-          history.push(`/restaurants`);
+          dispatch(fetchRestaurant(restaurant.id))
+          history.push(`/restaurants/${restaurant.id}`);
+          closeModal()
         } catch (e) {
-          const errors = await e.json();
+          const errors = e;
           setErrors(errors.errors);
+          console.log(errors)
         }
       } else {
+        setImageLoading(true);
         try {
           await dispatch(fetchCreateNewRestaurant(formdata));
           history.push(`/restaurants`);
+          closeModal();
         } catch (e) {
           const errors = await e.json();
           setErrors(errors.errors);
@@ -125,6 +142,8 @@ function RestaurantForm({ formAction, restaurant }) {
   const selectedCuisine = category
     ? "restaurant_input select"
     : "restaurant_input_not_selected";
+
+    console.log(errors)
   return (
     <form
       className="restaurant_form_container"

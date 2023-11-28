@@ -42,9 +42,9 @@ function App() {
           <Route exact path="/restaurants/:restaurantId">
             <RestaurantDetailPage />
           </Route>
-          <Route path="/restaurants/:restaurantId/edit">
+          {/* <Route path="/restaurants/:restaurantId/edit">
             <UpdateRestaurant />
-          </Route>
+          </Route> */}
           <Route exact path="/restaurants">
             <GetRestaurants />
           </Route>
