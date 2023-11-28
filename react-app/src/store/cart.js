@@ -63,7 +63,10 @@ export const loadCartThunk = () => async (dispatch) => {
     const item = objectItems[key];
     const res = await fetch(`/api/items/${item.id}`);
     if (res.ok) {
-      items[item.id] = item;
+      const data = await res.json() //included for test
+      console.log(data, 'data')
+      items[item.id] = {...item, ...data}; //included for test
+      // items[item.id] = item
     }
   }
   localStorage.setItem("cart", JSON.stringify(items));
