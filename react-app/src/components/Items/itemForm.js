@@ -4,6 +4,7 @@ import { createAnItemThunk, updateAnItemThunk } from "../../store/restaurant";
 import { useModal } from "../../context/Modal";
 import React from "react";
 import "./Items.css";
+import { loadCartThunk } from "../../store/cart";
 
 const ItemForm = ({ item, formType, restaurantId }) => {
   const { closeModal } = useModal();
@@ -75,6 +76,7 @@ const ItemForm = ({ item, formType, restaurantId }) => {
       if (formType === "Update") {
         try {
           await dispatch(updateAnItemThunk(formData, item.id));
+          await dispatch(loadCartThunk()) //included for test
           closeModal();
         } catch (error) {
           console.error(error);

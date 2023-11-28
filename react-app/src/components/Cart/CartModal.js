@@ -7,6 +7,7 @@ import { Link } from "react-router-dom/";
 import "./Cart.css";
 import { clearCart } from "../../store/cart";
 import React from "react";
+import { loadCartThunk } from "../../store/cart";
 
 function CartModal() {
   const cart = useSelector((state) => state.cart);
@@ -18,6 +19,7 @@ function CartModal() {
   const cartItems = Object.values(cart);
 
   useEffect(() => {
+    // dispatch(loadCartThunk())
     let newTotal = 0;
     cartItems.forEach((item) => {
       newTotal += parseFloat((item.price * parseInt(item.qty)).toFixed(2));
