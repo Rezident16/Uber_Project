@@ -59,9 +59,10 @@ export const fetchUpdateRestaurant =
   (restaurantId, payload) => async (dispatch) => {
     const response = await fetch(`/api/restaurants/${restaurantId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+      body: payload,
+    }
+    
+    );
     if (response.ok) {
       const data = await response.json();
       dispatch(updateRestaurant(data));

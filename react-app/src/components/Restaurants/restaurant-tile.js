@@ -15,7 +15,7 @@ function RestaurantTile({ restaurant }) {
           {restaurant.name} ({restaurant.address})
         </span>
 
-        {restaurant.reviews.length ? (
+        {restaurant?.reviews?.length ? (
           <span className="restaurant-rating">
             {(
               restaurant.reviews.reduce((curr, prev) => curr + prev.stars, 0) /

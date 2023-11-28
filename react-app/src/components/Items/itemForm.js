@@ -72,7 +72,6 @@ const ItemForm = ({ item, formType, restaurantId }) => {
       if (formType == "Update")
         formData.append("restaurant_id", item.restaurant_id);
       setImageLoading(true);
-
       if (formType === "Update") {
         try {
           await dispatch(updateAnItemThunk(formData, item.id));
