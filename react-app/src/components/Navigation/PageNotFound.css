@@ -1,7 +1,7 @@
 #not-found-scoot-logo {
   width: 400px;
   position: relative;
-  animation: scootAway 1.3s ease;
+  animation: scootUp 1.3s ease;
   animation-iteration-count: 1;
   bottom: -50px;
 }
@@ -35,7 +35,7 @@
   font-size: 30px;
 }
 
-@keyframes scootAway {
+@keyframes scootUp {
   0% {
     left: -150vw;
     bottom: -5px;

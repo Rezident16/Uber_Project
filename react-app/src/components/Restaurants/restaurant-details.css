@@ -64,7 +64,8 @@ header > div > p {
   align-items: flex-start;
 }
 
-.delete_item, .update_component {
+.delete_item,
+.update_component {
   padding-top: 4px;
   padding-bottom: 4px;
   margin-top: 5px;

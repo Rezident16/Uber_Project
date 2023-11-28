@@ -55,6 +55,10 @@
   justify-content: space-between;
 }
 
+.category-tile div:hover {
+  cursor: pointer;
+}
+
 #category-nav {
   display: flex;
   flex-direction: column;
@@ -171,8 +175,7 @@
   font-family: Roboto, Helvetica, sans-serif;
 }
 
-
-.delete-item-modal>h1 {
+.delete-item-modal > h1 {
   margin: 0;
 }
 
@@ -185,7 +188,7 @@
   background-color: black;
   color: white;
   padding: 8px 0;
-  width: 100%
+  width: 100%;
 }
 
 .do-not-delete-item {
@@ -193,9 +196,8 @@
   color: white;
   margin-top: 10px;
   padding: 8px 0;
-  width: 100%
+  width: 100%;
 }
-
 
 .create-an-item-form {
   display: flex;
@@ -214,7 +216,6 @@
   font-size: 13px;
   font-weight: 700;
 }
-
 
 .item-input {
   display: flex;
@@ -239,9 +240,8 @@
 }
 
 .item-input:hover {
-  border: 1px solid black
+  border: 1px solid black;
 }
-
 
 #item-img-input {
   display: flex;
@@ -266,7 +266,7 @@
   color: white;
   border-radius: 30px;
   cursor: pointer;
-  border: none
+  border: none;
 }
 
 .item-errors {
