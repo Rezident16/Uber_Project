@@ -54,6 +54,9 @@ img {
 .modal_buttons > a {
   color: white !important;
 }
+#checkout-button:hover{
+  text-decoration: none;
+}
 
 .cart_buttons {
   display: flex;
