@@ -9,6 +9,7 @@ import OpenModalButton from "../OpenModalButton";
 import DeleteARestaurantModal from "./delete-a-restaurant";
 import "./restaurant-details.css";
 import UpdateRestaurant from "./update-restaurant";
+import GoogleMap from "../Google/GoogleMapApi";
 
 function RestaurantDetailPage() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function RestaurantDetailPage() {
   return (
     <div className="restaurant_detail_container_full">
       <header>
+        <GoogleMap restaurant={restaurant} />
         <img src={restaurant.preview_img} alt=""></img>
         <h2>{restaurant.name}</h2>
         <div>
