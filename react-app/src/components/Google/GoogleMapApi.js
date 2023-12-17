@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useApiKey } from "../../context/ApiKey";
+import './map.css'
 
 
 const GoogleMap = ({ restaurant }) => {
@@ -20,7 +21,7 @@ const GoogleMap = ({ restaurant }) => {
     loader.load().then(() => {
       getLocation();
     });
-  }, [apiKey]);
+  }, [apiKey, map]);
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -35,7 +36,6 @@ const GoogleMap = ({ restaurant }) => {
   function successCallback(position) {
     const lat = position.coords.latitude;
     const lng = position.coords.longitude;
-    console.log(`Latitude: ${lat}, Longitude: ${lng}`);
 
     setUserLocation({ lat, lng });
 
@@ -52,10 +52,12 @@ const GoogleMap = ({ restaurant }) => {
       setMap(mapInstance);
 
       // Add a marker for the user's location
+
       const userMarker = new window.google.maps.Marker({
         position: { lat, lng },
         map: mapInstance,
         title: "Your Location",
+        icon: 'http://maps.gstatic.com/mapfiles/ms2/micons/man.png'
       });
       console.log(userMarker);
 
@@ -67,10 +69,8 @@ const GoogleMap = ({ restaurant }) => {
         if (status === "OK") {
           const restaurantLocation = results[0].geometry.location;
 
-          // Set the restaurant location state for later use
           setRestaurantLocation(restaurantLocation);
 
-          // Add a marker for the restaurant location
           const restaurantMarker = new window.google.maps.Marker({
             position: restaurantLocation,
             map: mapInstance,
@@ -82,17 +82,7 @@ const GoogleMap = ({ restaurant }) => {
         }
       });
     } else {
-      // Update the map center if it has already been initialized
       map.setCenter({ lat, lng });
-
-      // Update the marker position for the user's location
-      // For example, userMarker.setPosition({ lat, lng });
-
-      // If the restaurant location is available, update the marker position
-      if (restaurantLocation) {
-        // Update the marker position for the restaurant
-        // For example, restaurantMarker.setPosition(restaurantLocation);
-      }
     }
   }
 
@@ -100,7 +90,8 @@ const GoogleMap = ({ restaurant }) => {
     console.error(`Geolocation error: ${error.message}`);
   }
 
-  return <div id="map" style={{ width: "100%", height: "400px" }} />;
+  return <div id="map"/>;
+//   return null
 };
 
 export default GoogleMap;
