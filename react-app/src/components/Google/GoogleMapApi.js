@@ -76,9 +76,6 @@ const GoogleMap = ({ restaurant }) => {
             map: mapInstance,
             title: restaurant.name || "Restaurant",
           });
-          console.log(restaurantMarker);
-        } else {
-          console.error(`Geocoding failed for restaurant: ${status}`);
         }
       });
     } else {

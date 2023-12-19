@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 const GoogleMapsApiKeyContext = React.createContext();
 
 function MapsProvider ({children}) {
-    const script = document.createElement('script');
-    const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-    console.log(apiKey)
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-    document.head.append(script);
+    const [apiKey, setApiKey] = useState(null);
+
+    useEffect(() => {
+        const apiKeyFunc = async () => {
+            const res = await fetch('/api/auth/google/key');
+            const data = await res.json();
+            setApiKey(data.key);
+
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${data.key}&libraries=places`;
+            document.head.append(script);
+        }
+        apiKeyFunc();
+    }, []);
+
     return (
         <GoogleMapsApiKeyContext.Provider value={apiKey}>
             {children}
