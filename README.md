@@ -67,3 +67,12 @@
 | `DELETE /api/reviews/<int:reviewId>`                 | Deletes a review by ID                              |`{"message": "Success"}`                                                                                                                                                                              |
 | `POST /api/users/<int:id>`                           | Updates a user by their ID                          |`{"address": <STRING/>, "birthday": <STRING/>, "email": <STRING/>, "username":<STRING/> ,"id": <INT/>, "first_name": <STRING/>, "last_name": <STRING/>, "orders": [<orders/>]}`                      |
 | `DELETE /api/users/current`                          | Deletes the current user                            |`{"message": "Success"}`                                                                                                                                                                              |
+
+## Contributors
+
+| Name                 | LinkedIn             | GitHub               |
+| :------------------- | :------------------- | :------------------- |
+| Andrei Vorobev       | [Andrei's LinkedIn](https://www.linkedin.com/in/andreivorobev/)          | [Andrei's Github](https://github.com/Rezident16)  |
+| Brian Stokes         | [Brian's LinkedIn](https://www.linkedin.com/in/brian-stokes-86a842124)   | [Brian's Github](https://github.com/bcstokes4)    |
+| Mason Austin         | [Mason's LinkedIn](https://www.linkedin.com/in/mason-austin-a1b568240/)  | [Mason's Github](https://github.com/masonaustin42)|
+| Zohaib Rajan         | [Zohaib's LinkedIn](https://www.linkedin.com/in/zohaib-rajan-718198216/) | [Zohaib's Github](https://github.com/zohaibrajan) |
