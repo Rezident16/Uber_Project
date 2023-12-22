@@ -125,7 +125,7 @@ function RestaurantDetailPage() {
         <RestaurantReviews restaurant={restaurant} />
       </div>
 
-      {hasOrdered && hasNoReview && (
+      {hasOrdered && hasNoReview && (restaurant.owner_id !== user.id) && (
         <OpenModalButton
           buttonText={"Post Your Review"}
           modalComponent={<CreateAReviewModal />}
