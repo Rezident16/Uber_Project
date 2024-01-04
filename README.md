@@ -1,6 +1,17 @@
-# Uber_Project
+# SavoryScoot
 ![image](https://github.com/Rezident16/Uber_Project/assets/137537436/c36f1483-d086-4400-875e-9cf92abda4e4)
 
+## Installation Instructions
+### Back-end
+ - Run `pipenv -r install requirements.txt` to install packages and dependencies
+ - Create a .env file (see .env.example for values)
+ - Local database records can be changed in the `app/seeds` directory 
+ - In `pipenv shell`, run `flask db upgrade` and `flask seed all`
+ - To start server, run `flask run`
+
+ ### Front-end
+ - In `/react-app` run `npm install` to install packages and dependencies
+ - Run `npm start` to start React app
 
 
 ## MVP List

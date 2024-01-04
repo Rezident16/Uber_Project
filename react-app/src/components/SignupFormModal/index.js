@@ -52,7 +52,9 @@ function SignupFormModal() {
       errorsObj.password =
         "Confirm Password field must be the same as the Password field";
     }
-
+    if (password.length < 8){
+      errorsObj.password = "Password must be at least 8 characters"
+    }
     if (!Object.values(errorsObj).length) {
       const data = await dispatch(
         signUp(
