@@ -39,7 +39,7 @@ function Footer() {
               </a>
             </li>
             <li className="footer-links">
-              <a target="_blank" href="linkedin.com/in/brian-stokes-86a842124">
+              <a target="_blank" href="https://linkedin.com/in/brian-stokes-86a842124">
                 <i className="fa-brands fa-linkedin"></i>
               </a>
             </li>
