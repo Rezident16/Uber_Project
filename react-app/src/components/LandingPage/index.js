@@ -62,7 +62,7 @@ function LandingPage() {
               </a>
             </li>
             <li>
-              <a target="_blank" href="linkedin.com/in/brian-stokes-86a842124">
+              <a target="_blank" href="https://www.linkedin.com/in/brian-stokes-86a842124/">
                 <i className="fa-brands fa-linkedin"></i>
               </a>
             </li>
